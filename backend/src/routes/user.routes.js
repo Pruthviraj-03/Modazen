@@ -1,20 +1,29 @@
 import { Router } from "express";
-import { googleCallback } from "../controllers/user.controller.js";
+import {
+  googleCallback,
+  logoutUser,
+  refreshAccessToken,
+} from "../controllers/user.controller.js";
+import { verifyJWT } from "../middlewares/verifyJWT.middleware.js";
 import passport from "passport";
-
+import("../utils/Passport.utils.js");
 const router = Router();
 
-router.get(
-  "/google",
-  passport.authenticate("GoogleStrategy", {
+router.route("/google").get(
+  passport.authenticate("google", {
     scope: ["profile", "email"],
   })
 );
 
-router.get(
-  "/google/callback",
-  passport.authenticate("GoogleStrategy", { failureRedirect: "/login" }),
-  googleCallback
-);
+router
+  .route("/google/callback")
+  .get(
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    googleCallback
+  );
+
+router.route("/logout").get(verifyJWT, logoutUser);
+
+router.route("/refresh-token").post(refreshAccessToken);
 
 export { router };

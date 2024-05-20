@@ -5,9 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { User } from "./src/models/user.model.js";
-import { CookieToken } from "./src/utils/CookieToken.js";
+import("./src/utils/Passport.utils.js");
 
 // Load environment variables
 dotenv.config({
@@ -48,93 +46,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/api/v1/users/google/callback",
-      scope: ["profile", "email"],
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user = await User.findOne({ googleId: profile.id });
-        if (!user) {
-          const email =
-            profile.emails && profile.emails.length > 0
-              ? profile.emails[0].value
-              : "";
-          const name = profile.displayName || "";
-          const picture =
-            profile.photos && profile.photos.length > 0
-              ? profile.photos[0].value
-              : "";
-          const phoneNumber =
-            profile.phoneNumbers && profile.phoneNumbers.length > 0
-              ? profile.phoneNumbers[0].value
-              : "";
-
-          user = new User({
-            googleId: profile.id,
-            email,
-            name,
-            picture,
-            phoneNumber,
-            accessToken,
-          });
-          await user.save();
-        } else {
-          user.accessToken = accessToken;
-          await user.save();
-        }
-
-        user.token = CookieToken(user);
-
-        done(null, user);
-      } catch (error) {
-        done(error, null);
-      }
-    }
-  )
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (error) {
-    done(error, null);
-  }
-});
-
-app.get(
-  "/api/v1/users/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
-
-app.get(
-  "/api/v1/users/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    // const token = req.user.token;
-    // CookieToken(req.user, res);
-    // res.redirect(`http://localhost:3000/?token=${token}`);
-    res.redirect("http://localhost:3000/login");
-  }
-);
-
 //routes import
-// import { router as userRouter } from "./src/routes/user.routes.js";
+import { router as userRouter } from "./src/routes/user.routes.js";
 import { router as productRouter } from "./src/routes/products.routes.js";
 
 //routes declaration
-// app.use("/api/v1/users", userRouter);
+app.use("/api/v1/users", userRouter);
 app.use("/api/v2", productRouter);
 
 // http://localhost:8000/api/v1/users/google/callback
