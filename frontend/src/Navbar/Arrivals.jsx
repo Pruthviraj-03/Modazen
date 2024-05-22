@@ -16,6 +16,7 @@ import {
 import { categoryProducts } from "./Categories";
 import axios from "axios";
 import { useWishlist } from "../Components/Cart/WishlistContext";
+import { Products } from "./products";
 
 const Arrivals = ({ title }) => {
   const categoriesData = [
@@ -78,8 +79,8 @@ const Arrivals = ({ title }) => {
   ];
 
   const { addToWishlist, wishlistItems } = useWishlist();
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
+  // const [filteredProducts, setFilteredProducts] = useState([]);
   const [isCategoryDrawerOpen, setIsCategoryDrawerOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isRatingDrawerOpen, setIsRatingDrawerOpen] = useState(false);
@@ -87,101 +88,99 @@ const Arrivals = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 20;
   const [selectedSortOption, setSelectedSortOption] = useState("Recommended");
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
-  const [selectedRatings, setSelectedRatings] = useState([]);
-  const [selectedSizes, setSelectedSizes] = useState([]);
+  // const [selectedCategories, setSelectedCategories] = useState([]);
+  // const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
+  // const [selectedRatings, setSelectedRatings] = useState([]);
+  // const [selectedSizes, setSelectedSizes] = useState([]);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get("/api/v2/products");
-      console.log("fetchProducts ....", response);
-      setProducts(response.data);
-      console.log("Products state after set:", products);
-      console.log("products :", response.data);
-    } catch (error) {
-      console.error("Error fetching videos:", error.message);
-    }
-  };
+  // const fetchProducts = async () => {
+  //   try {
+  //     const response = await axios.get("/api/v2/products");
+  //     console.log("Response:", response);
+  //     setProducts(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching products:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, []);
 
-  console.log("Products state before render:", products);
+  // console.log("Products state before render:", products);
 
-  useEffect(() => {
-    filterProducts();
-  }, [selectedCategories, selectedPriceRanges, selectedRatings, selectedSizes]);
+  // useEffect(() => {
+  //   filterProducts();
+  // }, [selectedCategories, selectedPriceRanges, selectedRatings, selectedSizes]);
 
-  const filterProducts = () => {
-    let filtered = products;
+  // const filterProducts = () => {
+  //   let filtered = products;
 
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter((product) =>
-        selectedCategories.includes(product.category)
-      );
-    }
+  //   if (selectedCategories.length > 0) {
+  //     filtered = filtered.filter((product) =>
+  //       selectedCategories.includes(product.category)
+  //     );
+  //   }
 
-    if (selectedPriceRanges.length > 0) {
-      filtered = filtered.filter((product) =>
-        selectedPriceRanges.includes(product.pricerange)
-      );
-    }
+  //   if (selectedPriceRanges.length > 0) {
+  //     filtered = filtered.filter((product) =>
+  //       selectedPriceRanges.includes(product.pricerange)
+  //     );
+  //   }
 
-    if (selectedRatings.length > 0) {
-      filtered = filtered.filter((product) =>
-        selectedRatings.includes(String(product.rating))
-      );
-    }
+  //   if (selectedRatings.length > 0) {
+  //     filtered = filtered.filter((product) =>
+  //       selectedRatings.includes(String(product.rating))
+  //     );
+  //   }
 
-    if (selectedSizes.length > 0) {
-      filtered = filtered.filter((product) =>
-        selectedSizes.includes(product.size)
-      );
-    }
+  //   if (selectedSizes.length > 0) {
+  //     filtered = filtered.filter((product) =>
+  //       selectedSizes.includes(product.size)
+  //     );
+  //   }
 
-    setFilteredProducts(filtered);
-  };
+  //   setFilteredProducts(filtered);
+  // };
 
-  const handleCheckboxChange = (filterType, value) => {
-    switch (filterType) {
-      case "category":
-        setSelectedCategories((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
-        break;
-      case "priceRange":
-        setSelectedPriceRanges((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
-        break;
-      case "rating":
-        setSelectedRatings((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
-        break;
-      case "size":
-        setSelectedSizes((prev) =>
-          prev.includes(value)
-            ? prev.filter((item) => item !== value)
-            : [...prev, value]
-        );
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleCheckboxChange = (filterType, value) => {
+  //   switch (filterType) {
+  //     case "category":
+  //       setSelectedCategories((prev) =>
+  //         prev.includes(value)
+  //           ? prev.filter((item) => item !== value)
+  //           : [...prev, value]
+  //       );
+  //       break;
+  //     case "priceRange":
+  //       setSelectedPriceRanges((prev) =>
+  //         prev.includes(value)
+  //           ? prev.filter((item) => item !== value)
+  //           : [...prev, value]
+  //       );
+  //       break;
+  //     case "rating":
+  //       setSelectedRatings((prev) =>
+  //         prev.includes(value)
+  //           ? prev.filter((item) => item !== value)
+  //           : [...prev, value]
+  //       );
+  //       break;
+  //     case "size":
+  //       setSelectedSizes((prev) =>
+  //         prev.includes(value)
+  //           ? prev.filter((item) => item !== value)
+  //           : [...prev, value]
+  //       );
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
+  const currentProducts = Products.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -314,10 +313,10 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedPriceRanges.includes("$100 - $250")}
-                      onChange={() =>
-                        handleCheckboxChange("priceRange", "$100 - $250")
-                      }
+                      // checked={selectedPriceRanges.includes("$100 - $250")}
+                      // onChange={() =>
+                      // handleCheckboxChange("priceRange", "$100 - $250")
+                      // }
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $100 - $250
@@ -327,10 +326,10 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedPriceRanges.includes("$250 - $500")}
-                      onChange={() =>
-                        handleCheckboxChange("priceRange", "$250 - $500")
-                      }
+                      // checked={selectedPriceRanges.includes("$250 - $500")}
+                      // onChange={() =>
+                      // handleCheckboxChange("priceRange", "$250 - $500")
+                      // }
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $250 - $500
@@ -340,10 +339,10 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedPriceRanges.includes("$500 - $750")}
-                      onChange={() =>
-                        handleCheckboxChange("priceRange", "$500 - $750")
-                      }
+                      // checked={selectedPriceRanges.includes("$500 - $750")}
+                      // onChange={() =>
+                      // handleCheckboxChange("priceRange", "$500 - $750")
+                      // }
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $500 - $750
@@ -353,10 +352,10 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedPriceRanges.includes("$750 - $1000")}
-                      onChange={() =>
-                        handleCheckboxChange("priceRange", "$750 - $1000")
-                      }
+                      // checked={selectedPriceRanges.includes("$750 - $1000")}
+                      // onChange={() =>
+                      // handleCheckboxChange("priceRange", "$750 - $1000")
+                      // }
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $750 - $1000
@@ -366,10 +365,10 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedPriceRanges.includes("$1000 - $1500")}
-                      onChange={() =>
-                        handleCheckboxChange("priceRange", "$1000 - $1500")
-                      }
+                      // checked={selectedPriceRanges.includes("$1000 - $1500")}
+                      // onChange={() =>
+                      // handleCheckboxChange("priceRange", "$1000 - $1500")
+                      // }
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $1000 - $1500
@@ -405,8 +404,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedRatings.includes("1")}
-                      onChange={() => handleCheckboxChange("rating", "1")}
+                      // checked={selectedRatings.includes("1")}
+                      // onChange={() => handleCheckboxChange("rating", "1")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -416,8 +415,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedRatings.includes("2")}
-                      onChange={() => handleCheckboxChange("rating", "2")}
+                      // checked={selectedRatings.includes("2")}
+                      // onChange={() => handleCheckboxChange("rating", "2")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -428,8 +427,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedRatings.includes("3")}
-                      onChange={() => handleCheckboxChange("rating", "3")}
+                      // checked={selectedRatings.includes("3")}
+                      // onChange={() => handleCheckboxChange("rating", "3")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -441,8 +440,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedRatings.includes("4")}
-                      onChange={() => handleCheckboxChange("rating", "4")}
+                      // checked={selectedRatings.includes("4")}
+                      // onChange={() => handleCheckboxChange("rating", "4")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -455,8 +454,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedRatings.includes("5")}
-                      onChange={() => handleCheckboxChange("rating", "5")}
+                      // checked={selectedRatings.includes("5")}
+                      // onChange={() => handleCheckboxChange("rating", "5")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -497,8 +496,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedSizes.includes("XS")}
-                      onChange={() => handleCheckboxChange("size", "XS")}
+                      // checked={selectedSizes.includes("XS")}
+                      // onChange={() => handleCheckboxChange("size", "XS")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       XS
@@ -508,8 +507,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedSizes.includes("S")}
-                      onChange={() => handleCheckboxChange("size", "S")}
+                      // checked={selectedSizes.includes("S")}
+                      // onChange={() => handleCheckboxChange("size", "S")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       S
@@ -519,8 +518,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedSizes.includes("M")}
-                      onChange={() => handleCheckboxChange("size", "M")}
+                      // checked={selectedSizes.includes("M")}
+                      // onChange={() => handleCheckboxChange("size", "M")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       M
@@ -530,8 +529,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedSizes.includes("L")}
-                      onChange={() => handleCheckboxChange("size", "L")}
+                      // checked={selectedSizes.includes("L")}
+                      // onChange={() => handleCheckboxChange("size", "L")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       L
@@ -541,8 +540,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      checked={selectedSizes.includes("XL")}
-                      onChange={() => handleCheckboxChange("size", "XL")}
+                      // checked={selectedSizes.includes("XL")}
+                      // onChange={() => handleCheckboxChange("size", "XL")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       XL
@@ -557,8 +556,8 @@ const Arrivals = ({ title }) => {
         <div className="w-80 h-full p-20 flex flex-col gap-20 bg-dark-white">
           <div className="flex justify-between">
             <span className="font-poppins text-18 font-500 text-dark-grey">
-              Viewing {Math.min(indexOfLastProduct, products.length)} out of{" "}
-              {products.length} products
+              Viewing {Math.min(indexOfLastProduct, Products.length)} out of{" "}
+              {Products.length} products
             </span>
             <div className="flex items-center justify-center flex-row w-auto h-auto px-15 rounded-3 cursor-pointer border border-medium-grey">
               <span className="font-poppins text-16 font-500 text-dark-grey">
@@ -665,7 +664,7 @@ const Arrivals = ({ title }) => {
               onClick={() => handlePageChange(currentPage - 1)}
             />
             {Array.from(
-              { length: Math.ceil(products.length / productsPerPage) },
+              { length: Math.ceil(Products.length / productsPerPage) },
               (_, index) => (
                 <div key={index} className="w-auto">
                   <div
