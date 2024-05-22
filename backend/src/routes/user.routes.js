@@ -6,6 +6,7 @@ import {
   sendOTP,
   verifyOTP,
   resendOTP,
+  sendEmail,
 } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/verifyJWT.middleware.js";
 import passport from "passport";
@@ -34,5 +35,7 @@ router.route("/verify-otp").post(verifyOTP);
 router.route("/resend-otp").post(resendOTP);
 
 router.route("/refresh-token").post(refreshAccessToken);
+
+router.route("/subscribe").post(sendEmail);
 
 export { router };

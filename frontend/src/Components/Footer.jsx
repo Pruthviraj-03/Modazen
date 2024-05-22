@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg2 from "../images/logo2.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,6 +7,7 @@ import {
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import {
   faInstagram,
@@ -16,6 +17,20 @@ import {
 import "../index.css";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = async () => {
+    try {
+      await axios.post("http://localhost:8000/api/v1/subscribe", { email });
+      console.log("Email is:", email);
+      alert("Thanks for contacting us! We will be in touch with you shortly.");
+      setEmail(" ");
+    } catch (error) {
+      console.log(error);
+      alert("Email failed. Please try again later.");
+    }
+  };
+
   return (
     <div className="bg-main-color w-full h-500 flex justify-center items-center flex-col">
       <div className="flex items-center flex-row w-80 h-70">
@@ -137,11 +152,14 @@ const Footer = () => {
             <input
               className="font-poppins text-15 w-78 ml-15 h-full tracking-0.3 border-none outline-none bg-transparent focus:text-dark-white"
               placeholder="Enter your email"
-              type="text"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <FontAwesomeIcon
               className="p-20 ml-13 bg-dark-white cursor-pointer hover:bg-medium-grey hover:text-dark-white hover:border hover:border-dark-white"
               icon={faArrowRight}
+              onClick={handleSubscribe}
             />
           </div>
         </div>

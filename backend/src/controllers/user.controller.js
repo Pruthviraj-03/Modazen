@@ -5,6 +5,7 @@ import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import twilio from "twilio";
 import dotenv from "dotenv";
+import { mailHelper } from "../utils/MailHelper.utils.js";
 
 dotenv.config({
   path: "./.env",
@@ -193,6 +194,16 @@ const resendOTP = asyncHandler(async (req, res) => {
   }
 });
 
+const sendEmail = asyncHandler(async (req, res) => {
+  try {
+    const { email } = req.body;
+    await mailHelper({ email });
+    res.json(new ApiResponse(200, { email }, "Email send successfully."));
+  } catch (error) {
+    throw new ApiError(500, error?.message || "Failed to send an email.");
+  }
+});
+
 export {
   googleCallback,
   logoutUser,
@@ -200,4 +211,5 @@ export {
   sendOTP,
   verifyOTP,
   resendOTP,
+  sendEmail,
 };

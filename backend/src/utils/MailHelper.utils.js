@@ -1,7 +1,11 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-const mailHelper = async (option) => {
-  // Create a transporter using SMTP transport
+dotenv.config({
+  path: "./.env",
+});
+
+const mailHelper = async (data) => {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -13,25 +17,19 @@ const mailHelper = async (option) => {
 
   // Email content
   const message = {
-    from: 'raj.kurane03@gmail.com',
-    to: option.email,
-    subject: option.subject,
-    text: option.message,
+    from: "updates@modazen.com",
+    to: data.email,
+    subject: "Welcome to ModaZen Newsletter",
+    text: "Thank you for subscribing to our newsletter!",
   };
 
   try {
-    // Send email using the promise-based version of sendMail
     const info = await transporter.sendMail(message);
-    console.log('Email sent:', info.response);
+    console.log("Email sent:", info.response);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
+    throw error;
   }
 };
 
 export { mailHelper };
-
-
-
-
-
-
