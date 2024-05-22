@@ -1,11 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Login = () => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const navigate = useNavigate();
+
   const loginWithGoogle = () => {
     window.open("http://localhost:8000/api/v1/users/google/callback", "_self");
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handleContinue = async () => {
+    try {
+      await axios.post("/api/v1/users/send-otp", {
+        phoneNumber,
+      });
+      localStorage.setItem("phoneNumber", phoneNumber);
+      navigate("/login/otp");
+    } catch (error) {
+      console.error("Failed to send OTP:", error);
+    }
   };
 
   return (
@@ -28,8 +48,9 @@ const Login = () => {
           <input
             className="font-poppins text-dark-grey font-400 text-14 w-full h-full border-none outline-none tracking-0.5"
             placeholder="Mobile Number"
-            type="text"
             maxLength="10"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
           />
         </div>
         {/* <div className="flex flex-row">
@@ -38,13 +59,16 @@ const Login = () => {
           <span>&</span>
           <h3 className="font-poppins">Privacy Policy</h3>
         </div> */}
-        <Link to="/login/otp">
-          <div className="login-button flex justify-center items-center w-full h-40 bg-main-color cursor-pointer">
-            <span className="font-poppins text-dark-white text-15 font-700 tracking-0.5">
-              CONTINUE
-            </span>
-          </div>
-        </Link>
+        {/* <Link to="/login/otp"> */}
+        <div
+          className="login-button flex justify-center items-center w-full h-40 bg-main-color cursor-pointer"
+          onClick={handleContinue}
+        >
+          <span className="font-poppins text-dark-white text-15 font-700 tracking-0.5">
+            CONTINUE
+          </span>
+        </div>
+        {/* </Link> */}
         <h2 className="font-poppins text-dark-grey text-15.5 font-700 tracking-1 ml-10">
           ----------- or with google account -----------
         </h2>

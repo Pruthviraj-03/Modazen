@@ -3,13 +3,15 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
-    googleId: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    name: { type: String, required: true },
+    googleId: { type: String, unique: true },
+    email: { type: String, unique: true },
+    name: { type: String },
     picture: { type: String },
-    phoneNumber: { type: String },
-    accessToken: { type: String, required: true },
+    phoneNumber: { type: String, unique: true },
+    accessToken: { type: String },
     refreshToken: { type: String },
+    otp: { type: String },
+    otpExpires: { type: Date },
   },
   { timestamps: true }
 );
@@ -28,6 +30,14 @@ userSchema.methods.generateRefreshToken = function () {
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN }
   );
+};
+
+// Generate OTP
+userSchema.methods.generateOtp = function () {
+  const otp = Math.floor(1000 + Math.random() * 9000).toString();
+  this.otp = otp;
+  this.otpExpires = new Date(Date.now() + 10 * 60000); // OTP expires in 10 minutes
+  return otp;
 };
 
 const User = mongoose.model("User", userSchema);

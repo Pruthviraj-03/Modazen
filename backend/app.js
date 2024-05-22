@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import("./src/utils/Passport.utils.js");
+import twilio from "twilio";
 
 // Load environment variables
 dotenv.config({
@@ -45,6 +46,10 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = twilio(accountSid, authToken);
 
 //routes import
 import { router as userRouter } from "./src/routes/user.routes.js";

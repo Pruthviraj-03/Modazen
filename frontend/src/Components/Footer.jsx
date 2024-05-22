@@ -84,7 +84,7 @@ const Footer = () => {
             </Link>
             <Link o="/arrivals">
               <li className="mb-30 cursor-pointer hover:text-dark-white">
-                Ntew Arrivals
+                New Arrivals
               </li>
             </Link>
             <Link to="/featured">
