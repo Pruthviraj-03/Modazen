@@ -13,7 +13,7 @@ import featured2 from "../images/featured2.avif";
 import featured3 from "../images/featured3.avif";
 import featured4 from "../images/featured4.avif";
 import featured5 from "../images/featured5.avif";
-import { arrivalData, featuredData } from "./HomePage";
+import { arrivalData, featuredData, extraProducts } from "./HomePage";
 import { Products } from "./products";
 import { useCart } from "../Components/Cart/CartContext";
 import { useWishlist } from "../Components/Cart/WishlistContext";
@@ -98,6 +98,7 @@ const FeaturedProduct = () => {
       const selectedProduct =
         arrivalData.find((item) => item.name === productName) ||
         featuredData.find((item) => item.name === productName) ||
+        extraProducts.find((item) => item.name === productName) ||
         similarProductData.find((item) => item.name === productName) ||
         Products.find((item) => item.name === productName);
 

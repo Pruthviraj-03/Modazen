@@ -25,6 +25,10 @@
 /* header end */
 
 /* home start */
+.category-box:hover span {
+  color: #ffffff;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
   display: none !important;

@@ -35,34 +35,100 @@ export const arrivalData = [
   {
     id: 1,
     name: "Blue Grey Warm Jacket",
-    image: arrivals2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
+    desc: "EKLENTSON Army Jacket Men Blue Grey Warm Jacket Men Multi Pockets Winter Jacket Men Thermal",
+    img1: arrivals2,
+    img2: arrivals2,
+    img3: arrivals2,
+    img4: arrivals2,
+    img5: arrivals2,
+    price: "$110",
+    originalPrice: "$170",
+    discount: "25% OFF",
+    category: "Jacket",
+    pricerange: "$100 - $250",
+    rating: "1",
+    size: "S",
+    isIncart: "false",
+    isWishlisted: "false",
   },
   {
     id: 2,
     name: "Denim Jacket",
-    image: arrivals3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
+    desc: "TACVASEN Men's Denim Jacket Cotton Military Jackets Fleece Lined Thick Work Coats Warm Cargo Jackets with Hooded",
+    img1: arrivals3,
+    img2: arrivals3,
+    img3: arrivals3,
+    img4: arrivals3,
+    img5: arrivals3,
+    price: "$260",
+    originalPrice: "$300",
+    discount: "30% OFF",
+    category: "Jacket",
+    pricerange: "$250 - $500",
+    rating: "2",
+    size: "S",
+    isIncart: "false",
+    isWishlisted: "false",
   },
   {
     id: 3,
     name: "Black Jacket",
-    image: arrivals4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
+    desc: "Flygo Men's Sherpa Black Jacket Fleece Lined Zip Up Warm Hoodies Sweatshirt Winter Zipper Sweater Hooded Coat",
+    img1: arrivals4,
+    img2: arrivals4,
+    img3: arrivals4,
+    img4: arrivals4,
+    img5: arrivals4,
+    price: "$550",
+    originalPrice: "$600",
+    discount: "40% OFF",
+    category: "Jacket",
+    pricerange: "$500 - $750",
+    rating: "3",
+    size: "S",
+    isIncart: "false",
+    isWishlisted: "false",
   },
   {
     id: 4,
     name: "Green Polar Jacket",
-    image: arrivals5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
+    desc: "CHEXPEL Men's Green Polar Jacket with Hood Fleece Lining Cotton Military Jackets Work Jackets with Cargo Pocket",
+    img1: arrivals5,
+    img2: arrivals5,
+    img3: arrivals5,
+    img4: arrivals5,
+    img5: arrivals5,
+    price: "$760",
+    originalPrice: "$900",
+    discount: "45% OFF",
+    category: "Jacket",
+    pricerange: "$750 - $1000",
+    rating: "4",
+    size: "S",
+    isIncart: "false",
+    isWishlisted: "false",
+  },
+];
+
+export const extraProducts = [
+  {
+    id: 1,
+    name: "Green T-shirt",
+    desc: "TACVASEN Legendary Whitetails Men's",
+    img1: arrivals1,
+    img2: arrivals1,
+    img3: arrivals1,
+    img4: arrivals1,
+    img5: arrivals1,
+    price: "$300",
+    originalPrice: "$350",
+    discount: "30% OFF",
+    category: "TShirts",
+    pricerange: "$250 - $500",
+    rating: "5",
+    size: "S",
+    isIncart: "false",
+    isWishlisted: "false",
   },
 ];
 
@@ -151,7 +217,6 @@ export const featuredData = [
 
 const HomePage = () => {
   const { addToCart, cartItems } = useCart();
-  const [product, setProduct] = useState(null);
 
   const carouselData = [
     {
@@ -237,10 +302,10 @@ const HomePage = () => {
     },
   ];
 
-  const handleAddToCart = () => {
-    const isProductInCart = cartItems.some((item) => item.id === product.id);
+  const handleAddToCart = (extra) => {
+    const isProductInCart = cartItems.some((item) => item.id === extra.id);
     if (!isProductInCart) {
-      addToCart(product);
+      addToCart(extra);
       alert("Product added in the cart.");
     } else {
       alert("Product is already in the cart.");
@@ -303,9 +368,9 @@ const HomePage = () => {
             <div className="flex flex-row h-full w-full gap-40 mt-50">
               {categoryData.map((category) => (
                 <Link key={category.id} to="/categories">
-                  <div className="hover:bg-main-color hover:text-dark-white h-full w-213 bg-light-white flex flex-col justify-center items-center gap-40 cursor-pointer">
+                  <div className="category-box hover:bg-main-color hover:text-dark-white h-full w-213 bg-light-white flex flex-col justify-center items-center gap-40 cursor-pointer">
                     <FontAwesomeIcon className="text-50" icon={category.icon} />
-                    <span className="font-poppins text-18 font-500 text-dark-grey hover:text-dark-white">
+                    <span className="font-poppins text-18 font-500 text-dark-grey">
                       {category.name}
                     </span>
                   </div>
@@ -328,42 +393,51 @@ const HomePage = () => {
               </Link>
             </div>
             <div className="flex flex-row h-full w-full gap-20 mt-50">
-              <Link to={`/featured/${encodeURIComponent("Green T-shirt")}`}>
-                <div className="home-container-arrivals-container-big-block flex flex-row w-730 h-full p-30 bg-light-white cursor-pointer">
-                  <div className="w-60 h-full overflow-hidden">
-                    <img
-                      className="h-full w-full object-cover"
-                      src={arrivals1}
-                      alt="image Logo"
-                    />
-                  </div>
-                  <div className="flex items-center justify-center flex-col w-40p h-full gap-25">
-                    <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
-                      Green T-shirt
-                    </h3>
-                    <div className="flex items-center justify-center flex-row gap-6">
-                      <span className="font-poppins text-main-color text-18 font-700">
-                        $299
-                      </span>
-                      <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
-                        $100
-                      </h1>
-                      <h2 className="font-poppins text-main-color text-14 font-400">
-                        60% OFF
-                      </h2>
+              {extraProducts.map((extra) => (
+                <Link
+                  key={extra.id}
+                  to={`/featured/${encodeURIComponent(extra.name)}`}
+                >
+                  <div className="home-container-arrivals-container-big-block flex flex-row w-730 h-full p-30 bg-light-white cursor-pointer">
+                    <div className="w-60 h-full overflow-hidden">
+                      <img
+                        className="h-full w-full object-cover"
+                        src={extra.img1}
+                        alt={extra.name}
+                      />
                     </div>
-                    <div className="home-container-arrivals-container-big-block-info-button">
-                      <Link to="/shoppingcart">
-                        {/* flex items-center justify-center flex-row w-170 h-50
-                        bg-main-color gap-20 cursor-pointer */}
-                        <span className="font-poppins text-dark-white font-700 tracking-1">
-                          Add to Cart
+                    <div className="flex items-center justify-center flex-col w-40p h-full gap-25">
+                      <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
+                        {extra.name}
+                      </h3>
+                      <div className="flex items-center justify-center flex-row gap-6">
+                        <span className="font-poppins text-main-color text-18 font-700">
+                          {extra.price}
                         </span>
-                      </Link>
+                        <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                          {extra.originalPrice}
+                        </h1>
+                        <h2 className="font-poppins text-main-color text-14 font-400">
+                          {extra.discount}
+                        </h2>
+                      </div>
+                      <div
+                        className="home-container-arrivals-container-big-block-info-button"
+                        onClick={() => handleAddToCart(extra)}
+                      >
+                        <Link to="/shoppingcart">
+                          {/* flex items-center justify-center flex-row w-170 h-50
+                        bg-main-color gap-20 cursor-pointer */}
+                          <span className="font-poppins text-dark-white font-700 tracking-1">
+                            Add to Cart
+                          </span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              ))}
+
               <div className="flex flex-wrap w-50 h-full gap-20 bg-dark-white cursor-pointer">
                 {arrivalData.map((block) => (
                   <Link
@@ -372,7 +446,7 @@ const HomePage = () => {
                   >
                     <div className="home-container-arrivals-container-small-block flex flex-col items-center justify-center h-320 w-354 gap-40 bg-light-white">
                       <div className="h-40p w-40p">
-                        <img src={block.image} alt={block.name} />
+                        <img src={block.img1} alt={block.name} />
                       </div>
                       <div className="flex flex-col items-center justify-center gap-20">
                         <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
@@ -448,7 +522,10 @@ const HomePage = () => {
                       className="raj items-center justify-center flex-row w-170 h-10
                         bg-main-color gap-20 cursor-pointer hidden"
                     >
-                      <Link to="/shoppingcart" onClick={handleAddToCart}>
+                      <Link
+                        to="/shoppingcart"
+                        onClick={() => handleAddToCart(item)}
+                      >
                         <span className="font-poppins text-18 text-dark-white font-700 tracking-1">
                           Add to Cart
                         </span>

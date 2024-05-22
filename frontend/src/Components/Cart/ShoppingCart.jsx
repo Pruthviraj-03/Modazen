@@ -104,7 +104,7 @@ const ShoppingCart = () => {
                     <div className="shoppingCart-container-data-item-product-image h-200 w-45p overflow-hidden">
                       <img
                         className="h-full w-full object-contain"
-                        src={product.image}
+                        src={product.img1}
                         alt="img"
                       />
                     </div>

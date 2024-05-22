@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +15,7 @@ const Header = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [userProfileVisible, setUserProfileVisible] = useState(false);
   const navigate = useNavigate();
+  const profileRef = useRef(null);
 
   const handleRefreshPage = () => {
     navigate("/");
@@ -58,6 +59,19 @@ const Header = () => {
     setUserProfileVisible((prevVisible) => !prevVisible);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setUserProfileVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileRef]);
+
   return (
     <>
       <div className="bg-dark-white h-24 w-full flex items-center justify-center shadow-md fixed top-0 opacity-100 z-50">
@@ -94,11 +108,8 @@ const Header = () => {
               </Link>
             </ul>
           </div>
-          <div className="flex relative items-center border border-gray-300 w-32 h-45 ml-60 rounded-md hover:border-main-color">
-            <FontAwesomeIcon
-              className="search-icon text-15 ml-15"
-              icon={faSearch}
-            />
+          <div className="flex relative items-center border border-gray-300 w-32 h-45 ml-60 rounded-md">
+            <FontAwesomeIcon className="text-15 ml-15" icon={faSearch} />
             <input
               className="font-poppins text-main-color text-15 font-400 w-86 ml-15 tracking-0.3 h-full border-none outline-none"
               placeholder="Search for products"
@@ -130,7 +141,7 @@ const Header = () => {
             </Link>
             <FontAwesomeIcon
               className="h-22.5 w-22.5 cursor-pointer mb-1"
-              onMouseEnter={toggleUserProfile}
+              onClick={toggleUserProfile}
               icon={faUser}
             />
           </div>
@@ -138,7 +149,7 @@ const Header = () => {
       </div>
 
       {userProfileVisible && (
-        <div className="user-profile-overlay">
+        <div className="user-profile-overlay" ref={profileRef}>
           <Profile />
         </div>
       )}
