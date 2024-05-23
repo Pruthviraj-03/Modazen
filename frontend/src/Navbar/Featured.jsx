@@ -10,80 +10,10 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import featured1 from "../images/featured1.avif";
-import featured2 from "../images/featured2.avif";
-import featured3 from "../images/featured3.avif";
-import featured4 from "../images/featured4.avif";
-import featured5 from "../images/featured5.avif";
 import { useCart } from "../Components/Cart/CartContext";
 import { useWishlist } from "../Components/Cart/WishlistContext";
 import ModalImage from "react-modal-image";
-
-export const similarProductData = [
-  {
-    id: 1,
-    name: "Grey Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 2,
-    name: "Black Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
-  },
-  {
-    id: 3,
-    name: "Green Crop Top",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
-  },
-  {
-    id: 4,
-    name: "Golden Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
-  },
-  {
-    id: 5,
-    name: "Grey Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 6,
-    name: "Black Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
-  },
-  {
-    id: 7,
-    name: "Green Crop Top",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
-  },
-  {
-    id: 8,
-    name: "Golden Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
-  },
-];
+import { Products } from "./products";
 
 const Featured = () => {
   const { addToCart } = useCart();
@@ -130,10 +60,7 @@ const Featured = () => {
   const handleSwipe = (direction) => {
     if (direction === "LEFT" && firstCardIndex > 0) {
       setFirstCardIndex(firstCardIndex - 1);
-    } else if (
-      direction === "RIGHT" &&
-      firstCardIndex + 4 < similarProductData.length
-    ) {
+    } else if (direction === "RIGHT" && firstCardIndex + 4 < Products.length) {
       setFirstCardIndex(firstCardIndex + 1);
     }
   };
@@ -154,7 +81,7 @@ const Featured = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-auto mt-25 mb-50 bg-dark-white">
-      <div className="flex flex-col w-80 h-1200 gap-40">
+      <div className="flex flex-col w-80 h-full gap-40">
         <div className="flex flex-row ml-50p w-50 gap-30">
           <Link to="/featured">
             <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
@@ -173,7 +100,7 @@ const Featured = () => {
             <div className="flex justify-center items-center w-50 h-full flex-wrap gap-30">
               <div className="w-40p h-50p overflow-hidden">
                 <img
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   src={dummyProduct.image}
                   alt="featured1"
                   onClick={() => handleImageClick(dummyProduct.image)}
@@ -181,7 +108,7 @@ const Featured = () => {
               </div>
               <div className="w-40p h-50p overflow-hidden">
                 <img
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   src={dummyProduct.image}
                   alt="featured2"
                   onClick={() => handleImageClick(dummyProduct.image)}
@@ -189,7 +116,7 @@ const Featured = () => {
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   src={dummyProduct.image}
                   alt="featured3"
                   onClick={() => handleImageClick(dummyProduct.image)}
@@ -197,7 +124,7 @@ const Featured = () => {
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   src={dummyProduct.image}
                   alt="featured4"
                   onClick={() => handleImageClick(dummyProduct.image)}
@@ -205,7 +132,7 @@ const Featured = () => {
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                   src={dummyProduct.image}
                   alt="featured5"
                   onClick={() => handleImageClick(dummyProduct.image)}
@@ -241,27 +168,27 @@ const Featured = () => {
                   </span>
                 </div>
                 <div className="flex items-center w-45p h-full flex-row gap-22.5">
-                  <div className="size-box w-60 h-full rounded-60 flex items-center justify-center cursor-pointer">
+                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
                     <span className="font-poppins text-main-color text-18 font-700">
                       XS
                     </span>
                   </div>
-                  <div className="size-box w-60 h-full rounded-60 flex items-center justify-center cursor-pointer">
+                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
                     <span className="font-poppins text-main-color text-18 font-700">
                       S
                     </span>
                   </div>
-                  <div className="size-box w-60 h-full rounded-60 flex items-center justify-center cursor-pointer">
+                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
                     <span className="font-poppins text-main-color text-18 font-700">
                       M
                     </span>
                   </div>
-                  <div className="size-box w-60 h-full rounded-60 flex items-center justify-center cursor-pointer">
+                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
                     <span className="font-poppins text-main-color text-18 font-700">
                       L
                     </span>
                   </div>
-                  <div className="size-box w-60 h-full rounded-60 flex items-center justify-center cursor-pointer">
+                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
                     <span className="font-poppins text-main-color text-18 font-700">
                       XL
                     </span>
@@ -356,9 +283,8 @@ const Featured = () => {
             </div>
           </div>
           <div className="flex flex-row h-80 w-full p-30 gap-80">
-            {similarProductData
-              .slice(firstCardIndex, firstCardIndex + 4)
-              .map((similarProduct) => (
+            {Products.slice(firstCardIndex, firstCardIndex + 4).map(
+              (similarProduct) => (
                 <Link
                   to={`/featured/${encodeURIComponent(similarProduct.name)}`}
                 >
@@ -368,7 +294,7 @@ const Featured = () => {
                   >
                     <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
                       <span className="font-poppins text-16 font-600 text-main-color tracking-1">
-                        3
+                        {similarProduct.rating}
                       </span>
                       <FontAwesomeIcon
                         className="rating-icon text-12"
@@ -377,8 +303,8 @@ const Featured = () => {
                     </div>
                     <div className="featured-container-similiar-product-box-image w-70 h-65 pt-5p overflow-hidden">
                       <img
-                        className="object-cover w-full h-full"
-                        src={similarProduct.image}
+                        className="object-contain w-full h-full"
+                        src={similarProduct.img1}
                         alt="featured1"
                       />
                     </div>
@@ -401,7 +327,7 @@ const Featured = () => {
                           </div>
                         </Link>
                       </div>
-                      <h3 className="font-poppins text-main-color text-24 font-500">
+                      <h3 className="font-poppins text-main-color text-18 font-600">
                         {similarProduct.name}
                       </h3>
                       <div className="flex items-center justify-center flex-row gap-6">
@@ -418,7 +344,8 @@ const Featured = () => {
                     </div>
                   </div>
                 </Link>
-              ))}
+              )
+            )}
           </div>
         </div>
       </div>

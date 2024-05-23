@@ -24,12 +24,8 @@ import arrivals2 from "../images/Blue Grey Warm Jacket.jpg";
 import arrivals3 from "../images/Denim Jacket.jpg";
 import arrivals4 from "../images/Black Jacket.jpg";
 import arrivals5 from "../images/Green Polar Jacket.jpg";
-import featured1 from "../images/featured1.avif";
-import featured2 from "../images/featured2.avif";
-import featured3 from "../images/featured3.avif";
-import featured4 from "../images/featured4.avif";
-import featured5 from "../images/featured5.avif";
 import { useCart } from "../Components/Cart/CartContext";
+import { Products } from "./products";
 
 export const arrivalData = [
   {
@@ -129,89 +125,6 @@ export const extraProducts = [
     size: "S",
     isIncart: "false",
     isWishlisted: "false",
-  },
-];
-
-export const featuredData = [
-  {
-    id: 1,
-    name: "Gray T-shirt",
-    image: featured1,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 2,
-    name: "Gray Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 3,
-    name: "Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 4,
-    name: "Green Dress",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 5,
-    name: "Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 6,
-    name: "Gray T-shirt",
-    image: featured1,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 7,
-    name: "Gray Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 8,
-    name: "Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 9,
-    name: "Green Dress",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 10,
-    name: "Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
   },
 ];
 
@@ -486,7 +399,7 @@ const HomePage = () => {
             </div>
             <div className="home-container-featured-container-blocks">
               {/*  flex flex-wrap h-full w-full mt-50 gap-20 */}
-              {featuredData.map((item) => (
+              {Products.slice(0, 10).map((item) => (
                 <Link
                   key={item.id}
                   to={`/featured/${encodeURIComponent(item.name)}`}
@@ -497,16 +410,16 @@ const HomePage = () => {
                       {/*  w-50 h-50p overflow-hidden */}
                       <img
                         // className="h-full w-full object-cover"
-                        src={item.image}
+                        src={item.img1}
                         alt="featured-images"
                       />
                     </div>
                     <div className="home-container-featured-container-info">
                       {/* flex flex-col items-center justify-center */}
-                      <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
+                      <h3 className="font-poppins text-main-color text-18 font-500 tracking-1">
                         {item.name}
                       </h3>
-                      <div className="flex items-center justify-center flex-row gap-6 mt-3">
+                      <div className="flex items-center justify-center flex-row gap-7 mt-3">
                         <span className="font-poppins text-main-color text-18 font-700">
                           {item.price}
                         </span>

@@ -35,7 +35,7 @@ const Whishlist = () => {
                     <div className="flex items-center justify-center w-full h-250 overflow-hidden">
                       <img
                         className="h-90 w-90 object-contain"
-                        src={product.image}
+                        src={product.img1}
                         alt="featured1"
                       />
                     </div>

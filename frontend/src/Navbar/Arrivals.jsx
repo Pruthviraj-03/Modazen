@@ -13,205 +13,23 @@ import {
   faAngleUp,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { categoryProducts } from "./Categories";
-import axios from "axios";
 import { useWishlist } from "../Components/Cart/WishlistContext";
 import { Products } from "./products";
 
 const Arrivals = ({ title }) => {
-  const categoriesData = [
-    {
-      id: 1,
-      title: "Jacket",
-      icon: faVest,
-      slug: "jacket",
-      onClick: () => handleCategoryClick("Jacket"),
-    },
-    {
-      id: 2,
-      title: "Shirt",
-      icon: faTshirt,
-      slug: "shirt",
-      onClick: () => handleCategoryClick("Shirt"),
-    },
-    {
-      id: 3,
-      title: "Pants",
-      icon: faPersonDress,
-      slug: "pants",
-      onClick: () => handleCategoryClick("Pants"),
-    },
-    {
-      id: 4,
-      title: "Skirt",
-      icon: faPersonDress,
-      slug: "skirt",
-      onClick: () => handleCategoryClick("Skirt"),
-    },
-    {
-      id: 5,
-      title: "Dress",
-      icon: faPersonDress,
-      slug: "dress",
-      onClick: () => handleCategoryClick("Dress"),
-    },
-    {
-      id: 6,
-      title: "Underwear",
-      icon: faHatCowboySide,
-      slug: "underwear",
-      onClick: () => handleCategoryClick("Underwear"),
-    },
-    {
-      id: 7,
-      title: "Shoes",
-      icon: faShoePrints,
-      slug: "shoes",
-      onClick: () => handleCategoryClick("Shoes"),
-    },
-    {
-      id: 8,
-      title: "Accessories",
-      icon: faHatCowboySide,
-      slug: "accessories",
-      onClick: () => handleCategoryClick("Accessories"),
-    },
-  ];
-
   const { addToWishlist, wishlistItems } = useWishlist();
-  // const [products, setProducts] = useState([]);
-  // const [filteredProducts, setFilteredProducts] = useState([]);
   const [isCategoryDrawerOpen, setIsCategoryDrawerOpen] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isPriceDrawerOpen, setIsPriceDrawerOpen] = useState(false);
   const [isRatingDrawerOpen, setIsRatingDrawerOpen] = useState(false);
   const [isSizeDrawerOpen, setIsSizeDrawerOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 20;
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedPriceRange, setSelectedPriceRange] = useState([]);
+  const [selectedRating, setSelectedRating] = useState([]);
   const [selectedSortOption, setSelectedSortOption] = useState("Recommended");
-  // const [selectedCategories, setSelectedCategories] = useState([]);
-  // const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
-  // const [selectedRatings, setSelectedRatings] = useState([]);
-  // const [selectedSizes, setSelectedSizes] = useState([]);
-
-  // const fetchProducts = async () => {
-  //   try {
-  //     const response = await axios.get("/api/v2/products");
-  //     console.log("Response:", response);
-  //     setProducts(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching products:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, []);
-
-  // console.log("Products state before render:", products);
-
-  // useEffect(() => {
-  //   filterProducts();
-  // }, [selectedCategories, selectedPriceRanges, selectedRatings, selectedSizes]);
-
-  // const filterProducts = () => {
-  //   let filtered = products;
-
-  //   if (selectedCategories.length > 0) {
-  //     filtered = filtered.filter((product) =>
-  //       selectedCategories.includes(product.category)
-  //     );
-  //   }
-
-  //   if (selectedPriceRanges.length > 0) {
-  //     filtered = filtered.filter((product) =>
-  //       selectedPriceRanges.includes(product.pricerange)
-  //     );
-  //   }
-
-  //   if (selectedRatings.length > 0) {
-  //     filtered = filtered.filter((product) =>
-  //       selectedRatings.includes(String(product.rating))
-  //     );
-  //   }
-
-  //   if (selectedSizes.length > 0) {
-  //     filtered = filtered.filter((product) =>
-  //       selectedSizes.includes(product.size)
-  //     );
-  //   }
-
-  //   setFilteredProducts(filtered);
-  // };
-
-  // const handleCheckboxChange = (filterType, value) => {
-  //   switch (filterType) {
-  //     case "category":
-  //       setSelectedCategories((prev) =>
-  //         prev.includes(value)
-  //           ? prev.filter((item) => item !== value)
-  //           : [...prev, value]
-  //       );
-  //       break;
-  //     case "priceRange":
-  //       setSelectedPriceRanges((prev) =>
-  //         prev.includes(value)
-  //           ? prev.filter((item) => item !== value)
-  //           : [...prev, value]
-  //       );
-  //       break;
-  //     case "rating":
-  //       setSelectedRatings((prev) =>
-  //         prev.includes(value)
-  //           ? prev.filter((item) => item !== value)
-  //           : [...prev, value]
-  //       );
-  //       break;
-  //     case "size":
-  //       setSelectedSizes((prev) =>
-  //         prev.includes(value)
-  //           ? prev.filter((item) => item !== value)
-  //           : [...prev, value]
-  //       );
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = Products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const toggleCategoryDrawer = () => {
-    setIsCategoryDrawerOpen(!isCategoryDrawerOpen);
-  };
-
-  const toggleDrawer = () => {
-    setIsDrawerOpen(!isDrawerOpen);
-  };
-
-  const toggleRatingDrawer = () => {
-    setIsRatingDrawerOpen(!isRatingDrawerOpen);
-  };
-
-  const toggleSizeDrawer = () => {
-    setIsSizeDrawerOpen(!isSizeDrawerOpen);
-  };
-
-  const handleCategoryClick = (categoryName) => {
-    const matchingProducts = categoryProducts.filter(
-      (product) => product.category === categoryName
-    );
-    console.log("Product category:", categoryName);
-    console.log("Matching products:", matchingProducts);
-  };
+  const [sortedProducts, setSortedProducts] = useState([]);
+  const productsPerPage = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [shuffledProducts, setShuffledProducts] = useState([]);
 
   const handleAddToWishlist = (product) => {
     const isProductInWishlist = wishlistItems.some(
@@ -224,6 +42,162 @@ const Arrivals = ({ title }) => {
       alert("Product is already in the wishlist.");
     }
   };
+
+  const toggleCategoryDrawer = () => {
+    setIsCategoryDrawerOpen(!isCategoryDrawerOpen);
+  };
+
+  const toggleDrawer = () => {
+    setIsPriceDrawerOpen(!isPriceDrawerOpen);
+  };
+
+  const toggleRatingDrawer = () => {
+    setIsRatingDrawerOpen(!isRatingDrawerOpen);
+  };
+
+  const toggleSizeDrawer = () => {
+    setIsSizeDrawerOpen(!isSizeDrawerOpen);
+  };
+
+  const categoriesData = [
+    {
+      id: 1,
+      title: "Jacket",
+      icon: faVest,
+      checked: selectedCategory.includes("Jacket"),
+      onChange: () => handleCategoryChange("Jacket"),
+    },
+    {
+      id: 2,
+      title: "Shirt",
+      icon: faTshirt,
+      checked: selectedCategory.includes("Shirt"),
+      onChange: () => handleCategoryChange("Shirt"),
+    },
+    {
+      id: 3,
+      title: "Pants",
+      icon: faPersonDress,
+      checked: selectedCategory.includes("Pants"),
+      onChange: () => handleCategoryChange("Pants"),
+    },
+    {
+      id: 4,
+      title: "Skirt",
+      icon: faPersonDress,
+      checked: selectedCategory.includes("Skirt"),
+      onChange: () => handleCategoryChange("Skirt"),
+    },
+    {
+      id: 5,
+      title: "Dress",
+      icon: faPersonDress,
+      checked: selectedCategory.includes("Dress"),
+      onChange: () => handleCategoryChange("Dress"),
+    },
+    {
+      id: 6,
+      title: "Underwear",
+      icon: faHatCowboySide,
+      checked: selectedCategory.includes("Underwear"),
+      onChange: () => handleCategoryChange("Underwear"),
+    },
+    {
+      id: 7,
+      title: "Shoes",
+      icon: faShoePrints,
+      checked: selectedCategory.includes("Shoes"),
+      onChange: () => handleCategoryChange("Shoes"),
+    },
+  ];
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory((prevSelection) =>
+      prevSelection.includes(category)
+        ? prevSelection.filter(
+            (selectedCategory) => selectedCategory !== category
+          )
+        : [...prevSelection, category]
+    );
+  };
+
+  const handlePriceRangeChange = (range) => {
+    setSelectedPriceRange((prevSelection) =>
+      prevSelection.includes(range)
+        ? prevSelection.filter((selectedRange) => selectedRange !== range)
+        : [...prevSelection, range]
+    );
+  };
+
+  const handleRatingChange = (rating) => {
+    setSelectedRating((prevSelection) =>
+      prevSelection.includes(rating)
+        ? prevSelection.filter((selectedRating) => selectedRating !== rating)
+        : [...prevSelection, rating]
+    );
+  };
+
+  const filteredProducts = Products.filter(
+    (product) =>
+      selectedCategory.includes(product.category) ||
+      selectedPriceRange.includes(product.pricerange) ||
+      selectedRating.includes(product.rating)
+  );
+
+  const sortProducts = (Products) => {
+    let sorted = [...Products];
+    if (selectedSortOption === "Price: Low To High") {
+      sorted.sort(
+        (a, b) =>
+          parseFloat(a.price.replace("$", "")) -
+          parseFloat(b.price.replace("$", ""))
+      );
+    } else if (selectedSortOption === "Price: High To Low") {
+      sorted.sort(
+        (a, b) =>
+          parseFloat(b.price.replace("$", "")) -
+          parseFloat(a.price.replace("$", ""))
+      );
+    }
+    setSortedProducts(sorted);
+  };
+
+  useEffect(() => {
+    sortProducts(Products);
+  }, [selectedSortOption, Products]);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = Products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handlePageChange = (page) => {
+    if (page < 1) {
+      setCurrentPage(1);
+    } else if (page > Math.ceil(Products.length / productsPerPage)) {
+      setCurrentPage(Math.ceil(Products.length / productsPerPage));
+    } else {
+      setCurrentPage(page);
+    }
+  };
+
+  const shuffleArray = (array) => {
+    let shuffledArray = array.slice();
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
+
+  useEffect(() => {
+    setShuffledProducts(shuffleArray(Products));
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-auto mt-25 mb-50">
@@ -271,18 +245,21 @@ const Arrivals = ({ title }) => {
             {isCategoryDrawerOpen && (
               <div className="arrivals-container-filter-box-options mt-20">
                 {categoriesData.map((category) => (
-                  <Link key={category.id} to={`/products/${category.slug}`}>
-                    <ul className="flex flex-col gap-13">
-                      <li className="flex flex-row items-center justify-center h-45 w-full gap-5p cursor-pointer pl-20">
-                        <h3 className="text-main-color w-20 text-20 font-500">
-                          <FontAwesomeIcon icon={category.icon} />
-                        </h3>
-                        <span className="font-poppins text-main-color w-50 text-20 font-500">
-                          {category.title}
-                        </span>
-                      </li>
-                    </ul>
-                  </Link>
+                  <ul
+                    className="flex flex-col gap-13"
+                    key={category.id}
+                    checked={category.checked}
+                    onChange={category.onChange}
+                  >
+                    <li className="flex flex-row items-center justify-center h-45 w-full gap-5p cursor-pointer pl-20">
+                      <h3 className="text-main-color w-20 text-20 font-500">
+                        <FontAwesomeIcon icon={category.icon} />
+                      </h3>
+                      <span className="font-poppins text-main-color w-50 text-20 font-500">
+                        {category.title}
+                      </span>
+                    </li>
+                  </ul>
                 ))}
               </div>
             )}
@@ -298,25 +275,23 @@ const Arrivals = ({ title }) => {
               </span>
               <FontAwesomeIcon
                 className={
-                  isDrawerOpen
+                  isPriceDrawerOpen
                     ? "rotated text-12.5 cursor-pointer text-main-color hover:text-dark-grey"
                     : "text-12.5 cursor-pointer text-main-color hover:text-dark-grey"
                 }
-                icon={isDrawerOpen ? faAngleUp : faAngleDown}
+                icon={isPriceDrawerOpen ? faAngleUp : faAngleDown}
                 onClick={toggleDrawer}
               />
             </div>
-            {isDrawerOpen && (
+            {isPriceDrawerOpen && (
               <div className="mt-20">
                 <ul className="flex flex-col gap-13">
                   <li>
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedPriceRanges.includes("$100 - $250")}
-                      // onChange={() =>
-                      // handleCheckboxChange("priceRange", "$100 - $250")
-                      // }
+                      checked={selectedPriceRange.includes("$100 - $250")}
+                      onChange={() => handlePriceRangeChange("$100 - $250")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $100 - $250
@@ -326,10 +301,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedPriceRanges.includes("$250 - $500")}
-                      // onChange={() =>
-                      // handleCheckboxChange("priceRange", "$250 - $500")
-                      // }
+                      checked={selectedPriceRange.includes("$250 - $500")}
+                      onChange={() => handlePriceRangeChange("$250 - $500")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $250 - $500
@@ -339,10 +312,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedPriceRanges.includes("$500 - $750")}
-                      // onChange={() =>
-                      // handleCheckboxChange("priceRange", "$500 - $750")
-                      // }
+                      checked={selectedPriceRange.includes("$500 - $750")}
+                      onChange={() => handlePriceRangeChange("$500 - $750")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $500 - $750
@@ -352,10 +323,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedPriceRanges.includes("$750 - $1000")}
-                      // onChange={() =>
-                      // handleCheckboxChange("priceRange", "$750 - $1000")
-                      // }
+                      checked={selectedPriceRange.includes("$750 - $1000")}
+                      onChange={() => handlePriceRangeChange("$750 - $1000")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $750 - $1000
@@ -365,10 +334,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedPriceRanges.includes("$1000 - $1500")}
-                      // onChange={() =>
-                      // handleCheckboxChange("priceRange", "$1000 - $1500")
-                      // }
+                      checked={selectedPriceRange.includes("$1000 - $1500")}
+                      onChange={() => handlePriceRangeChange("$1000 - $1500")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       $1000 - $1500
@@ -404,8 +371,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedRatings.includes("1")}
-                      // onChange={() => handleCheckboxChange("rating", "1")}
+                      checked={selectedRating.includes("1")}
+                      onChange={() => handleRatingChange("1")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -415,8 +382,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedRatings.includes("2")}
-                      // onChange={() => handleCheckboxChange("rating", "2")}
+                      checked={selectedRating.includes("2")}
+                      onChange={() => handleRatingChange("2")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -427,8 +394,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedRatings.includes("3")}
-                      // onChange={() => handleCheckboxChange("rating", "3")}
+                      checked={selectedRating.includes("3")}
+                      onChange={() => handleRatingChange("3")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -440,8 +407,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedRatings.includes("4")}
-                      // onChange={() => handleCheckboxChange("rating", "4")}
+                      checked={selectedRating.includes("4")}
+                      onChange={() => handleRatingChange("4")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -454,8 +421,8 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedRatings.includes("5")}
-                      // onChange={() => handleCheckboxChange("rating", "5")}
+                      checked={selectedRating.includes("5")}
+                      onChange={() => handleRatingChange("5")}
                     ></input>
                     <span className="ml-20">
                       <FontAwesomeIcon className="star-icon" icon={faStar} />
@@ -496,8 +463,6 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedSizes.includes("XS")}
-                      // onChange={() => handleCheckboxChange("size", "XS")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       XS
@@ -507,8 +472,6 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedSizes.includes("S")}
-                      // onChange={() => handleCheckboxChange("size", "S")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       S
@@ -518,8 +481,6 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedSizes.includes("M")}
-                      // onChange={() => handleCheckboxChange("size", "M")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       M
@@ -529,8 +490,6 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedSizes.includes("L")}
-                      // onChange={() => handleCheckboxChange("size", "L")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       L
@@ -540,8 +499,6 @@ const Arrivals = ({ title }) => {
                     <input
                       className="h-18 w-18 cursor-pointer"
                       type="checkbox"
-                      // checked={selectedSizes.includes("XL")}
-                      // onChange={() => handleCheckboxChange("size", "XL")}
                     ></input>
                     <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
                       XL

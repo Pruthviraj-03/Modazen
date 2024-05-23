@@ -97,7 +97,7 @@ const Footer = () => {
                 Categories
               </li>
             </Link>
-            <Link o="/arrivals">
+            <Link to="/arrivals">
               <li className="mb-30 cursor-pointer hover:text-dark-white">
                 New Arrivals
               </li>

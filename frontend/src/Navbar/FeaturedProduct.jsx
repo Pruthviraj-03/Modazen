@@ -9,87 +9,17 @@ import {
   faAngleRight,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import featured2 from "../images/featured2.avif";
-import featured3 from "../images/featured3.avif";
-import featured4 from "../images/featured4.avif";
-import featured5 from "../images/featured5.avif";
-import { arrivalData, featuredData, extraProducts } from "./HomePage";
+import { arrivalData, extraProducts } from "./HomePage";
 import { Products } from "./products";
 import { useCart } from "../Components/Cart/CartContext";
 import { useWishlist } from "../Components/Cart/WishlistContext";
-
-export const similarProductData = [
-  {
-    id: 1,
-    name: "Grey Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 2,
-    name: "Black Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
-  },
-  {
-    id: 3,
-    name: "Green Crop Top",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
-  },
-  {
-    id: 4,
-    name: "Golden Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
-  },
-  {
-    id: 5,
-    name: "Grey Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 6,
-    name: "Black Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
-  },
-  {
-    id: 7,
-    name: "Green Crop Top",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
-  },
-  {
-    id: 8,
-    name: "Golden Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
-  },
-];
 
 const FeaturedProduct = () => {
   const { productName } = useParams();
   const { addToCart, cartItems } = useCart();
   const { addToWishlist, wishlistItems } = useWishlist();
   const [product, setProduct] = useState(null);
+  const [productCategory, setProductCategory] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [firstCardIndex, setFirstCardIndex] = useState(0);
 
@@ -97,13 +27,25 @@ const FeaturedProduct = () => {
     if (productName) {
       const selectedProduct =
         arrivalData.find((item) => item.name === productName) ||
-        featuredData.find((item) => item.name === productName) ||
         extraProducts.find((item) => item.name === productName) ||
-        similarProductData.find((item) => item.name === productName) ||
         Products.find((item) => item.name === productName);
 
       if (selectedProduct) {
         setProduct(selectedProduct);
+      }
+    }
+  }, [productName]);
+
+  useEffect(() => {
+    if (productName) {
+      const selectedProduct =
+        Products.find((item) => item.name === productName) ||
+        arrivalData.find((item) => item.name === productName) ||
+        extraProducts.find((item) => item.name === productName);
+
+      if (selectedProduct) {
+        setProduct(selectedProduct);
+        setProductCategory(selectedProduct.category);
       }
     }
   }, [productName]);
@@ -152,10 +94,7 @@ const FeaturedProduct = () => {
   const handleSwipe = (direction) => {
     if (direction === "LEFT" && firstCardIndex > 0) {
       setFirstCardIndex(firstCardIndex - 1);
-    } else if (
-      direction === "RIGHT" &&
-      firstCardIndex + 4 < similarProductData.length
-    ) {
+    } else if (direction === "RIGHT" && firstCardIndex + 4 < Products.length) {
       setFirstCardIndex(firstCardIndex + 1);
     }
   };
@@ -166,7 +105,7 @@ const FeaturedProduct = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-auto mt-25 mb-50 bg-dark-white">
-      <div className="flex flex-col w-80 h-1200 gap-40">
+      <div className="flex flex-col w-80 h-full gap-40">
         <div className="flex flex-row ml-50p w-50 gap-30">
           <Link to="/featured">
             <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
@@ -184,35 +123,35 @@ const FeaturedProduct = () => {
           <div className="flex justify-center items-center w-50 h-full flex-wrap gap-30">
             <div className="w-40p h-50p overflow-hidden">
               <img
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full cursor-pointer"
                 src={product.img1 || product.image}
                 alt="featured1"
               />
             </div>
             <div className="w-40p h-50p overflow-hidden">
               <img
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full cursor-pointer"
                 src={product.img2 || product.image}
                 alt="featured2"
               />
             </div>
             <div className="w-17.5 h-20 overflow-hidden">
               <img
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full cursor-pointer"
                 src={product.img3 || product.image}
                 alt="featured3"
               />
             </div>
             <div className="w-17.5 h-20 overflow-hidden">
               <img
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full cursor-pointer"
                 src={product.img4 || product.image}
                 alt="featured4"
               />
             </div>
             <div className="w-17.5 h-20 overflow-hidden">
               <img
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full cursor-pointer"
                 src={product.img5 || product.image}
                 alt="featured5"
               />
@@ -352,8 +291,8 @@ const FeaturedProduct = () => {
             </div>
           </div>
           <div className="flex flex-row h-80 w-full p-30 gap-80">
-            {similarProductData
-              .slice(firstCardIndex, firstCardIndex + 4)
+            {Products.filter((product) => product.category === productCategory)
+              .slice(0, 4)
               .map((similarProduct) => (
                 <Link
                   to={`/featured/${encodeURIComponent(similarProduct.name)}`}
@@ -361,7 +300,7 @@ const FeaturedProduct = () => {
                   <div className="featured-container-similiar-product-box flex flex-col items-center justify-center h-360 w-305 gap-27.5 cursor-pointer relative">
                     <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
                       <span className="font-poppins text-16 font-600 text-main-color tracking-1">
-                        3
+                        {similarProduct.rating}
                       </span>
                       <FontAwesomeIcon
                         className="rating-icon text-12"
@@ -370,8 +309,8 @@ const FeaturedProduct = () => {
                     </div>
                     <div className="featured-container-similiar-product-box-image w-70 h-65 pt-5p overflow-hidden">
                       <img
-                        className="object-cover w-full h-full"
-                        src={similarProduct.image}
+                        className="object-contain w-full h-full"
+                        src={similarProduct.img1}
                         alt="featured1"
                       />
                     </div>
@@ -394,7 +333,7 @@ const FeaturedProduct = () => {
                           </div>
                         </Link>
                       </div>
-                      <h3 className="font-poppins text-main-color text-24 font-500">
+                      <h3 className="font-poppins text-main-color text-18 font-600">
                         {similarProduct.name}
                       </h3>
                       <div className="flex items-center justify-center flex-row gap-6">
