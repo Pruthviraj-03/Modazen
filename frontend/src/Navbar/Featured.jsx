@@ -9,11 +9,12 @@ import {
   faAngleRight,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import featured1 from "../images/featured1.avif";
 import { useCart } from "../Components/Cart/CartContext";
 import { useWishlist } from "../Components/Cart/WishlistContext";
 import ModalImage from "react-modal-image";
 import { Products } from "./products";
+import image31 from "./apiImages/j7i1.jpg";
+import image32 from "./apiImages/j7i2.jpg";
 
 const Featured = () => {
   const { addToCart } = useCart();
@@ -26,11 +27,22 @@ const Featured = () => {
   const product = [
     {
       id: 1,
-      name: "Gray T-shirt",
-      image: featured1,
-      price: "$299",
-      originalPrice: "$100",
-      discount: "74% OFF",
+      name: "TACVASEN Men Winter Jacket",
+      desc: "TACVASEN Men's Winter Jacket Cotton Military Jackets Fleece Lined Thick Work Coats Warm Cargo Jackets with Hooded",
+      price: "$270",
+      originalPrice: "$300",
+      discount: "30% OFF",
+      category: "Jacket",
+      pricerange: "$250 - $500",
+      rating: "2",
+      size: "S",
+      img1: image31,
+      img2: image32,
+      img3: image31,
+      img4: image32,
+      img5: image31,
+      isIncart: "false",
+      isWishlisted: "false",
     },
   ];
 
@@ -92,7 +104,7 @@ const Featured = () => {
             <FontAwesomeIcon className="rightArrow-icon" icon={faAngleRight} />
           </span>
           <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
-            Gray T-shirt
+            TACVASEN Men Winter Jacket
           </span>
         </div>
         {product.map((dummyProduct) => (
@@ -101,7 +113,7 @@ const Featured = () => {
               <div className="w-40p h-50p overflow-hidden">
                 <img
                   className="object-contain w-full h-full"
-                  src={dummyProduct.image}
+                  src={dummyProduct.img1}
                   alt="featured1"
                   onClick={() => handleImageClick(dummyProduct.image)}
                 />
@@ -109,7 +121,7 @@ const Featured = () => {
               <div className="w-40p h-50p overflow-hidden">
                 <img
                   className="object-contain w-full h-full"
-                  src={dummyProduct.image}
+                  src={dummyProduct.img2}
                   alt="featured2"
                   onClick={() => handleImageClick(dummyProduct.image)}
                 />
@@ -117,7 +129,7 @@ const Featured = () => {
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
                   className="object-contain w-full h-full"
-                  src={dummyProduct.image}
+                  src={dummyProduct.img3}
                   alt="featured3"
                   onClick={() => handleImageClick(dummyProduct.image)}
                 />
@@ -125,7 +137,7 @@ const Featured = () => {
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
                   className="object-contain w-full h-full"
-                  src={dummyProduct.image}
+                  src={dummyProduct.img4}
                   alt="featured4"
                   onClick={() => handleImageClick(dummyProduct.image)}
                 />
@@ -133,7 +145,7 @@ const Featured = () => {
               <div className="w-17.5 h-20 overflow-hidden">
                 <img
                   className="object-contain w-full h-full"
-                  src={dummyProduct.image}
+                  src={dummyProduct.img5}
                   alt="featured5"
                   onClick={() => handleImageClick(dummyProduct.image)}
                 />
@@ -156,10 +168,7 @@ const Featured = () => {
               </div>
               <div className="featured-line"></div>
               <p className="font-poppins text-dark-grey text-18 font-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                {dummyProduct.desc}
               </p>
               <div className="flex items-center h-10 flex-row">
                 <div className="flex items-center w-10 h-full">
