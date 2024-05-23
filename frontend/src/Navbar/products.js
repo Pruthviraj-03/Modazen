@@ -1010,7 +1010,7 @@ const Products = [
     category: "Jacket",
     pricerange: "$100 - $250",
     rating: "1",
-    size: "S",
+    size: "M",
     img1: image1,
     img2: image2,
     img3: image3,

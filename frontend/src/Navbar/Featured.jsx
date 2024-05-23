@@ -23,6 +23,7 @@ const Featured = () => {
   const [firstCardIndex, setFirstCardIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const product = [
     {
@@ -89,6 +90,10 @@ const Featured = () => {
   const handleCloseModal = () => {
     setSelectedImage("");
     setShowModal(false);
+  };
+
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
   };
 
   return (
@@ -177,27 +182,62 @@ const Featured = () => {
                   </span>
                 </div>
                 <div className="flex items-center w-45p h-full flex-row gap-22.5">
-                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
+                  <div
+                    className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
+                      selectedSize === "XS"
+                        ? "bg-main-color text-dark-white"
+                        : ""
+                    }`}
+                    onClick={() => handleSizeClick("XS")}
+                  >
                     <span className="font-poppins text-main-color text-18 font-700">
                       XS
                     </span>
                   </div>
-                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
+                  <div
+                    className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
+                      selectedSize === "S"
+                        ? "bg-main-color text-dark-white"
+                        : ""
+                    }`}
+                    onClick={() => handleSizeClick("S")}
+                  >
                     <span className="font-poppins text-main-color text-18 font-700">
                       S
                     </span>
                   </div>
-                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
+                  <div
+                    className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
+                      selectedSize === "M"
+                        ? "bg-main-color text-dark-white"
+                        : ""
+                    }`}
+                    onClick={() => handleSizeClick("M")}
+                  >
                     <span className="font-poppins text-main-color text-18 font-700">
                       M
                     </span>
                   </div>
-                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
+                  <div
+                    className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
+                      selectedSize === "L"
+                        ? "bg-main-color text-dark-white"
+                        : ""
+                    }`}
+                    onClick={() => handleSizeClick("L")}
+                  >
                     <span className="font-poppins text-main-color text-18 font-700">
                       L
                     </span>
                   </div>
-                  <div className="size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer">
+                  <div
+                    className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
+                      selectedSize === "XL"
+                        ? "bg-main-color text-dark-white"
+                        : ""
+                    }`}
+                    onClick={() => handleSizeClick("XL")}
+                  >
                     <span className="font-poppins text-main-color text-18 font-700">
                       XL
                     </span>

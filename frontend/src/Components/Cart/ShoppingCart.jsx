@@ -113,7 +113,7 @@ const ShoppingCart = () => {
                         {product.name}
                       </span>
                       <h3 className="font-poppins text-main-color text-16 font-700 mt-15">
-                        Size: S
+                        Size: {product.size}
                       </h3>
                     </div>
                   </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import featured1 from "../../images/featured1.avif";
 import { Link } from "react-router-dom";
 import { useWishlist } from "../Cart/WishlistContext";
 
