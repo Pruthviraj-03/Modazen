@@ -7,6 +7,8 @@ import {
   verifyOTP,
   resendOTP,
   sendEmail,
+  getDetailFromDB,
+  sendDetailToDB,
 } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/verifyJWT.middleware.js";
 import passport from "passport";
@@ -37,5 +39,9 @@ router.route("/resend-otp").post(resendOTP);
 router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/subscribe").post(sendEmail);
+
+router.route("/userprofile").get(getDetailFromDB);
+
+router.route("/editprofile").post(sendDetailToDB);
 
 export { router };

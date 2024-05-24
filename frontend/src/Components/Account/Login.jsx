@@ -10,6 +10,7 @@ const Login = () => {
 
   const loginWithGoogle = () => {
     window.open("http://localhost:8000/api/v1/users/google/callback", "_self");
+    navigate("/googleId");
   };
 
   const handlePhoneNumberChange = (e) => {

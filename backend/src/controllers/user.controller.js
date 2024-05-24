@@ -204,6 +204,64 @@ const sendEmail = asyncHandler(async (req, res) => {
   }
 });
 
+const getDetailFromDB = asyncHandler(async (req, res) => {
+  try {
+    const { user } = req.query; // Extracting googleId from query params
+
+    // Use 'user' to fetch user details from the database
+    const userDetails = await User.findOne({ googleId: user }).select(
+      "-otp -otpExpires"
+    );
+
+    if (!userDetails) {
+      throw new ApiError(404, "User not found");
+    }
+
+    res.json(
+      new ApiResponse(200, { userDetails }, "Got user details successfully.")
+    );
+  } catch (error) {
+    throw new ApiError(500, error?.message || "Failed to get the details.");
+  }
+});
+
+const sendDetailToDB = asyncHandler(async (req, res) => {
+  try {
+    const { googleId } = req.params;
+    const { email, name, picture, phoneNumber, gender, DOB, AlternateMobile } =
+      req.body;
+
+    let user = await User.findOne({ googleId });
+
+    if (!user) {
+      user = new User({
+        googleId,
+        email,
+        name,
+        picture,
+        phoneNumber,
+        gender,
+        DOB,
+        AlternateMobile,
+      });
+    } else {
+      user.email = email || user.email;
+      user.name = name || user.name;
+      user.picture = picture || user.picture;
+      user.phoneNumber = phoneNumber || user.phoneNumber;
+      user.gender = gender || user.gender;
+      user.DOB = DOB || user.DOB;
+      user.AlternateMobile = AlternateMobile || user.AlternateMobile;
+    }
+
+    await user.save();
+
+    res.json(new ApiResponse(200, { user }, "Send user details successfully."));
+  } catch (error) {
+    throw new ApiError(500, error?.message || "Failed to send the details.");
+  }
+});
+
 export {
   googleCallback,
   logoutUser,
@@ -212,4 +270,6 @@ export {
   verifyOTP,
   resendOTP,
   sendEmail,
+  getDetailFromDB,
+  sendDetailToDB,
 };

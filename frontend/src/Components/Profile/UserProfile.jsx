@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const UserProfile = () => {
+  const [userDetails, setUserDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/users/userprofile"
+        );
+        setUserDetails(response.data);
+        console.log("User data:", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
   return (
     <div className="w-full h-auto flex items-center justify-center p-150">
       <div className="user-profile-container flex justify-center items-center w-40p h-auto min-h-400 flex-col gap-10 p-50">
@@ -17,7 +36,7 @@ const UserProfile = () => {
               Full Name
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              Raj kurane
+              {userDetails.name ? userDetails.name : "------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -25,7 +44,7 @@ const UserProfile = () => {
               Mobile Number
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              8692848775
+              {userDetails.phoneNumber ? userDetails.phoneNumber : "------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -33,7 +52,7 @@ const UserProfile = () => {
               Email ID
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              raj.kurane03@gmail.com
+              {userDetails.email ? userDetails.email : "------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -41,7 +60,7 @@ const UserProfile = () => {
               Gender
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              MALE
+              {userDetails.gender ? userDetails.gender : "------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -49,7 +68,7 @@ const UserProfile = () => {
               Date of Birth
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              08/03/2003
+              {userDetails.DOB ? userDetails.DOB : "------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -57,7 +76,9 @@ const UserProfile = () => {
               Alternate Mobile
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              7506631677
+              {userDetails.AlternateMobile
+                ? userDetails.AlternateMobile
+                : "------"}
             </span>
           </div>
         </div>

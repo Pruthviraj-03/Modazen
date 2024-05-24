@@ -24,17 +24,11 @@ passport.use(
             profile.photos && profile.photos.length > 0
               ? profile.photos[0].value
               : "";
-          const phoneNumber =
-            profile.phoneNumbers && profile.phoneNumbers.length > 0
-              ? profile.phoneNumbers[0].value
-              : "";
-
           user = new User({
             googleId: profile.id,
             email,
             name,
             picture,
-            phoneNumber,
             accessToken,
           });
           await user.save();
