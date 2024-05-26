@@ -77,10 +77,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const googleCallback = asyncHandler(async (req, res) => {
   try {
-    const googleId = req.user.googleId;
-    res.redirect(`http://localhost:3000/?user=${googleId}`);
+    const userId = req.user._id;
+    res.redirect(`http://localhost:3000/?user=${userId}`);
     // .json(new ApiResponse(200, { token }, "User registered successfully"));
-    console.log(googleId, "User registered successfully");
+    console.log(userId, "User logged in successfully");
   } catch (error) {
     throw new ApiError(401, error?.message || "Failed to login");
   }

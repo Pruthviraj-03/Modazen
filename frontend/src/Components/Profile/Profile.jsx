@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
-  const googleId = user ? user.googleId : null;
+  const userId = user ? user.userId : null;
 
   const [userDetails, setUserDetails] = useState(null);
 
@@ -28,7 +28,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="flex justify-center flex-col h-auto p-20 gap-12">
-        {googleId ? (
+        {userId ? (
           <>
             <h3 className="font-poppins text-main-color text-17.5 font-700 tracking-0.5">
               Hello {userDetails.name ? userDetails.name : "------"}
@@ -74,9 +74,9 @@ const Profile = () => {
           </h4>
         </Link>
         <div className="profile-line"></div>
-        {googleId ? (
+        {userId ? (
           <>
-            <Link to={`/?user=${googleId}/userprofile`}>
+            <Link to={`/?user=${userId}/userprofile`}>
               <h4 className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5 hover:text-main-color hover:font-700 hover:tracking-0.6 cursor-pointer">
                 Edit Profile
               </h4>
