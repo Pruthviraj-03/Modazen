@@ -5,10 +5,11 @@ dotenv.config({
   path: "./.env",
 });
 
-const mailHelper = async (data) => {
+const mailHelper = async (user) => {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
+    secure: process.env.SMTP_PORT == 465,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -18,9 +19,10 @@ const mailHelper = async (data) => {
   // Email content
   const message = {
     from: "updates@modazen.com",
-    to: data.email,
-    subject: "Welcome to ModaZen Newsletter",
-    text: "Thank you for subscribing to our newsletter!",
+    to: user.email,
+    subject: user.subject,
+    text: user.message,
+    html: user.htmlMessage,
   };
 
   try {

@@ -78,8 +78,20 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const googleCallback = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
+
+    const email = user.email;
+
+    await mailHelper({
+      email,
+      subject: "Login At Modazen",
+      message: "You've successfully Login at Modazen!",
+      htmlMessage: "<p>You've successfully Login at Modazen!</p>",
+    });
     res.redirect(`http://localhost:3000/?user=${userId}`);
-    // .json(new ApiResponse(200, { token }, "User registered successfully"));
     console.log(userId, "User logged in successfully");
   } catch (error) {
     throw new ApiError(401, error?.message || "Failed to login");
@@ -88,8 +100,27 @@ const googleCallback = asyncHandler(async (req, res) => {
 
 const logoutUser = asyncHandler(async (req, res) => {
   try {
+    if (!req.user) {
+      throw new ApiError(401, "User not authenticated");
+    }
+
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
+
+    const email = user.email;
+
+    await mailHelper({
+      email,
+      subject: "Logout At Modazen",
+      message: "You've successfully logged out from Modazen!",
+      htmlMessage: "<p>You've successfully logged out from Modazen!</p>",
+    });
+
     await User.findByIdAndUpdate(
-      req.user._id,
+      userId,
       { $set: { refreshToken: undefined } },
       { new: true }
     );
@@ -97,13 +128,14 @@ const logoutUser = asyncHandler(async (req, res) => {
     const options = {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
     };
 
     res
       .status(200)
       .clearCookie("accessToken", options)
       .clearCookie("refreshToken", options)
-      .json(new ApiResponse(200, {}, "User logged out"));
+      .json(new ApiResponse(200, {}, "User logged out successfully"));
   } catch (error) {
     throw new ApiError(401, error?.message || "Failed to logout");
   }
@@ -160,6 +192,12 @@ const verifyOTP = asyncHandler(async (req, res) => {
     user.otpExpires = null;
     await user.save();
 
+    await client.messages.create({
+      body: "You successfully logged in at Modazen!",
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: `+91${phoneNumber}`,
+    });
+
     // Redirect to the homepage (assuming this is an API endpoint)
     res
       .json(new ApiResponse(200, {}, "OTP verify successfully"))
@@ -196,7 +234,14 @@ const resendOTP = asyncHandler(async (req, res) => {
 const sendEmail = asyncHandler(async (req, res) => {
   try {
     const { email } = req.body;
-    await mailHelper({ email });
+
+    await mailHelper({
+      email,
+      subject: "Welcome to ModaZen Newsletter",
+      message: "Thank you for subscribing to our newsletter!",
+      htmlMessage: "<p>Thank you for subscribing to our newsletter!</p>",
+    });
+
     res.json(new ApiResponse(200, { email }, "Email send successfully."));
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to send an email.");
