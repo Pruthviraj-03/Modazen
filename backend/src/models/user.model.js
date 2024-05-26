@@ -3,27 +3,25 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema(
   {
-    googleId: { type: String, unique: true, sparse: true }, // Allow null values for users without GoogleId
+    googleId: { type: String, unique: true, sparse: true },
     email: {
       type: String,
       unique: true,
-      required: true,
-      match: [/^\S+@\S+\.\S+$/, "Please use a valid email address."],
     },
-    name: { type: String, required: true },
+    name: {
+      type: String,
+    },
     picture: { type: String },
     phoneNumber: {
       type: String,
       unique: true,
-      match: [/^\d{10}$/, "Please use a valid phone number."],
     },
     gender: { type: String, enum: ["Male", "Female"] },
     DOB: { type: Date },
     AlternateMobile: {
       type: String,
       unique: true,
-      sparse: true, // Allow null values for users without AlternateMobile
-      match: [/^\d{10}$/, "Please use a valid phone number."],
+      sparse: true,
     },
     accessToken: { type: String, select: false },
     refreshToken: { type: String, select: false },
@@ -64,9 +62,9 @@ userSchema.methods.generateRefreshToken = function () {
 // Generate OTP
 userSchema.methods.generateOtp = function () {
   try {
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = Math.floor(1000 + Math.random() * 9000);
     this.otp = otp;
-    this.otpExpires = new Date(Date.now() + 10 * 60000); // OTP expires in 10 minutes
+    this.otpExpires = new Date(Date.now() + 10 * 60000);
     return otp;
   } catch (error) {
     throw new Error("Error generating OTP");

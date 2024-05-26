@@ -85,7 +85,7 @@ const Header = () => {
             </div>
           </Link>
           <div className="w-52 flex items-center justify-center h-full">
-            <ul className="font-poppins flex flex-row gap-12">
+            <ul className="font-poppins flex flex-row gap-50">
               <Link to="/categories" onClick={window.scrollTo(0, 0)}>
                 <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
                   Categories

@@ -6,8 +6,6 @@ import axios from "axios";
 const Profile = () => {
   const { user } = useContext(UserContext);
   const googleId = user ? user.googleId : null;
-  console.log("User:", user);
-  console.log("Google ID:", googleId);
 
   const [userDetails, setUserDetails] = useState(null);
 

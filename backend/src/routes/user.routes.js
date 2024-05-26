@@ -10,7 +10,7 @@ import {
   getDetailFromDB,
   sendDetailToDB,
 } from "../controllers/user.controller.js";
-import { verifyJWT } from "../middlewares/verifyJWT.middleware.js";
+import { authMiddleWare } from "../middlewares/auth.middleware.js";
 import passport from "passport";
 import("../utils/Passport.utils.js");
 const router = Router();
@@ -28,7 +28,7 @@ router
     googleCallback
   );
 
-router.route("/logout").get(verifyJWT, logoutUser);
+router.route("/logout").get(authMiddleWare, logoutUser);
 
 router.route("/send-otp").post(sendOTP);
 
@@ -38,10 +38,10 @@ router.route("/resend-otp").post(resendOTP);
 
 router.route("/refresh-token").post(refreshAccessToken);
 
-router.route("/subscribe").post(sendEmail);
+router.route("/subscribe").post(authMiddleWare, sendEmail);
 
-router.route("/userprofile").get(getDetailFromDB);
+router.route("/userprofile").get(authMiddleWare, getDetailFromDB);
 
-router.route("/editprofile").post(sendDetailToDB);
+router.route("/editprofile").post(authMiddleWare, sendDetailToDB);
 
 export { router };

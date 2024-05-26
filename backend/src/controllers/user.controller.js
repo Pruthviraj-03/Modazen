@@ -109,16 +109,14 @@ const logoutUser = asyncHandler(async (req, res) => {
   }
 });
 
-const sendOTP = asyncHandler(async (req, res) => {
+const sendOTP = async (req, res) => {
   try {
     const { phoneNumber } = req.body;
 
-    // Check if the phone number starts with +91, if not, add the country code
     const formattedPhoneNumber = phoneNumber.startsWith("+91")
       ? phoneNumber
       : `+91${phoneNumber}`;
 
-    // Validate the phone number format
     if (!/^\+91\d{10}$/.test(formattedPhoneNumber)) {
       throw new ApiError(400, "Invalid phone number format");
     }
@@ -143,14 +141,14 @@ const sendOTP = asyncHandler(async (req, res) => {
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to send the otp");
   }
-});
+};
 
 const verifyOTP = asyncHandler(async (req, res) => {
   try {
     const { phoneNumber, otp } = req.body;
 
     // Find the user by phone number
-    const user = await User.findOne({ phoneNumber });
+    const user = await User.findOne({ phoneNumber: `+91${phoneNumber}` });
 
     // Check if user exists and OTP matches
     if (!user || user.otp !== otp || user.otpExpires < new Date()) {
@@ -162,9 +160,10 @@ const verifyOTP = asyncHandler(async (req, res) => {
     user.otpExpires = null;
     await user.save();
 
+    // Redirect to the homepage (assuming this is an API endpoint)
     res
-      .redirect("http://localhost:3000/")
-      .json(new ApiResponse(200, {}, "OTP verified successfully"));
+      .json(new ApiResponse(200, {}, "OTP verify successfully"))
+      .redirect("http://localhost:3000/");
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to verify the otp");
   }
@@ -206,9 +205,8 @@ const sendEmail = asyncHandler(async (req, res) => {
 
 const getDetailFromDB = asyncHandler(async (req, res) => {
   try {
-    const { user } = req.query; // Extracting googleId from query params
+    const { user } = req.query;
 
-    // Use 'user' to fetch user details from the database
     const userDetails = await User.findOne({ googleId: user }).select(
       "-otp -otpExpires"
     );

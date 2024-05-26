@@ -10,7 +10,7 @@ const Login = () => {
 
   const loginWithGoogle = () => {
     window.open("http://localhost:8000/api/v1/users/google/callback", "_self");
-    navigate("/googleId");
+    // navigate("/googleId");
   };
 
   const handlePhoneNumberChange = (e) => {
@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleContinue = async () => {
     try {
-      await axios.post("/api/v1/users/send-otp", {
+      await axios.post("http://localhost:8000/api/v1/users/send-otp", {
         phoneNumber,
       });
       localStorage.setItem("phoneNumber", phoneNumber);

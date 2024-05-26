@@ -47,10 +47,15 @@ const Otp = () => {
   const handleSubmit = async () => {
     const enteredOtp = otp.join("");
     try {
-      const response = await axios.post("/api/v1/users/verify-otp", {
-        phoneNumber,
-        otp: enteredOtp,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/verify-otp",
+        {
+          phoneNumber,
+          otp: enteredOtp,
+        }
+      );
+
+      console.log("Otp is:", otp);
 
       if (response.status === 200) {
         navigate("/");

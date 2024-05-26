@@ -3,7 +3,7 @@ import { asyncHandler } from "../utils/AsyncHandler.utils.js";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 
-const verifyJWT = asyncHandler(async (req, res, next) => {
+const authMiddleWare = asyncHandler(async (req, res, next) => {
   try {
     const token =
       req.cookies.accessToken ||
@@ -13,14 +13,12 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     console.log(token);
 
     if (!token) {
-      throw new ApiError(401, "Unauthorized request");
+      throw new ApiError(401, "Login first to access this page");
     }
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(decodedToken._id).select(
-      "-password -refreshToken"
-    );
+    const user = await User.findById(decodedToken._id).select("-refreshToken");
 
     if (!user) {
       throw new ApiError(401, "Invalid Access Token");
@@ -29,8 +27,8 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    throw new ApiError(401, error.message || "Invalid access token");
+    throw new ApiError(401, error.message || "Token not found plzz Login!");
   }
 });
 
-export { verifyJWT };
+export { authMiddleWare };
