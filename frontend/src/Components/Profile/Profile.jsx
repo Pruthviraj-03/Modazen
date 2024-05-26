@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import axios from "axios";
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const userId = user ? user.userId : null;
+  const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState(null);
 
@@ -24,6 +25,16 @@ const Profile = () => {
 
     fetchUserDetails();
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:8000/api/v1/users/logout");
+      setUser(null);
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to logout:", error);
+    }
+  };
 
   return (
     <div className="profile">
@@ -81,7 +92,10 @@ const Profile = () => {
                 Edit Profile
               </h4>
             </Link>
-            <h4 className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5 hover:text-main-color hover:font-700 hover:tracking-0.6 cursor-pointer">
+            <h4
+              className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5 hover:text-main-color hover:font-700 hover:tracking-0.6 cursor-pointer"
+              onClick={handleLogout}
+            >
               Logout
             </h4>
           </>
