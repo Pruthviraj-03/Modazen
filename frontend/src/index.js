@@ -5,9 +5,9 @@ import App from "./App";
 import "./index.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CartProvider } from "./Components/Cart/CartContext";
-import { WishlistProvider } from "./Components/Cart/WishlistContext";
-import { UserProvider } from "./Components/Profile/UserContext";
+import { CartProvider } from "./Components/Context/CartContext";
+import { WishlistProvider } from "./Components/Context/WishlistContext";
+import { UserProvider } from "./Components/Context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

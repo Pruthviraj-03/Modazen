@@ -24,7 +24,7 @@ import arrivals2 from "../images/Blue Grey Warm Jacket.jpg";
 import arrivals3 from "../images/Denim Jacket.jpg";
 import arrivals4 from "../images/Black Jacket.jpg";
 import arrivals5 from "../images/Green Polar Jacket.jpg";
-import { useCart } from "../Components/Cart/CartContext";
+import { useCart } from "../Components/Context/CartContext";
 import { Products } from "./products";
 
 export const arrivalData = [

@@ -9,8 +9,8 @@ import {
   faAngleRight,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import { useCart } from "../Components/Cart/CartContext";
-import { useWishlist } from "../Components/Cart/WishlistContext";
+import { useCart } from "../Components/Context/CartContext";
+import { useWishlist } from "../Components/Context/WishlistContext";
 import ModalImage from "react-modal-image";
 import { Products } from "./products";
 import image31 from "./apiImages/j7i1.jpg";

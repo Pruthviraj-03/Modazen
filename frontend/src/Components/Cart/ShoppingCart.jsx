@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useCart } from "./CartContext";
+import { useCart } from "../Context/CartContext";
 
 const ShoppingCart = () => {
   const { cartItems, removeFromCart } = useCart();

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useWishlist } from "../Cart/WishlistContext";
+import { useWishlist } from "../Context/WishlistContext";
 
 const Whishlist = () => {
   const { wishlistItems, removeFromWishlist } = useWishlist();

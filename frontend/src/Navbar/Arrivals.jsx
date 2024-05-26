@@ -13,7 +13,7 @@ import {
   faAngleUp,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useWishlist } from "../Components/Cart/WishlistContext";
+import { useWishlist } from "../Components/Context/WishlistContext";
 import { Products } from "./products";
 
 const Arrivals = ({ title }) => {

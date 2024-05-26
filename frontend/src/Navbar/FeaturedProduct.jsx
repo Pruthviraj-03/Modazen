@@ -11,8 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { arrivalData, extraProducts } from "./HomePage";
 import { Products } from "./products";
-import { useCart } from "../Components/Cart/CartContext";
-import { useWishlist } from "../Components/Cart/WishlistContext";
+import { useCart } from "../Components/Context/CartContext";
+import { useWishlist } from "../Components/Context/WishlistContext";
 
 const FeaturedProduct = () => {
   const { productName } = useParams();
