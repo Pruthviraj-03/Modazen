@@ -21,7 +21,9 @@ const Footer = () => {
 
   const handleSubscribe = async () => {
     try {
-      await axios.post("http://localhost:8000/api/v1/subscribe", { email });
+      await axios.post("http://localhost:8000/api/v1/users/subscribe", {
+        email,
+      });
       console.log("Email is:", email);
       alert("Thanks for contacting us! We will be in touch with you shortly.");
       setEmail(" ");

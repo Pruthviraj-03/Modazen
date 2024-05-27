@@ -1,6 +1,9 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { User } from "../models/user.model.js";
+import { mailHelper } from "./MailHelper.utils.js";
+import { CookieToken } from "./CookieToken.utils.js";
+import { generateAccessAndRefreshTokens } from "../controllers/user.controller.js";
 
 passport.use(
   new GoogleStrategy(
@@ -9,8 +12,9 @@ passport.use(
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: "http://localhost:8000/api/v1/users/google/callback",
       scope: ["profile", "email"],
+      passReqToCallback: true,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
         let user = await User.findOne({ googleId: profile.id });
 
@@ -30,12 +34,25 @@ passport.use(
             name,
             picture,
             accessToken,
+            refreshToken,
           });
           await user.save();
-        } else {
-          user.accessToken = accessToken;
-          await user.save();
+
+          await mailHelper({
+            email,
+            subject: "Login At Modazen",
+            message: "You've successfully Login at Modazen!",
+            htmlMessage: "<p>You've successfully Login at Modazen!</p>",
+          });
         }
+
+        // Generate tokens
+        // const tokens = await generateAccessAndRefreshTokens(user);
+
+        // console.log("Generated tokens:", tokens);
+
+        // Set cookies with the generated tokens
+        // CookieToken(user, req.res, tokens);
 
         done(null, user);
       } catch (error) {

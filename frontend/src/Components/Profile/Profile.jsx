@@ -1,36 +1,34 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../Context/UserContext";
 import axios from "axios";
 
 const Profile = () => {
-  const { user, setUser } = useContext(UserContext);
-  const userId = user ? user.userId : null;
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
 
-  const [userDetails, setUserDetails] = useState(null);
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/users/login/success",
+        { withCredentials: true }
+      );
+
+      console.log("response at profile", response);
+      setUserData(response.data.data.user);
+    } catch (error) {
+      console.log("error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/users/userprofile"
-        );
-        setUserDetails(response.data);
-        console.log("User data:", response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUserDetails();
+    getUser();
   }, []);
 
   const handleLogout = async () => {
     try {
       await axios.get("http://localhost:8000/api/v1/users/logout");
-      setUser(null);
       navigate("/login");
+      window.alert("User logout success");
     } catch (error) {
       console.error("Failed to logout:", error);
     }
@@ -39,16 +37,18 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="flex justify-center flex-col h-auto p-20 gap-12">
-        {userId ? (
+        {userData ? (
           <>
             <h3 className="font-poppins text-main-color text-17.5 font-700 tracking-0.5">
-              Hello {userDetails.name ? userDetails.name : "------"}
+              Hello {userData.name ? userData.name : "------------------"}
             </h3>
             <span className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5">
-              {userDetails.phoneNumber ? userDetails.phoneNumber : "------"}
+              {userData.phoneNumber
+                ? userData.phoneNumber
+                : "------------------"}
             </span>
-            <span className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5">
-              {userDetails.email ? userDetails.email : "------"}
+            <span className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5 h-auto">
+              {userData.email ? userData.email : "------------------"}
             </span>
           </>
         ) : (
@@ -85,9 +85,9 @@ const Profile = () => {
           </h4>
         </Link>
         <div className="profile-line"></div>
-        {userId ? (
+        {userData ? (
           <>
-            <Link to={`/?user=${userId}/userprofile`}>
+            <Link to="/userprofile">
               <h4 className="font-poppins text-dark-grey text-17.5 font-400 tracking-0.5 hover:text-main-color hover:font-700 hover:tracking-0.6 cursor-pointer">
                 Edit Profile
               </h4>

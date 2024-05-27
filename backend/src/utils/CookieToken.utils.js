@@ -1,5 +1,11 @@
-const CookieToken = (user, res) => {
-  const token = user.generateAccessToken();
+const CookieToken = (user, res, tokens) => {
+  console.log("Received tokens:", tokens);
+
+  if (!tokens) {
+    throw new Error("Tokens are undefined");
+  }
+
+  const { accessToken, refreshToken } = tokens;
 
   const options = {
     expires: new Date(
@@ -9,14 +15,17 @@ const CookieToken = (user, res) => {
     secure: process.env.NODE_ENV === "production",
   };
 
-  res.cookie("token", token, options).json({
+  res.cookie("accessToken", accessToken, options);
+  res.cookie("refreshToken", refreshToken, options);
+
+  res.json({
     success: true,
-    token,
+    accessToken,
+    refreshToken,
     user: {
       id: user._id,
       email: user.email,
       name: user.name,
-      picture: user.picture,
       phoneNumber: user.phoneNumber,
     },
   });

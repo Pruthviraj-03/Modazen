@@ -22,9 +22,12 @@ const generateAccessAndRefreshTokens = asyncHandler(async (user) => {
 
   user.accessToken = accessToken;
   user.refreshToken = refreshToken;
+
   await user.save({ validateBeforeSave: false });
 
-  return { accessToken, refreshToken };
+  const tokens = { accessToken, refreshToken };
+  console.log("Tokens object:", tokens);
+  return tokens;
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
@@ -75,26 +78,22 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-const googleCallback = asyncHandler(async (req, res) => {
+const userLogin = asyncHandler(async (req, res) => {
   try {
     const userId = req.user._id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select(
+      "-googleId -picture -accessToken -refreshToken -otp -otpExpires"
+    );
+
     if (!user) {
-      throw new ApiError(404, "User not found");
+      throw new ApiError(401, "User not found");
     }
+    console.log("User not found");
 
-    const email = user.email;
-
-    await mailHelper({
-      email,
-      subject: "Login At Modazen",
-      message: "You've successfully Login at Modazen!",
-      htmlMessage: "<p>You've successfully Login at Modazen!</p>",
-    });
-    res.redirect(`http://localhost:3000/?user=${userId}`);
-    console.log(userId, "User logged in successfully");
+    res.json(new ApiResponse(200, { user }, "User data found"));
+    console.log("User data found", user);
   } catch (error) {
-    throw new ApiError(401, error?.message || "Failed to login");
+    throw new ApiError(500, error.message || "Failed to fetch user data");
   }
 });
 
@@ -248,26 +247,6 @@ const sendEmail = asyncHandler(async (req, res) => {
   }
 });
 
-const getDetailFromDB = asyncHandler(async (req, res) => {
-  try {
-    const { user } = req.query;
-
-    const userDetails = await User.findOne({ googleId: user }).select(
-      "-otp -otpExpires"
-    );
-
-    if (!userDetails) {
-      throw new ApiError(404, "User not found");
-    }
-
-    res.json(
-      new ApiResponse(200, { userDetails }, "Got user details successfully.")
-    );
-  } catch (error) {
-    throw new ApiError(500, error?.message || "Failed to get the details.");
-  }
-});
-
 const sendDetailToDB = asyncHandler(async (req, res) => {
   try {
     const { googleId } = req.params;
@@ -306,13 +285,13 @@ const sendDetailToDB = asyncHandler(async (req, res) => {
 });
 
 export {
-  googleCallback,
+  generateAccessAndRefreshTokens,
   logoutUser,
   refreshAccessToken,
   sendOTP,
   verifyOTP,
   resendOTP,
   sendEmail,
-  getDetailFromDB,
   sendDetailToDB,
+  userLogin,
 };

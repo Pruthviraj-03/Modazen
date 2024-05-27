@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -10,7 +10,6 @@ const Login = () => {
 
   const loginWithGoogle = () => {
     window.open("http://localhost:8000/api/v1/users/google/callback", "_self");
-    // navigate("/googleId");
   };
 
   const handlePhoneNumberChange = (e) => {

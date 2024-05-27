@@ -1,14 +1,13 @@
 import { Router } from "express";
 import {
-  googleCallback,
   logoutUser,
   refreshAccessToken,
   sendOTP,
   verifyOTP,
   resendOTP,
   sendEmail,
-  getDetailFromDB,
   sendDetailToDB,
+  userLogin,
 } from "../controllers/user.controller.js";
 import { authMiddleWare } from "../middlewares/auth.middleware.js";
 import passport from "passport";
@@ -21,12 +20,14 @@ router.route("/google").get(
   })
 );
 
-router
-  .route("/google/callback")
-  .get(
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    googleCallback
-  );
+router.route("/google/callback").get(
+  passport.authenticate("google", {
+    successRedirect: "http://localhost:3000/",
+    failureRedirect: "http://localhost:3000/login",
+  })
+);
+
+router.route("/login/success").get(userLogin);
 
 router.route("/logout").get(authMiddleWare, logoutUser);
 
@@ -38,10 +39,8 @@ router.route("/resend-otp").post(resendOTP);
 
 router.route("/refresh-token").post(refreshAccessToken);
 
-router.route("/subscribe").post(authMiddleWare, sendEmail);
+router.route("/subscribe").post(sendEmail);
 
-router.route("/userprofile").get(authMiddleWare, getDetailFromDB);
-
-router.route("/editprofile").post(authMiddleWare, sendDetailToDB);
+router.route("/editprofile").post(sendDetailToDB);
 
 export { router };

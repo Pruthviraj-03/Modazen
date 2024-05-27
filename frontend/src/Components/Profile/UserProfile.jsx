@@ -3,22 +3,23 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UserProfile = () => {
-  const [userDetails, setUserDetails] = useState(null);
+  const [userData, setUserData] = useState(null);
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/users/login/success"
+      );
+
+      console.log("response at profile", response);
+      setUserData(response.data.data.user);
+    } catch (error) {
+      console.log("error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/users/userprofile"
-        );
-        setUserDetails(response.data);
-        console.log("User data:", response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchUserDetails();
+    getUser();
   }, []);
 
   return (
@@ -36,7 +37,7 @@ const UserProfile = () => {
               Full Name
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.name ? userDetails.name : "------"}
+              {userData.name ? userData.name : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -44,7 +45,9 @@ const UserProfile = () => {
               Mobile Number
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.phoneNumber ? userDetails.phoneNumber : "------"}
+              {userData.phoneNumber
+                ? userData.phoneNumber
+                : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -52,7 +55,7 @@ const UserProfile = () => {
               Email ID
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.email ? userDetails.email : "------"}
+              {userData.email ? userData.email : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -60,7 +63,7 @@ const UserProfile = () => {
               Gender
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.gender ? userDetails.gender : "------"}
+              {userData.gender ? userData.gender : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -68,7 +71,7 @@ const UserProfile = () => {
               Date of Birth
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.DOB ? userDetails.DOB : "------"}
+              {userData.DOB ? userData.DOB : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">
@@ -76,9 +79,9 @@ const UserProfile = () => {
               Alternate Mobile
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userDetails.AlternateMobile
-                ? userDetails.AlternateMobile
-                : "------"}
+              {userData.AlternateMobile
+                ? userData.AlternateMobile
+                : "------------------"}
             </span>
           </div>
         </div>
