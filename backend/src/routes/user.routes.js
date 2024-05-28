@@ -42,7 +42,7 @@ router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/subscribe").post(sendEmail);
 
-router.route("/editprofile").post(authMiddleWare, sendDetailToDB);
+router.route("/editprofile").post(sendDetailToDB);
 
 router.route("/razorpay/payment").post(razorpayPayment);
 

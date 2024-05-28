@@ -25,8 +25,8 @@ const CookieToken = (user, res, tokens) => {
   res.cookie("accessToken", accessToken, options);
   res.cookie("refreshToken", refreshToken, options);
 
-  console.log(user.name, "registered successfully");
-  console.log("Received tokens:", tokens);
+  // console.log(user.name, "registered successfully");
+  // console.log("Received tokens:", tokens);
 };
 
 export { CookieToken };

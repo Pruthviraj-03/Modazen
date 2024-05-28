@@ -14,7 +14,11 @@ const EditProfile = () => {
   });
 
   const handleChange = (e) => {
-    setFormData(e.target.value);
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   // const handleGenderChange = (selectedGender) => {
@@ -54,6 +58,7 @@ const EditProfile = () => {
             <input
               className="font-poppins"
               type="text"
+              name="name"
               value={formData.name}
               onChange={handleChange}
             ></input>
@@ -63,6 +68,7 @@ const EditProfile = () => {
             <input
               className="font-poppins"
               type="text"
+              name="phoneNumber"
               maxLength="10"
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -73,6 +79,7 @@ const EditProfile = () => {
             <input
               className="font-poppins"
               type="text"
+              name="email"
               value={formData.email}
               onChange={handleChange}
             ></input>
@@ -104,7 +111,8 @@ const EditProfile = () => {
             <input
               className="font-poppins"
               type="text"
-              placeholder="dd/mm/yyyy"
+              name="DOB"
+              placeholder="DD/MM/YYYY"
               maxLength="10"
               value={formData.DOB}
               onChange={handleChange}
@@ -115,6 +123,7 @@ const EditProfile = () => {
             <input
               className="font-poppins"
               type="text"
+              name="AlternateMobile"
               maxLength="10"
               value={formData.AlternateMobile}
               onChange={handleChange}

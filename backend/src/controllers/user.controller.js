@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import twilio from "twilio";
 import dotenv from "dotenv";
 import { mailHelper } from "../utils/MailHelper.utils.js";
+import moment from "moment";
 
 dotenv.config({
   path: "./.env",
@@ -99,10 +100,10 @@ const userLogin = asyncHandler(async (req, res) => {
     if (!user) {
       throw new ApiError(401, "User not found");
     }
-    console.log("User not found");
+    // console.log("User not found");
 
     res.json(new ApiResponse(200, { user }, "User data found"));
-    console.log("User data found", user);
+    // console.log("User data found", user);
   } catch (error) {
     throw new ApiError(500, error.message || "Failed to fetch user data");
   }
@@ -128,7 +129,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         .clearCookie("userId", options)
         .clearCookie("user", options)
         .json(new ApiResponse(200, {}, "User logged out successfully"));
-      console.log("User logged out successfully");
+      // console.log("User logged out successfully");
     });
   } catch (error) {
     console.log("Failed to logout:", error);
@@ -245,32 +246,46 @@ const sendEmail = asyncHandler(async (req, res) => {
 
 const sendDetailToDB = asyncHandler(async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
+
+    let user = await User.findById(userId);
+
     const { email, name, phoneNumber, DOB, AlternateMobile } = req.body;
 
-    let user = await User.findOne({ userId });
+    let formattedDOB;
+    if (DOB) {
+      const parsedDOB = moment(DOB, "DD/MM/YYYY", true);
+      if (!parsedDOB.isValid()) {
+        throw new ApiError(400, "Invalid date format for DOB");
+      }
+      formattedDOB = parsedDOB.format("YYYY-MM-DD");
+    }
 
     if (!user) {
       user = new User({
+        _id: userId,
         email,
         name,
         phoneNumber,
-        DOB,
+        DOB: formattedDOB,
         AlternateMobile,
       });
     } else {
       user.email = email || user.email;
       user.name = name || user.name;
       user.phoneNumber = phoneNumber || user.phoneNumber;
-      user.DOB = DOB || user.DOB;
+      user.DOB = formattedDOB || user.DOB;
       user.AlternateMobile = AlternateMobile || user.AlternateMobile;
     }
 
     await user.save();
 
-    res.json(new ApiResponse(200, { user }, "Send user details successfully."));
+    res.json(
+      new ApiResponse(200, { user }, "User details saved successfully.")
+    );
   } catch (error) {
-    throw new ApiError(500, error?.message || "Failed to send the details.");
+    console.error("Error saving user details:", error);
+    throw new ApiError(500, error?.message || "Failed to save the details.");
   }
 });
 
