@@ -249,29 +249,23 @@ const sendEmail = asyncHandler(async (req, res) => {
 
 const sendDetailToDB = asyncHandler(async (req, res) => {
   try {
-    const { googleId } = req.params;
-    const { email, name, picture, phoneNumber, gender, DOB, AlternateMobile } =
-      req.body;
+    const userId = req.user._id;
+    const { email, name, phoneNumber, DOB, AlternateMobile } = req.body;
 
-    let user = await User.findOne({ googleId });
+    let user = await User.findOne({ userId });
 
     if (!user) {
       user = new User({
-        googleId,
         email,
         name,
-        picture,
         phoneNumber,
-        gender,
         DOB,
         AlternateMobile,
       });
     } else {
       user.email = email || user.email;
       user.name = name || user.name;
-      user.picture = picture || user.picture;
       user.phoneNumber = phoneNumber || user.phoneNumber;
-      user.gender = gender || user.gender;
       user.DOB = DOB || user.DOB;
       user.AlternateMobile = AlternateMobile || user.AlternateMobile;
     }

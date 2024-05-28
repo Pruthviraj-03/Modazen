@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
 
   const getUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/users/login/success"
+        "http://localhost:8000/api/v1/users/login/success",
+        { withCredentials: true }
       );
 
       console.log("response at profile", response);

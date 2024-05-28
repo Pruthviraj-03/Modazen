@@ -8,21 +8,26 @@ const EditProfile = () => {
     name: "",
     email: "",
     phoneNumber: "",
-    gender: "",
+    // gender: "",
     DOB: "",
     AlternateMobile: "",
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData(e.target.value);
   };
+
+  // const handleGenderChange = (selectedGender) => {
+  //   setFormData({ ...formData, gender: selectedGender });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(
         "http://localhost:8000/api/v1/users/editprofile",
-        formData
+        formData,
+        { withCredentials: true }
       );
       console.log("User details saved successfully.");
       navigate("/userprofile");
@@ -73,16 +78,26 @@ const EditProfile = () => {
             ></input>
           </div>
           <div className="gender-box flex mb-20 h-60 w-full">
-            <button className="flex justify-center items-center h-full w-50">
+            {/* <button
+              className={`flex justify-center items-center h-full w-50 ${
+                formData.gender === "Male" ? "bg-main-color" : ""
+              }`}
+              onClick={() => handleGenderChange("Male")}
+            >
               <span className="font-poppins text-main-color text-14 font-400">
                 Male
               </span>
             </button>
-            <button className="flex justify-center items-center h-full w-50">
+            <button
+              className={`flex justify-center items-center h-full w-50 ${
+                formData.gender === "Female" ? "bg-main-color" : ""
+              }`}
+              onClick={() => handleGenderChange("Female")}
+            >
               <span className="font-poppins text-main-color text-14 font-400">
                 Female
               </span>
-            </button>
+            </button> */}
           </div>
           <div className="fieldset relative mb-20 h-80p w-full">
             <legend className="font-poppins">Date of Birth</legend>
@@ -106,11 +121,14 @@ const EditProfile = () => {
             ></input>
           </div>
         </div>
-        <div className="edit-profile-button flex justify-center items-center w-560 h-55 bg-main-color cursor-pointer">
+        <button
+          className="edit-profile-button flex justify-center items-center w-560 h-55 bg-main-color cursor-pointer"
+          type="submit"
+        >
           <span className="font-poppins text-dark-white text-18 font-700 tracking-0.5">
             SAVE DETAILS
           </span>
-        </div>
+        </button>
       </form>
     </div>
   );

@@ -1,13 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCreditCard,
   faMoneyBillTransfer,
 } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
 
-const Checkout = () => {
+const Checkout = (props) => {
+  const navigate = useNavigate();
+
+  const handlePayment = async () => {
+    const amount = props.location?.state?.totalAmount || 100;
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/v1/users/razorpay/payment",
+        { amount }
+      );
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_API_KEY,
+        amount: data.order.amount,
+        currency: data.order.currency,
+        name: "Your Company Name",
+        description: "Test Transaction",
+        image: "https://your-logo-url.com/logo.png",
+        order_id: data.order.id,
+        handler: function (response) {
+          alert(`Payment ID: ${response.razorpay_payment_id}`);
+          alert(`Order ID: ${response.razorpay_order_id}`);
+          alert(`Signature: ${response.razorpay_signature}`);
+          console.log("Payment success", amount);
+          navigate("/completed");
+        },
+        prefill: {
+          name: "Your Name",
+          email: "email@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Your Address",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      console.error("Payment initiation failed:", error);
+    }
+  };
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
       <div className="categories-title flex justify-center items-center w-80 h-full">
@@ -161,13 +205,14 @@ const Checkout = () => {
               </div>
             </div>
             <div className="flex relative mt-40">
-              <Link to="/completed">
-                <div className="featured-product-completed-button flex absolute right-0 items-center justify-center h-55 w-200 bg-dark-white cursor-pointer">
-                  <span className="font-poppins text-main-color text-18 font-500">
-                    Checkout
-                  </span>
-                </div>
-              </Link>
+              <div
+                className="featured-product-completed-button flex absolute right-0 items-center justify-center h-55 w-200 bg-dark-white cursor-pointer"
+                onClick={handlePayment}
+              >
+                <span className="font-poppins text-main-color text-18 font-500">
+                  Checkout
+                </span>
+              </div>
             </div>
           </div>
         </div>

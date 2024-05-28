@@ -34,6 +34,15 @@ const ShoppingCart = () => {
     return isNaN(totalPrice) ? "Invalid" : `$${totalPrice.toFixed(2)}`;
   };
 
+  const totalAmount = cartItems
+    .reduce((total, product) => {
+      const itemTotal =
+        parseFloat(product.price.replace(/\$/g, "")) *
+        (quantities[product.id] || 1);
+      return total + itemTotal;
+    }, 0)
+    .toFixed(2);
+
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
       <div className="categories-title flex justify-center items-center w-80 h-full">
@@ -169,15 +178,7 @@ const ShoppingCart = () => {
                 Total
               </h3>
               <span className="font-poppins text-main-color text-36 font-700">
-                $
-                {cartItems
-                  .reduce((total, product) => {
-                    const itemTotal =
-                      parseFloat(product.price.replace(/\$/g, "")) *
-                      (quantities[product.id] || 1);
-                    return total + itemTotal;
-                  }, 0)
-                  .toFixed(2)}
+                ${totalAmount}
               </span>
             </div>
           </div>
@@ -190,7 +191,7 @@ const ShoppingCart = () => {
                   </span>
                 </div>
               </Link>
-              <Link to="/checkout">
+              <Link to="/checkout" state={{ totalAmount }}>
                 <div className="featured-product-checkout-button flex items-center justify-center h-55 w-200 bg-dark-white cursor-pointer">
                   <span className="font-poppins text-main-color text-18 font-500">
                     Checkout

@@ -9,6 +9,7 @@ import {
   sendDetailToDB,
   userLogin,
 } from "../controllers/user.controller.js";
+import { razorpayPayment } from "../utils/Razorpay.utils.js";
 import { authMiddleWare } from "../middlewares/auth.middleware.js";
 import passport from "passport";
 import("../utils/Passport.utils.js");
@@ -42,5 +43,7 @@ router.route("/refresh-token").post(refreshAccessToken);
 router.route("/subscribe").post(sendEmail);
 
 router.route("/editprofile").post(sendDetailToDB);
+
+router.route("/razorpay/payment").post(razorpayPayment);
 
 export { router };

@@ -47,12 +47,12 @@ passport.use(
         }
 
         // Generate tokens
-        // const tokens = await generateAccessAndRefreshTokens(user);
+        const tokens = await generateAccessAndRefreshTokens(user);
 
-        // console.log("Generated tokens:", tokens);
+        console.log("Generated tokens:", tokens);
 
         // Set cookies with the generated tokens
-        // CookieToken(user, req.res, tokens);
+        CookieToken(user, req.res, tokens);
 
         done(null, user);
       } catch (error) {

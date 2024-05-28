@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema(
     DOB: { type: Date },
     AlternateMobile: {
       type: String,
-      unique: true,
       sparse: true,
     },
     accessToken: { type: String, select: false },

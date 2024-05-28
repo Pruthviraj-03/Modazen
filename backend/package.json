@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "cloudinary": "^2.2.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -31,7 +32,8 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
-    "razorpay": "^2.9.3",
+    "razorpay": "^2.9.4",
+    "shortid": "^2.2.16",
     "twilio": "^5.0.4",
     "validator": "^13.12.0"
   },
