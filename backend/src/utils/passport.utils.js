@@ -4,6 +4,11 @@ import { User } from "../models/user.model.js";
 import { mailHelper } from "./MailHelper.utils.js";
 import { CookieToken } from "./CookieToken.utils.js";
 import { generateAccessAndRefreshTokens } from "../controllers/user.controller.js";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: "./.env",
+});
 
 passport.use(
   new GoogleStrategy(
@@ -46,16 +51,12 @@ passport.use(
           });
         }
 
-        // Generate tokens
         const tokens = await generateAccessAndRefreshTokens(user);
-
-        console.log("Generated tokens:", tokens);
-
-        // Set cookies with the generated tokens
         CookieToken(user, req.res, tokens);
 
         done(null, user);
       } catch (error) {
+        console.error("Error in GoogleStrategy callback:", error);
         done(error, null);
       }
     }

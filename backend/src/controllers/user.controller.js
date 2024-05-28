@@ -16,19 +16,30 @@ const client = twilio(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-const generateAccessAndRefreshTokens = asyncHandler(async (user) => {
-  const accessToken = user.generateAccessToken();
-  const refreshToken = user.generateRefreshToken();
+const generateAccessAndRefreshTokens = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        reject(new Error("User not found"));
+        return;
+      }
 
-  user.accessToken = accessToken;
-  user.refreshToken = refreshToken;
+      const accessToken = user.generateAccessToken();
+      const refreshToken = user.generateRefreshToken();
 
-  await user.save({ validateBeforeSave: false });
+      user.accessToken = accessToken;
+      user.refreshToken = refreshToken;
 
-  const tokens = { accessToken, refreshToken };
-  console.log("Tokens object:", tokens);
-  return tokens;
-});
+      await user.save({ validateBeforeSave: false });
+
+      const tokens = { accessToken, refreshToken };
+      resolve(tokens);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
