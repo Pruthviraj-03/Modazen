@@ -5,8 +5,6 @@ dotenv.config({
 });
 
 const CookieToken = (user, res, tokens) => {
-  console.log("Received tokens:", tokens);
-
   if (!tokens || !tokens.accessToken || !tokens.refreshToken) {
     console.log("Tokens are undefined");
     throw new Error("Tokens are undefined");
@@ -27,7 +25,7 @@ const CookieToken = (user, res, tokens) => {
   res.cookie("accessToken", accessToken, options);
   res.cookie("refreshToken", refreshToken, options);
 
-  console.log(user.name, "Registered successfully");
+  console.log(user.name, "registered successfully");
   console.log("Received tokens:", tokens);
 };
 

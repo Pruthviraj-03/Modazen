@@ -30,7 +30,7 @@ router.route("/google/callback").get(
 
 router.route("/login/success").get(userLogin);
 
-router.route("/logout").get(authMiddleWare, logoutUser);
+router.route("/logout").get(logoutUser);
 
 router.route("/send-otp").post(sendOTP);
 

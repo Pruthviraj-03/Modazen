@@ -110,43 +110,28 @@ const userLogin = asyncHandler(async (req, res) => {
 
 const logoutUser = asyncHandler(async (req, res) => {
   try {
-    if (!req.user) {
-      throw new ApiError(401, "User not authenticated");
-    }
+    req.logout((err) => {
+      if (err) {
+        console.log("Failed to logout:", err);
+        throw new ApiError(401, err?.message || "Failed to logout");
+      }
 
-    const userId = req.user._id;
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new ApiError(404, "User not found");
-    }
-
-    const email = user.email;
-
-    await mailHelper({
-      email,
-      subject: "Logout At Modazen",
-      message: "You've successfully logged out from Modazen!",
-      htmlMessage: "<p>You've successfully logged out from Modazen!</p>",
+      const options = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Strict",
+      };
+      res
+        .status(200)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .clearCookie("userId", options)
+        .clearCookie("user", options)
+        .json(new ApiResponse(200, {}, "User logged out successfully"));
+      console.log("User logged out successfully");
     });
-
-    await User.findByIdAndUpdate(
-      userId,
-      { $set: { refreshToken: undefined } },
-      { new: true }
-    );
-
-    const options = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
-    };
-
-    res
-      .status(200)
-      .clearCookie("accessToken", options)
-      .clearCookie("refreshToken", options)
-      .json(new ApiResponse(200, {}, "User logged out successfully"));
   } catch (error) {
+    console.log("Failed to logout:", error);
     throw new ApiError(401, error?.message || "Failed to logout");
   }
 });

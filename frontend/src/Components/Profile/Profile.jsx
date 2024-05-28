@@ -12,8 +12,6 @@ const Profile = () => {
         "http://localhost:8000/api/v1/users/login/success",
         { withCredentials: true }
       );
-
-      console.log("response at profile", response);
       setUserData(response.data.data.user);
     } catch (error) {
       console.log("error fetching user data:", error);
@@ -26,9 +24,12 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:8000/api/v1/users/logout");
-      navigate("/login");
+      await axios.get("http://localhost:8000/api/v1/users/logout", {
+        withCredentials: true,
+      });
       window.alert("User logout success");
+      setUserData(null);
+      navigate("/login");
     } catch (error) {
       console.error("Failed to logout:", error);
     }
