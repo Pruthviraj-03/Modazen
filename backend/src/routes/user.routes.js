@@ -28,9 +28,9 @@ router.route("/google/callback").get(
   })
 );
 
-router.route("/login/success").get(userLogin);
+router.route("/login/success").get(authMiddleWare, userLogin);
 
-router.route("/logout").get(logoutUser);
+router.route("/logout").get(authMiddleWare, logoutUser);
 
 router.route("/send-otp").post(sendOTP);
 
@@ -42,7 +42,7 @@ router.route("/refresh-token").post(refreshAccessToken);
 
 router.route("/subscribe").post(sendEmail);
 
-router.route("/editprofile").post(sendDetailToDB);
+router.route("/editprofile").post(authMiddleWare, sendDetailToDB);
 
 router.route("/razorpay/payment").post(razorpayPayment);
 

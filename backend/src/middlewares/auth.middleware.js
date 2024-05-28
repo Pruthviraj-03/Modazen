@@ -5,20 +5,20 @@ import { User } from "../models/user.model.js";
 
 const authMiddleWare = asyncHandler(async (req, res, next) => {
   try {
-    const token =
-      req.cookies.accessToken ||
-      (req.headers.authorization &&
-        req.headers.authorization.replace("Bearer ", ""));
-
-    console.log(token);
+    const token = req.cookies.accessToken;
 
     if (!token) {
-      throw new ApiError(401, "Login first to access this page");
+      throw new ApiError(401, "Login first to access this page!");
     }
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      throw new ApiError(401, "Invalid or expired token");
+    }
 
-    const user = await User.findById(decodedToken._id).select("-refreshToken");
+    const user = await User.findById(decodedToken.id).select("-refreshToken");
 
     if (!user) {
       throw new ApiError(401, "Invalid Access Token");

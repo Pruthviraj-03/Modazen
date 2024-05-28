@@ -232,7 +232,7 @@ const sendEmail = asyncHandler(async (req, res) => {
 
     await mailHelper({
       email,
-      subject: "Welcome to ModaZen Newsletter",
+      subject: "Welcome to ModaZen Newsletter!",
       message: "Thank you for subscribing to our newsletter!",
       htmlMessage: "<p>Thank you for subscribing to our newsletter!</p>",
     });

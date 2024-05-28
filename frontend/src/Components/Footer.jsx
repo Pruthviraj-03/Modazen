@@ -6,7 +6,7 @@ import {
   faEnvelope,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -17,6 +17,7 @@ import {
 import "../index.css";
 
 const Footer = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
   const handleSubscribe = async () => {
@@ -29,7 +30,9 @@ const Footer = () => {
       setEmail(" ");
     } catch (error) {
       console.log(error);
-      alert("Email failed. Please try again later.");
+      alert("Email failed, Login first!");
+      navigate("/login");
+      setEmail(" ");
     }
   };
 
