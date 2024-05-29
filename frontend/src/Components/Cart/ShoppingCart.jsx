@@ -191,7 +191,7 @@ const ShoppingCart = () => {
                   </span>
                 </div>
               </Link>
-              <Link to="/checkout" state={{ totalAmount }}>
+              <Link to="/checkout">
                 <div className="featured-product-checkout-button flex items-center justify-center h-55 w-200 bg-dark-white cursor-pointer">
                   <span className="font-poppins text-main-color text-18 font-500">
                     Checkout

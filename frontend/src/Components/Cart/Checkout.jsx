@@ -8,11 +8,11 @@ import {
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 
-const Checkout = (props) => {
+const Checkout = () => {
   const navigate = useNavigate();
 
   const handlePayment = async () => {
-    const amount = props.location?.state?.totalAmount || 100;
+    const amount = 100;
     try {
       const { data } = await axios.post(
         "http://localhost:8000/api/v1/users/razorpay/payment",

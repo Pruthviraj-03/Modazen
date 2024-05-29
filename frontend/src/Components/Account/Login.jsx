@@ -46,7 +46,8 @@ const Login = () => {
           </span>
           <div className="login-number-box-line"></div>
           <input
-            className="font-poppins text-dark-grey font-400 text-14 w-full h-full border-none outline-none tracking-0.5"
+            className="font-poppins text-main-color font-400 text-14 w-full h-full border-none outline-none tracking-1"
+            type="text"
             placeholder="Mobile Number"
             maxLength="10"
             value={phoneNumber}

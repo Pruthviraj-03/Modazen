@@ -16,16 +16,19 @@ const CookieToken = (user, res, tokens) => {
     parseInt(process.env.COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000;
   const expirationDate = new Date(Date.now() + expirationTimeMs);
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   const options = {
     expires: expirationDate,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax",
   };
 
   res.cookie("accessToken", accessToken, options);
   res.cookie("refreshToken", refreshToken, options);
 
-  // console.log(user.name, "registered successfully");
+  // console.log(user.phoneNumber, "registered successfully");
   // console.log("Received tokens:", tokens);
 };
 

@@ -7,6 +7,7 @@ import twilio from "twilio";
 import dotenv from "dotenv";
 import { mailHelper } from "../utils/MailHelper.utils.js";
 import moment from "moment";
+import { CookieToken } from "../utils/CookieToken.utils.js";
 
 dotenv.config({
   path: "./.env",
@@ -175,11 +176,16 @@ const verifyOTP = asyncHandler(async (req, res) => {
   try {
     const { phoneNumber, otp } = req.body;
 
-    // Find the user by phone number
-    const user = await User.findOne({ phoneNumber: `+91${phoneNumber}` });
+    // console.log("number is:", phoneNumber, "and", "otp is:", otp);
 
-    // Check if user exists and OTP matches
+    const user = await User.findOne({
+      phoneNumber: `+91${phoneNumber}`,
+    }).select("+otp +otpExpires");
+
+    // console.log("user otp is:", user);
+
     if (!user || user.otp !== otp || user.otpExpires < new Date()) {
+      console.log("Invalid or expired otp");
       return res.status(400).json({ error: "Invalid or expired OTP" });
     }
 
@@ -188,6 +194,10 @@ const verifyOTP = asyncHandler(async (req, res) => {
     user.otpExpires = null;
     await user.save();
 
+    const tokens = await generateAccessAndRefreshTokens(user);
+    // console.log("Generated tokens:", tokens);
+    CookieToken(user, res, tokens);
+
     await client.messages.create({
       body: "You successfully logged in at Modazen!",
       from: process.env.TWILIO_PHONE_NUMBER,
@@ -195,9 +205,8 @@ const verifyOTP = asyncHandler(async (req, res) => {
     });
 
     // Redirect to the homepage (assuming this is an API endpoint)
-    res
-      .json(new ApiResponse(200, {}, "OTP verify successfully"))
-      .redirect("http://localhost:3000/");
+    res.json(new ApiResponse(200, {}, "OTP verify successfully"));
+    console.log("otp verified successfully");
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to verify the otp");
   }

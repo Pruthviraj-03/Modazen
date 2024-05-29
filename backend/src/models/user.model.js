@@ -22,8 +22,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       sparse: true,
     },
-    // accessToken: { type: String, select: false },
-    // refreshToken: { type: String, select: false },
     otp: { type: String, select: false },
     otpExpires: { type: Date, select: false },
   },
