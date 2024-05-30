@@ -44,6 +44,6 @@ router.route("/subscribe").post(sendEmail);
 
 router.route("/editprofile").post(authMiddleWare, sendDetailToDB);
 
-router.route("/razorpay/payment").post(authMiddleWare, razorpayPayment);
+router.route("/razorpay/payment").post(razorpayPayment);
 
 export { router };

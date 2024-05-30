@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCreditCard,
@@ -9,49 +9,73 @@ import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 
 const Checkout = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+  const totalAmount = location.state?.totalAmount || 0;
+  console.log("Amount is:", totalAmount);
+  const [paymentStatus, setPaymentStatus] = useState(null);
 
-  const handlePayment = async () => {
-    const amount = 100;
+  const handlePayment = async (e) => {
+    const amount = totalAmount * 100;
+    const currency = "INR";
+    const receiptId = "1234567890";
+
+    if (!amount) {
+      window.alert("Add product first into the cart!");
+      navigate("/shoppingcart");
+    }
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:8000/api/v1/users/razorpay/payment",
-        { amount }
+        { amount, currency, receipt: receiptId }
       );
-      const options = {
+      const order = response.data.data.order;
+      console.log("order:", order);
+
+      var options = {
         key: process.env.REACT_APP_RAZORPAY_API_KEY,
-        amount: data.order.amount,
-        currency: data.order.currency,
-        name: "Your Company Name",
-        description: "Test Transaction",
-        image: "https://your-logo-url.com/logo.png",
-        order_id: data.order.id,
+        amount: order.amount,
+        currency: order.currency,
+        name: "ModaZen",
+        description: "Transaction for buying products.",
+        order_id: order.id,
         handler: function (response) {
           alert(`Payment ID: ${response.razorpay_payment_id}`);
           alert(`Order ID: ${response.razorpay_order_id}`);
           alert(`Signature: ${response.razorpay_signature}`);
-          console.log("Payment success", amount);
+          window.alert("Payment success");
+          setPaymentStatus("success");
           navigate("/completed");
         },
         prefill: {
-          name: "Your Name",
-          email: "email@example.com",
-          contact: "9999999999",
+          name: "Raj Kurane",
+          email: "raj.kurane03@gmail.com",
+          contact: "8692848775",
         },
         notes: {
-          address: "Your Address",
+          address: "India, Maharashtra, Mumbai-60",
         },
         theme: {
           color: "#3399cc",
         },
       };
 
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
+      const payment = new window.Razorpay(options);
+      payment.open();
+      e.preventDefault();
     } catch (error) {
-      console.error("Payment initiation failed:", error);
+      console.error("Error during payment process:", error);
     }
   };
+
+  const handleAction = () => {
+    if (paymentStatus === "success") {
+      navigate("/completed");
+    } else {
+      alert("Do payment first!");
+    }
+  };
+
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
       <div className="categories-title flex justify-center items-center w-80 h-full">
@@ -83,16 +107,17 @@ const Checkout = () => {
               <div className="checkout-container-title-two-line"></div>
             </div>
           </Link>
-          <Link to="/completed">
-            <div className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
-                3
-              </h3>
-              <span className="font-poppins text-medium-grey text-24 font-500">
-                Completed
-              </span>
-            </div>
-          </Link>
+          <div
+            className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer"
+            onClick={handleAction}
+          >
+            <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
+              3
+            </h3>
+            <span className="font-poppins text-medium-grey text-24 font-500">
+              Completed
+            </span>
+          </div>
         </div>
         <div className="flex w-full h-90 flex-row gap-50">
           <div className="flex w-48.5 h-full flex-col gap-35">
@@ -104,38 +129,38 @@ const Checkout = () => {
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Full Name
               </span>
-              <input type="text"></input>
+              <input type="text" required></input>
             </div>
             <div className="checkout-container-data-buyer-info-address flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Address
               </span>
-              <input type="text"></input>
+              <input type="text" required></input>
             </div>
             <div className="checkout-container-data-buyer-info-contact flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Contact
               </span>
-              <input type="text"></input>
+              <input type="text" required></input>
             </div>
             <div className="checkout-container-data-buyer-info-city flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 City
               </span>
-              <input type="text"></input>
+              <input type="text" required></input>
             </div>
             <div className="flex flex-row gap-30">
               <div className="checkout-container-data-buyer-info-state flex flex-col gap-15 w-61">
                 <span className="font-poppins text-dark-grey text-18 font-400">
                   State
                 </span>
-                <input type="text"></input>
+                <input type="text" required></input>
               </div>
               <div className="checkout-container-data-buyer-info-zip-code flex flex-col gap-15 w-35">
                 <span className="font-poppins text-dark-grey text-18 font-400">
                   Zip Code
                 </span>
-                <input type="text"></input>
+                <input type="text" required></input>
               </div>
             </div>
           </div>
@@ -210,7 +235,7 @@ const Checkout = () => {
                 onClick={handlePayment}
               >
                 <span className="font-poppins text-main-color text-18 font-500">
-                  Checkout
+                  Pay Now
                 </span>
               </div>
             </div>

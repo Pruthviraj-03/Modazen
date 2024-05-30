@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 
 const ShoppingCart = () => {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart } = useCart();
   const [quantities, setQuantities] = useState({});
 
@@ -43,6 +44,9 @@ const ShoppingCart = () => {
     }, 0)
     .toFixed(2);
 
+  const onClickGoesTo = () => {
+    navigate("/checkout", { state: { totalAmount: totalAmount } });
+  };
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
       <div className="categories-title flex justify-center items-center w-80 h-full">
@@ -63,17 +67,20 @@ const ShoppingCart = () => {
               <div className="shoppingCart-container-title-one-line"></div>
             </div>
           </Link>
-          <Link to="/checkout">
-            <div className="shoppingCart-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
-                2
-              </h3>
-              <span className="font-poppins text-medium-grey text-24 font-500">
-                Checkout
-              </span>
-              <div className="shoppingCart-container-title-two-line"></div>
-            </div>
-          </Link>
+          {/* <Link to="/checkout"> */}
+          <div
+            className="shoppingCart-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer"
+            onClick={onClickGoesTo}
+          >
+            <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
+              2
+            </h3>
+            <span className="font-poppins text-medium-grey text-24 font-500">
+              Checkout
+            </span>
+            <div className="shoppingCart-container-title-two-line"></div>
+          </div>
+          {/* </Link> */}
           <Link to="/completed">
             <div className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer">
               <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
@@ -191,13 +198,14 @@ const ShoppingCart = () => {
                   </span>
                 </div>
               </Link>
-              <Link to="/checkout">
-                <div className="featured-product-checkout-button flex items-center justify-center h-55 w-200 bg-dark-white cursor-pointer">
-                  <span className="font-poppins text-main-color text-18 font-500">
-                    Checkout
-                  </span>
-                </div>
-              </Link>
+              <div
+                className="featured-product-checkout-button flex items-center justify-center h-55 w-200 bg-dark-white cursor-pointer"
+                onClick={onClickGoesTo}
+              >
+                <span className="font-poppins text-main-color text-18 font-500">
+                  Checkout
+                </span>
+              </div>
             </div>
           </div>
         </div>
