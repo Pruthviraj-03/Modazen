@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -130,16 +130,17 @@ export const extraProducts = [
 
 const HomePage = () => {
   const { addToCart, cartItems } = useCart();
+  const navigate = useNavigate();
 
   const carouselData = [
     {
       id: 1,
-      title: "Sweatshirts",
+      title: "Jackets",
       discount: "25% Off",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       imageUrl: carousel4,
-      slug: "sweatshirts",
+      slug: "jacket",
     },
     {
       id: 2,
@@ -148,7 +149,7 @@ const HomePage = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       imageUrl: carousel1,
-      slug: "jackets",
+      slug: "t-shirts",
     },
     {
       id: 3,
@@ -166,7 +167,7 @@ const HomePage = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       imageUrl: carousel2,
-      slug: "western-wear",
+      slug: "tops",
     },
     {
       id: 5,
@@ -175,7 +176,7 @@ const HomePage = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       imageUrl: carousel5,
-      slug: "handbags",
+      slug: "accessories",
     },
   ];
 
@@ -239,6 +240,10 @@ const HomePage = () => {
 
   const shuffledProducts = shuffleArray(Products);
 
+  const handleCarouselClick = (slug) => {
+    navigate(`/products/${slug}`);
+  };
+
   return (
     <div className="h-auto w-full">
       <div className="flex flex-col justify-center w-full h-auto">
@@ -256,17 +261,18 @@ const HomePage = () => {
                   <p className="font-poppins text-18 font-400 text-main-color">
                     {carousel.description}
                   </p>
-                  <Link to={`/products/${carousel.slug}`}>
-                    <div className="home-carousel-data-button hover:border hover:border-main-color hover:bg-dark-white  flex items-center justify-center flex-row cursor-pointer w-230 h-70p bg-main-color gap-20">
-                      <span className="font-poppins text-24 font-400 text-dark-white tracking-1">
-                        Shop Now
-                      </span>
-                      <FontAwesomeIcon
-                        className="arrow-icon2 text-24 font-400 text-dark-white tracking-1"
-                        icon={faArrowRight}
-                      />
-                    </div>
-                  </Link>
+                  <div
+                    className="home-carousel-data-button hover:border hover:border-main-color hover:bg-dark-white flex items-center justify-center flex-row cursor-pointer w-230 h-70p bg-main-color gap-20"
+                    onClick={() => handleCarouselClick(carousel.slug)}
+                  >
+                    <span className="font-poppins text-24 font-400 text-dark-white tracking-1">
+                      Shop Now
+                    </span>
+                    <FontAwesomeIcon
+                      className="arrow-icon2 text-24 font-400 text-dark-white tracking-1"
+                      icon={faArrowRight}
+                    />
+                  </div>
                 </div>
                 <div className="home-carousel-poster h-full w-65">
                   <img

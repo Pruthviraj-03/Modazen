@@ -12,6 +12,7 @@ import {
   Featured,
   FeaturedProduct,
   Products,
+  CategoriesProduct,
 } from "./Navbar/index.js";
 import {
   Aboutus,
@@ -44,6 +45,7 @@ const App = () => {
             element={<FeaturedProduct />}
           />
           <Route exact path="/products" element={<Products />} />
+          <Route exact path="/products/:slug" element={<CategoriesProduct />} />
           <Route exact path="/aboutus" element={<Aboutus />} />
           <Route exact path="/contactus" element={<Contactus />} />
           <Route exact path="/privacypolicy" element={<PrivacyPolicy />} />

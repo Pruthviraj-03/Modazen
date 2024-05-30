@@ -16,7 +16,7 @@ import {
 import { useWishlist } from "../Components/Context/WishlistContext";
 import { Products } from "./products";
 
-const Arrivals = ({ title }) => {
+const Arrivals = ({ title, filteredProducts }) => {
   const { addToWishlist, wishlistItems } = useWishlist();
   const [isCategoryDrawerOpen, setIsCategoryDrawerOpen] = useState(false);
   const [isPriceDrawerOpen, setIsPriceDrawerOpen] = useState(false);
@@ -575,65 +575,125 @@ const Arrivals = ({ title }) => {
             </div>
           </div>
           <div className="w-full h-auto flex flex-wrap gap-20 p-10">
-            {currentProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/featured/${encodeURIComponent(product.name)}`}
-              >
-                <div className="arrivals-container-box flex flex-col relative w-272.5 h-335 gap-27.5 items-center justify-center cursor-pointer">
-                  <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
-                    <span className="font-poppins text-16 font-600 text-main-color tracking-1">
-                      {product.rating}
-                    </span>
-                    <FontAwesomeIcon
-                      className="rating-icon text-12"
-                      icon={faStar}
-                    />
-                  </div>
-                  <div className="arrivals-container-box-image w-70 h-65 pt-5p overflow-hidden">
-                    <img
-                      className="w-full h-full object-contain"
-                      src={product.img1}
-                      alt={product.name}
-                    />
-                  </div>
-                  <div className="arrivals-container-box-info flex flex-col items-center justify-center gap-10 w-80 h-20">
-                    <div
-                      className="add-to-wishlist hidden justify-center items-center gap-10 w-75 h-32.5 transition-opacity duration-300 ease-in-out absolute top-2/3 left-0 right-0 bottom-0 mx-auto z-50 rounded-1.5"
-                      onClick={() => {
-                        handleAddToWishlist(product);
-                      }}
-                    >
-                      <Link to="/wishlist">
-                        <div className="gap-10 w-full h-full flex items-center justify-center flex-row">
-                          <FontAwesomeIcon
-                            className="heart-icon text-17"
-                            icon={faHeart}
-                          />
-                          <h2 className="font-poppins text-16 font-600 text-main-color tracking-1">
-                            WISHLIST
+            {filteredProducts
+              ? filteredProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    to={`/featured/${encodeURIComponent(product.name)}`}
+                  >
+                    <div className="arrivals-container-box flex flex-col relative w-272.5 h-335 gap-27.5 items-center justify-center cursor-pointer">
+                      <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
+                        <span className="font-poppins text-16 font-600 text-main-color tracking-1">
+                          {product.rating}
+                        </span>
+                        <FontAwesomeIcon
+                          className="rating-icon text-12"
+                          icon={faStar}
+                        />
+                      </div>
+                      <div className="arrivals-container-box-image w-70 h-65 pt-5p overflow-hidden">
+                        <img
+                          className="w-full h-full object-contain"
+                          src={product.img1}
+                          alt={product.name}
+                        />
+                      </div>
+                      <div className="arrivals-container-box-info flex flex-col items-center justify-center gap-10 w-80 h-20">
+                        <div
+                          className="add-to-wishlist hidden justify-center items-center gap-10 w-75 h-32.5 transition-opacity duration-300 ease-in-out absolute top-2/3 left-0 right-0 bottom-0 mx-auto z-50 rounded-1.5"
+                          onClick={() => {
+                            handleAddToWishlist(product);
+                          }}
+                        >
+                          <Link to="/wishlist">
+                            <div className="gap-10 w-full h-full flex items-center justify-center flex-row">
+                              <FontAwesomeIcon
+                                className="heart-icon text-17"
+                                icon={faHeart}
+                              />
+                              <h2 className="font-poppins text-16 font-600 text-main-color tracking-1">
+                                WISHLIST
+                              </h2>
+                            </div>
+                          </Link>
+                        </div>
+                        <h3 className="font-poppins text-18 font-500 text-main-color h-auto w-auto">
+                          {product.name}
+                        </h3>
+                        <div className="flex items-center justify-center flex-row gap-6">
+                          <span className="font-poppins text-main-color text-18 font-700 tracking-1">
+                            {product.price}
+                          </span>
+                          <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                            {product.originalPrice}
+                          </h1>
+                          <h2 className="font-poppins text-main-color text-14 font-400">
+                            {product.discount}
                           </h2>
                         </div>
-                      </Link>
+                      </div>
                     </div>
-                    <h3 className="font-poppins text-18 font-500 text-main-color h-auto w-auto">
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center justify-center flex-row gap-6">
-                      <span className="font-poppins text-main-color text-18 font-700 tracking-1">
-                        {product.price}
-                      </span>
-                      <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
-                        {product.originalPrice}
-                      </h1>
-                      <h2 className="font-poppins text-main-color text-14 font-400">
-                        {product.discount}
-                      </h2>
+                  </Link>
+                ))
+              : currentProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    to={`/featured/${encodeURIComponent(product.name)}`}
+                  >
+                    <div className="arrivals-container-box flex flex-col relative w-272.5 h-335 gap-27.5 items-center justify-center cursor-pointer">
+                      <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
+                        <span className="font-poppins text-16 font-600 text-main-color tracking-1">
+                          {product.rating}
+                        </span>
+                        <FontAwesomeIcon
+                          className="rating-icon text-12"
+                          icon={faStar}
+                        />
+                      </div>
+                      <div className="arrivals-container-box-image w-70 h-65 pt-5p overflow-hidden">
+                        <img
+                          className="w-full h-full object-contain"
+                          src={product.img1}
+                          alt={product.name}
+                        />
+                      </div>
+                      <div className="arrivals-container-box-info flex flex-col items-center justify-center gap-10 w-80 h-20">
+                        <div
+                          className="add-to-wishlist hidden justify-center items-center gap-10 w-75 h-32.5 transition-opacity duration-300 ease-in-out absolute top-2/3 left-0 right-0 bottom-0 mx-auto z-50 rounded-1.5"
+                          onClick={() => {
+                            handleAddToWishlist(product);
+                          }}
+                        >
+                          <Link to="/wishlist">
+                            <div className="gap-10 w-full h-full flex items-center justify-center flex-row">
+                              <FontAwesomeIcon
+                                className="heart-icon text-17"
+                                icon={faHeart}
+                              />
+                              <h2 className="font-poppins text-16 font-600 text-main-color tracking-1">
+                                WISHLIST
+                              </h2>
+                            </div>
+                          </Link>
+                        </div>
+                        <h3 className="font-poppins text-18 font-500 text-main-color h-auto w-auto">
+                          {product.name}
+                        </h3>
+                        <div className="flex items-center justify-center flex-row gap-6">
+                          <span className="font-poppins text-main-color text-18 font-700 tracking-1">
+                            {product.price}
+                          </span>
+                          <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                            {product.originalPrice}
+                          </h1>
+                          <h2 className="font-poppins text-main-color text-14 font-400">
+                            {product.discount}
+                          </h2>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  </Link>
+                ))}
           </div>
           <div
             className="w-full h-5 flex items-center justify-center flex-row gap-30"

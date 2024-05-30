@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../Components/Context/CartContext";
 import { useWishlist } from "../Components/Context/WishlistContext";
-import ModalImage from "react-modal-image";
+// import ModalImage from "react-modal-image";
 import { Products } from "./products";
 import image31 from "./apiImages/j7i1.jpg";
 import image32 from "./apiImages/j7i2.jpg";
@@ -21,8 +21,6 @@ const Featured = () => {
   const { addToWishlist } = useWishlist();
   const [quantity, setQuantity] = useState(1);
   const [firstCardIndex, setFirstCardIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
   const product = [
@@ -82,16 +80,6 @@ const Featured = () => {
     handleSwipe(direction);
   };
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedImage("");
-    setShowModal(false);
-  };
-
   const handleSizeClick = (size) => {
     setSelectedSize(size);
   };
@@ -120,7 +108,6 @@ const Featured = () => {
                   className="object-contain w-full h-full"
                   src={dummyProduct.img1}
                   alt="featured1"
-                  onClick={() => handleImageClick(dummyProduct.image)}
                 />
               </div>
               <div className="w-40p h-50p overflow-hidden">
@@ -128,7 +115,6 @@ const Featured = () => {
                   className="object-contain w-full h-full"
                   src={dummyProduct.img2}
                   alt="featured2"
-                  onClick={() => handleImageClick(dummyProduct.image)}
                 />
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
@@ -136,7 +122,6 @@ const Featured = () => {
                   className="object-contain w-full h-full"
                   src={dummyProduct.img3}
                   alt="featured3"
-                  onClick={() => handleImageClick(dummyProduct.image)}
                 />
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
@@ -144,7 +129,6 @@ const Featured = () => {
                   className="object-contain w-full h-full"
                   src={dummyProduct.img4}
                   alt="featured4"
-                  onClick={() => handleImageClick(dummyProduct.image)}
                 />
               </div>
               <div className="w-17.5 h-20 overflow-hidden">
@@ -152,7 +136,6 @@ const Featured = () => {
                   className="object-contain w-full h-full"
                   src={dummyProduct.img5}
                   alt="featured5"
-                  onClick={() => handleImageClick(dummyProduct.image)}
                 />
               </div>
             </div>
@@ -306,13 +289,6 @@ const Featured = () => {
             </div>
           </div>
         ))}
-        {showModal && (
-          <ModalImage
-            small={selectedImage}
-            large={selectedImage}
-            onClose={handleCloseModal}
-          />
-        )}
         <div className="flex flex-col w-full h-40p gap-50">
           <div className="flex items-center justify-between h-10 w-full">
             <span className="font-poppins text-main-color text-38 font-700">

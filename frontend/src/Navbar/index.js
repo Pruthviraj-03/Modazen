@@ -4,3 +4,4 @@ export { default as Categories } from "./Categories.jsx";
 export { default as Featured } from "./Featured.jsx";
 export { default as FeaturedProduct } from "./FeaturedProduct.jsx";
 export { default as Products } from "./Products.jsx";
+export { default as CategoriesProduct } from "./CategoriesProduct.jsx";
