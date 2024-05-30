@@ -216,8 +216,8 @@ const Arrivals = ({ title }) => {
   const handlePageChange = (page) => {
     if (page < 1) {
       setCurrentPage(1);
-    } else if (page > Math.ceil(Products.length / productsPerPage)) {
-      setCurrentPage(Math.ceil(Products.length / productsPerPage));
+    } else if (page > Math.ceil(sortedProducts.length / productsPerPage)) {
+      setCurrentPage(Math.ceil(sortedProducts.length / productsPerPage));
     } else {
       setCurrentPage(page);
     }
