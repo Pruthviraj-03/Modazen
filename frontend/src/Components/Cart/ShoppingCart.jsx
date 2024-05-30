@@ -47,6 +47,13 @@ const ShoppingCart = () => {
   const onClickGoesTo = () => {
     navigate("/checkout", { state: { totalAmount: totalAmount } });
   };
+
+  const handleAction = (e) => {
+    e.preventDefault();
+    alert("Do payment first!");
+    navigate("/checkout");
+  };
+
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
       <div className="categories-title flex justify-center items-center w-80 h-full">
@@ -67,7 +74,6 @@ const ShoppingCart = () => {
               <div className="shoppingCart-container-title-one-line"></div>
             </div>
           </Link>
-          {/* <Link to="/checkout"> */}
           <div
             className="shoppingCart-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer"
             onClick={onClickGoesTo}
@@ -80,9 +86,11 @@ const ShoppingCart = () => {
             </span>
             <div className="shoppingCart-container-title-two-line"></div>
           </div>
-          {/* </Link> */}
           <Link to="/completed">
-            <div className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer">
+            <div
+              className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer"
+              onClick={handleAction}
+            >
               <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
                 3
               </h3>
