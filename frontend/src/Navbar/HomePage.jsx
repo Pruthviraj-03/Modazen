@@ -225,6 +225,20 @@ const HomePage = () => {
     }
   };
 
+  const shuffleArray = (array) => {
+    let shuffledArray = array.slice();
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
+
+  const shuffledProducts = shuffleArray(Products);
+
   return (
     <div className="h-auto w-full">
       <div className="flex flex-col justify-center w-full h-auto">
@@ -399,7 +413,7 @@ const HomePage = () => {
             </div>
             <div className="home-container-featured-container-blocks">
               {/*  flex flex-wrap h-full w-full mt-50 gap-20 */}
-              {Products.slice(0, 10).map((item) => (
+              {shuffledProducts.slice(0, 10).map((item) => (
                 <Link
                   key={item.id}
                   to={`/featured/${encodeURIComponent(item.name)}`}

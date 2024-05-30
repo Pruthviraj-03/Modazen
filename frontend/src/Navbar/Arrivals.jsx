@@ -29,7 +29,6 @@ const Arrivals = ({ title }) => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const productsPerPage = 20;
   const [currentPage, setCurrentPage] = useState(1);
-  const [shuffledProducts, setShuffledProducts] = useState([]);
 
   const handleAddToWishlist = (product) => {
     const isProductInWishlist = wishlistItems.some(
@@ -137,38 +136,79 @@ const Arrivals = ({ title }) => {
     );
   };
 
-  const filteredProducts = Products.filter(
-    (product) =>
-      selectedCategory.includes(product.category) ||
-      selectedPriceRange.includes(product.pricerange) ||
-      selectedRating.includes(product.rating)
-  );
-
-  const sortProducts = (Products) => {
-    let sorted = [...Products];
-    if (selectedSortOption === "Price: Low To High") {
-      sorted.sort(
-        (a, b) =>
-          parseFloat(a.price.replace("$", "")) -
-          parseFloat(b.price.replace("$", ""))
-      );
-    } else if (selectedSortOption === "Price: High To Low") {
-      sorted.sort(
-        (a, b) =>
-          parseFloat(b.price.replace("$", "")) -
-          parseFloat(a.price.replace("$", ""))
-      );
-    }
-    setSortedProducts(sorted);
-  };
-
   useEffect(() => {
-    sortProducts(Products);
-  }, [selectedSortOption, Products]);
+    const processProducts = () => {
+      let filteredProducts = Products;
+
+      if (selectedCategory.length > 0) {
+        filteredProducts = filteredProducts.filter((product) =>
+          selectedCategory.includes(product.category)
+        );
+      }
+
+      if (selectedPriceRange.length > 0) {
+        filteredProducts = filteredProducts.filter((product) =>
+          selectedPriceRange.includes(product.pricerange)
+        );
+      }
+
+      if (selectedRating.length > 0) {
+        filteredProducts = filteredProducts.filter((product) =>
+          selectedRating.includes(product.rating)
+        );
+      }
+
+      let processedProducts = [...filteredProducts];
+
+      if (selectedSortOption === "Price: Low To High") {
+        processedProducts.sort(
+          (a, b) =>
+            parseFloat(a.price.replace("$", "")) -
+            parseFloat(b.price.replace("$", ""))
+        );
+      } else if (selectedSortOption === "Price: High To Low") {
+        processedProducts.sort(
+          (a, b) =>
+            parseFloat(b.price.replace("$", "")) -
+            parseFloat(a.price.replace("$", ""))
+        );
+      }
+
+      if (
+        selectedSortOption !== "Price: Low To High" &&
+        selectedSortOption !== "Price: High To Low"
+      ) {
+        processedProducts = shuffleArray(processedProducts);
+      }
+
+      return processedProducts;
+    };
+
+    const shuffleArray = (array) => {
+      let shuffledArray = array.slice();
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [
+          shuffledArray[j],
+          shuffledArray[i],
+        ];
+      }
+      return shuffledArray;
+    };
+
+    const processedProducts = processProducts();
+    setSortedProducts(processedProducts);
+  }, [
+    selectedCategory,
+    selectedPriceRange,
+    selectedRating,
+    selectedSortOption,
+    Products,
+  ]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = Products.slice(
+  const currentProducts = sortedProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -182,22 +222,6 @@ const Arrivals = ({ title }) => {
       setCurrentPage(page);
     }
   };
-
-  const shuffleArray = (array) => {
-    let shuffledArray = array.slice();
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
-    }
-    return shuffledArray;
-  };
-
-  useEffect(() => {
-    setShuffledProducts(shuffleArray(Products));
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-auto mt-25 mb-50">
@@ -513,8 +537,8 @@ const Arrivals = ({ title }) => {
         <div className="w-80 h-full p-20 flex flex-col gap-20 bg-dark-white">
           <div className="flex justify-between">
             <span className="font-poppins text-18 font-500 text-dark-grey">
-              Viewing {Math.min(indexOfLastProduct, Products.length)} out of{" "}
-              {Products.length} products
+              Viewing {Math.min(indexOfLastProduct, sortedProducts.length)} out
+              of {sortedProducts.length} products
             </span>
             <div className="flex items-center justify-center flex-row w-auto h-auto px-15 rounded-3 cursor-pointer border border-medium-grey">
               <span className="font-poppins text-16 font-500 text-dark-grey">
@@ -621,7 +645,7 @@ const Arrivals = ({ title }) => {
               onClick={() => handlePageChange(currentPage - 1)}
             />
             {Array.from(
-              { length: Math.ceil(Products.length / productsPerPage) },
+              { length: Math.ceil(sortedProducts.length / productsPerPage) },
               (_, index) => (
                 <div key={index} className="w-auto">
                   <div

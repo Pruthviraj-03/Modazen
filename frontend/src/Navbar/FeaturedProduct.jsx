@@ -108,6 +108,20 @@ const FeaturedProduct = () => {
     setSelectedSize(size);
   };
 
+  const shuffleArray = (array) => {
+    let shuffledArray = array.slice();
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  };
+
+  const shuffledProducts = shuffleArray(Products);
+
   return (
     <div className="flex items-center justify-center w-full h-auto mt-25 mb-50 bg-dark-white">
       <div className="flex flex-col w-80 h-full gap-40">
@@ -321,7 +335,8 @@ const FeaturedProduct = () => {
             </div>
           </div>
           <div className="flex flex-row h-80 w-full p-30 gap-80">
-            {Products.filter((product) => product.category === productCategory)
+            {shuffledProducts
+              .filter((product) => product.category === productCategory)
               .slice(0, 4)
               .map((similarProduct) => (
                 <Link
