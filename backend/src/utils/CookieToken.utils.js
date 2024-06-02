@@ -6,7 +6,7 @@ dotenv.config({
 
 const CookieToken = (user, res, tokens) => {
   if (!tokens || !tokens.accessToken || !tokens.refreshToken) {
-    console.log("Tokens are undefined");
+    // console.log("Tokens are undefined");
     throw new Error("Tokens are undefined");
   }
 

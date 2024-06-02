@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState({});
@@ -12,7 +13,6 @@ const UserProfile = () => {
         { withCredentials: true }
       );
 
-      console.log("response at profile", response);
       setUserData(response.data.data.user);
     } catch (error) {
       console.log("error fetching user data:", error);
@@ -72,7 +72,9 @@ const UserProfile = () => {
               Date of Birth
             </h3>
             <span className="font-poppin flex items-center h-full w-50 text-main-color text-16 tracking-0.5 font-400">
-              {userData.DOB ? userData.DOB : "------------------"}
+              {userData.DOB
+                ? moment(userData.DOB).format("DD/MM/YYYY")
+                : "------------------"}
             </span>
           </div>
           <div className="flex items-center flex-row gap-10p h-40 w-full">

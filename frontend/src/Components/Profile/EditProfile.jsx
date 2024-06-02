@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -13,11 +16,42 @@ const EditProfile = () => {
     AlternateMobile: "",
   });
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/users/login/success",
+          { withCredentials: true }
+        );
+
+        const userData = response.data.data.user;
+        setFormData({
+          name: userData.name || "",
+          email: userData.email || "",
+          phoneNumber: userData.phoneNumber || "",
+          DOB: userData.DOB ? moment(userData.DOB).format("DD/MM/YYYY") : "",
+          AlternateMobile: userData.AlternateMobile || "",
+        });
+      } catch (error) {
+        console.log("error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      DOB: moment(date).format("DD/MM/YYYY"),
     }));
   };
 
@@ -30,7 +64,10 @@ const EditProfile = () => {
     try {
       await axios.post(
         "http://localhost:8000/api/v1/users/editprofile",
-        formData,
+        {
+          ...formData,
+          DOB: moment(formData.DOB, "DD/MM/YYYY").format("YYYY-MM-DD"),
+        },
         { withCredentials: true }
       );
       console.log("User details saved successfully.");
@@ -61,6 +98,7 @@ const EditProfile = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <div className="fieldset relative mb-20 h-80p w-full">
@@ -72,6 +110,7 @@ const EditProfile = () => {
               maxLength="10"
               value={formData.phoneNumber}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <div className="fieldset relative mb-20 h-80p w-full">
@@ -82,6 +121,7 @@ const EditProfile = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              required
             ></input>
           </div>
           <div className="gender-box flex mb-20 h-60 w-full">
@@ -108,15 +148,18 @@ const EditProfile = () => {
           </div>
           <div className="fieldset relative mb-20 h-80p w-full">
             <legend className="font-poppins">Date of Birth</legend>
-            <input
+            <DatePicker
               className="font-poppins"
-              type="text"
-              name="DOB"
-              placeholder="DD/MM/YYYY"
-              maxLength="10"
-              value={formData.DOB}
-              onChange={handleChange}
-            ></input>
+              dateFormat="dd/MM/yyyy"
+              selected={
+                formData.DOB
+                  ? moment(formData.DOB, "DD/MM/YYYY").toDate()
+                  : null
+              }
+              onChange={handleDateChange}
+              placeholderText="DD/MM/YYYY"
+              required
+            />
           </div>
           <div className="fieldset relative mb-20 h-80p w-full">
             <legend className="font-poppins">Alternate Mobile</legend>
@@ -127,6 +170,7 @@ const EditProfile = () => {
               maxLength="10"
               value={formData.AlternateMobile}
               onChange={handleChange}
+              required
             ></input>
           </div>
         </div>

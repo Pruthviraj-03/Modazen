@@ -263,7 +263,7 @@ const sendDetailToDB = asyncHandler(async (req, res) => {
 
     let formattedDOB;
     if (DOB) {
-      const parsedDOB = moment(DOB, "DD/MM/YYYY", true);
+      const parsedDOB = moment(DOB, "YYYY-MM-DD", true);
       if (!parsedDOB.isValid()) {
         throw new ApiError(400, "Invalid date format for DOB");
       }
@@ -293,7 +293,6 @@ const sendDetailToDB = asyncHandler(async (req, res) => {
       new ApiResponse(200, { user }, "User details saved successfully.")
     );
   } catch (error) {
-    console.error("Error saving user details:", error);
     throw new ApiError(500, error?.message || "Failed to save the details.");
   }
 });

@@ -182,8 +182,8 @@ const HomePage = () => {
 
   const categoryData = [
     { id: 1, name: "Jacket", icon: faVest },
-    { id: 2, name: "Shirt", icon: faTShirt },
-    { id: 3, name: "Pants", icon: faPersonDress },
+    { id: 2, name: "Shirts", icon: faTShirt },
+    { id: 3, name: "Pants", icon: faHatCowboySide },
     { id: 4, name: "Shoes", icon: faShoePrints },
     { id: 5, name: "Dress", icon: faPersonDress },
     { id: 6, name: "Accessories", icon: faHatCowboySide },

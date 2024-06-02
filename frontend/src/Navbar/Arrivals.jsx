@@ -63,61 +63,47 @@ const Arrivals = ({ title, filteredProducts }) => {
       id: 1,
       title: "Jacket",
       icon: faVest,
-      checked: selectedCategory.includes("Jacket"),
-      onChange: () => handleCategoryChange("Jacket"),
     },
     {
       id: 2,
-      title: "Shirt",
+      title: "Shirts",
       icon: faTshirt,
-      checked: selectedCategory.includes("Shirt"),
-      onChange: () => handleCategoryChange("Shirt"),
     },
     {
       id: 3,
-      title: "Pants",
-      icon: faPersonDress,
-      checked: selectedCategory.includes("Pants"),
-      onChange: () => handleCategoryChange("Pants"),
+      title: "T-Shirts",
+      icon: faTshirt,
     },
     {
       id: 4,
-      title: "Skirt",
-      icon: faPersonDress,
-      checked: selectedCategory.includes("Skirt"),
-      onChange: () => handleCategoryChange("Skirt"),
+      title: "Pants",
+      icon: faHatCowboySide,
     },
     {
       id: 5,
       title: "Dress",
       icon: faPersonDress,
-      checked: selectedCategory.includes("Dress"),
-      onChange: () => handleCategoryChange("Dress"),
     },
     {
       id: 6,
-      title: "Underwear",
-      icon: faHatCowboySide,
-      checked: selectedCategory.includes("Underwear"),
-      onChange: () => handleCategoryChange("Underwear"),
+      title: "Tops",
+      icon: faPersonDress,
     },
     {
       id: 7,
       title: "Shoes",
       icon: faShoePrints,
-      checked: selectedCategory.includes("Shoes"),
-      onChange: () => handleCategoryChange("Shoes"),
+    },
+    {
+      id: 8,
+      title: "Accessories",
+      icon: faHatCowboySide,
     },
   ];
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory((prevSelection) =>
-      prevSelection.includes(category)
-        ? prevSelection.filter(
-            (selectedCategory) => selectedCategory !== category
-          )
-        : [...prevSelection, category]
-    );
+  const handleCategoryClick = (e, categoryTitle) => {
+    e.preventDefault();
+    setSelectedCategory([categoryTitle]);
   };
 
   const handlePriceRangeChange = (range) => {
@@ -270,10 +256,11 @@ const Arrivals = ({ title, filteredProducts }) => {
               <div className="arrivals-container-filter-box-options mt-20">
                 {categoriesData.map((category) => (
                   <ul
-                    className="flex flex-col gap-13"
+                    className={`flex flex-col gap-13 category-btn ${
+                      selectedCategory.includes(category.title) ? "active" : ""
+                    }`}
                     key={category.id}
-                    checked={category.checked}
-                    onChange={category.onChange}
+                    onClick={(e) => handleCategoryClick(e, category.title)}
                   >
                     <li className="flex flex-row items-center justify-center h-45 w-full gap-5p cursor-pointer pl-20">
                       <h3 className="text-main-color w-20 text-20 font-500">

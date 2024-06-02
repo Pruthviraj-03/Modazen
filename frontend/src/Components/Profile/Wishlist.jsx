@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useWishlist } from "../Context/WishlistContext";
+import axios from "axios";
 
 const Whishlist = () => {
-  const { wishlistItems, removeFromWishlist } = useWishlist();
+  const { wishlistItems, setWishlistItems, removeFromWishlist } = useWishlist();
+
+  useEffect(() => {
+    const fetchUserWishlist = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v2/getWishlistProducts",
+          { withCredentials: true }
+        );
+        const { userWishlist } = response.data.data;
+        setWishlistItems(userWishlist);
+      } catch (error) {
+        console.error("Failed to fetch user wishlist:", error);
+      }
+    };
+
+    fetchUserWishlist();
+  }, [setWishlistItems]);
 
   const handleRemoveFromWishlist = (productId) => {
     removeFromWishlist(productId);
-    alert("Product remove from the whishlist.");
+    alert("Product removed from the wishlist.");
   };
 
   const wishlistItemCount = wishlistItems.length;

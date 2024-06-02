@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
     },
     otp: { type: String, select: false },
     otpExpires: { type: Date, select: false },
+    wishlist: [{ type: Object }],
   },
   { timestamps: true }
 );
@@ -65,6 +66,25 @@ userSchema.methods.generateOtp = function () {
     return otp;
   } catch (error) {
     throw new Error("Error generating OTP");
+  }
+};
+
+// Add to Wishlist
+userSchema.methods.addToWishlist = async function (product) {
+  if (!this.wishlist.includes(product)) {
+    this.wishlist.push(product);
+    await this.save();
+  }
+};
+
+// Remove from Wishlist
+userSchema.methods.removeFromWishlist = async function (productId) {
+  try {
+    this.wishlist = this.wishlist.filter((product) => product.id !== productId);
+    await this.save();
+    return this.wishlist;
+  } catch (error) {
+    throw new Error("Failed to remove product from wishlist");
   }
 };
 

@@ -8,12 +8,12 @@ const Profile = () => {
 
   const getUser = async () => {
     try {
-      console.log("Fetching user data...");
+      // console.log("Fetching user data...");
       const response = await axios.get(
         "http://localhost:8000/api/v1/users/login/success",
         { withCredentials: true }
       );
-      console.log("User data response:", response.data);
+      // console.log("User data response:", response.data);
       setUserData(response.data.data.user);
     } catch (error) {
       console.log("error fetching user data:", error);
