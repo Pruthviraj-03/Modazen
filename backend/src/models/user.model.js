@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     otp: { type: String, select: false },
     otpExpires: { type: Date, select: false },
     wishlist: [{ type: Object }],
+    cart: [{ type: Object }],
   },
   { timestamps: true }
 );
@@ -83,6 +84,25 @@ userSchema.methods.removeFromWishlist = async function (productId) {
     this.wishlist = this.wishlist.filter((product) => product.id !== productId);
     await this.save();
     return this.wishlist;
+  } catch (error) {
+    throw new Error("Failed to remove product from wishlist");
+  }
+};
+
+// Add to cart
+userSchema.methods.addToCart = async function (product) {
+  if (!this.cart.includes(product)) {
+    this.cart.push(product);
+    await this.save();
+  }
+};
+
+// Remove from cart
+userSchema.methods.removeFromCart = async function (productId) {
+  try {
+    this.cart = this.cart.filter((product) => product.id !== productId);
+    await this.save();
+    return this.cart;
   } catch (error) {
     throw new Error("Failed to remove product from wishlist");
   }

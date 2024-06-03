@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
+import axios from "axios";
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, setCartItems, removeFromCart } = useCart();
   const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    const fetchUserCart = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v2/getCartProducts",
+          { withCredentials: true }
+        );
+        const { userCart } = response.data.data;
+        setCartItems(userCart);
+      } catch (error) {
+        console.error("Failed to fetch user wishlist:", error);
+      }
+    };
+
+    fetchUserCart();
+  }, [setCartItems]);
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
