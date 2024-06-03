@@ -25,7 +25,7 @@ const Featured = () => {
 
   const product = [
     {
-      id: 1,
+      id: "7",
       name: "TACVASEN Men Winter Jacket",
       desc: "TACVASEN Men's Winter Jacket Cotton Military Jackets Fleece Lined Thick Work Coats Warm Cargo Jackets with Hooded",
       price: "$270",
@@ -61,6 +61,7 @@ const Featured = () => {
 
   const handleAddToWishlist = () => {
     addToWishlist(product[0]);
+    alert("Product added to wishlist.");
   };
 
   const handleSimilarProductAddToWishlist = (similarProduct) => {

@@ -33,6 +33,7 @@ export const WishlistProvider = ({ children }) => {
   // Function to remove an item from the wishlist
   const removeFromWishlist = async (productId) => {
     try {
+      console.log(productId);
       await axios.delete(
         `http://localhost:8000/api/v2/removeWishlistProducts/${productId}`,
         { withCredentials: true }

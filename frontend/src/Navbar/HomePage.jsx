@@ -29,7 +29,7 @@ import { Products } from "./products";
 
 export const arrivalData = [
   {
-    id: 1,
+    id: 202,
     name: "Blue Grey Warm Jacket",
     desc: "EKLENTSON Army Jacket Men Blue Grey Warm Jacket Men Multi Pockets Winter Jacket Men Thermal",
     img1: arrivals2,
@@ -48,7 +48,7 @@ export const arrivalData = [
     isWishlisted: "false",
   },
   {
-    id: 2,
+    id: 203,
     name: "Denim Jacket",
     desc: "TACVASEN Men's Denim Jacket Cotton Military Jackets Fleece Lined Thick Work Coats Warm Cargo Jackets with Hooded",
     img1: arrivals3,
@@ -67,7 +67,7 @@ export const arrivalData = [
     isWishlisted: "false",
   },
   {
-    id: 3,
+    id: 204,
     name: "Black Jacket",
     desc: "Flygo Men's Sherpa Black Jacket Fleece Lined Zip Up Warm Hoodies Sweatshirt Winter Zipper Sweater Hooded Coat",
     img1: arrivals4,
@@ -86,7 +86,7 @@ export const arrivalData = [
     isWishlisted: "false",
   },
   {
-    id: 4,
+    id: 205,
     name: "Green Polar Jacket",
     desc: "CHEXPEL Men's Green Polar Jacket with Hood Fleece Lining Cotton Military Jackets Work Jackets with Cargo Pocket",
     img1: arrivals5,
@@ -108,7 +108,7 @@ export const arrivalData = [
 
 export const extraProducts = [
   {
-    id: 1,
+    id: 201,
     name: "Green T-shirt",
     desc: "TACVASEN Legendary Whitetails Men's",
     img1: arrivals1,
