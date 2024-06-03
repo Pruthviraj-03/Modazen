@@ -1,5 +1,6 @@
 // WishlistContext.js
 import React, { createContext, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Create a new context for the wishlist
@@ -11,6 +12,7 @@ export const useWishlist = () => useContext(WishlistContext);
 // Wishlist context provider component
 export const WishlistProvider = ({ children }) => {
   const [wishlistItems, setWishlistItems] = useState([]);
+  const navigate = useNavigate();
 
   // Function to add an item to the wishlist
   const addToWishlist = async (product) => {
@@ -26,6 +28,7 @@ export const WishlistProvider = ({ children }) => {
         console.error("Product data is undefined in the response");
       }
     } catch (error) {
+      navigate("/login");
       console.error("Failed to add product to wishlist:", error.response);
     }
   };
