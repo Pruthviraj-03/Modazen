@@ -20,6 +20,7 @@ const ShoppingCart = () => {
         const { userCart } = response.data.data;
         setCartItems(userCart);
       } catch (error) {
+        navigate("/login");
         console.error("Failed to fetch user wishlist:", error);
       }
     };

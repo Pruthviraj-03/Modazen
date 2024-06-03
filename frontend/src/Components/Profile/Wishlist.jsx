@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWishlist } from "../Context/WishlistContext";
 import axios from "axios";
 
 const Whishlist = () => {
   const { wishlistItems, setWishlistItems, removeFromWishlist } = useWishlist();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserWishlist = async () => {
@@ -16,6 +17,7 @@ const Whishlist = () => {
         const { userWishlist } = response.data.data;
         setWishlistItems(userWishlist);
       } catch (error) {
+        navigate("/login");
         console.error("Failed to fetch user wishlist:", error);
       }
     };
