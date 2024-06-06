@@ -12,7 +12,6 @@ import Profile from "../Components/Profile/Profile";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
   const [userProfileVisible, setUserProfileVisible] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
@@ -23,35 +22,15 @@ const Header = () => {
     setSearchQuery("");
   };
 
-  const handleSearchChange = (event) => {
-    const { value } = event.target;
-    setSearchQuery(value);
-
-    if (value.trim() === "") {
-      setSuggestions([]);
-    } else {
-      const suggestionsList = [
-        "Shirt",
-        "T-shirt",
-        "Jeans",
-        "Dress",
-        "Shoes",
-      ].filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-      setSuggestions(suggestionsList);
-    }
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    setSearchQuery(suggestion);
-    setSuggestions([]);
-    navigate(`/products?search=${encodeURIComponent(suggestion)}`);
-    setSearchQuery("");
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && searchQuery.trim() !== "") {
-      navigate(`/not-found/${encodeURIComponent(searchQuery)}`);
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && searchQuery.trim() !== "") {
+      navigate(`/products/search/${searchQuery}`);
       setSearchQuery("");
+      console.log(searchQuery);
     }
   };
 
@@ -60,8 +39,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
         setUserProfileVisible(false);
       }
     };
@@ -118,19 +97,6 @@ const Header = () => {
               onChange={handleSearchChange}
               onKeyDown={handleKeyPress}
             />
-            {searchQuery.trim() !== "" && suggestions.length > 0 && (
-              <ul className="suggestions-list w-full">
-                {suggestions.map((suggestion, index) => (
-                  <li
-                    className="font-poppins text-main-color text-15 font-400 py-10 px-15 cursor-pointer hover:bg-medium-white"
-                    key={index}
-                    onClick={() => handleSuggestionClick(suggestion)}
-                  >
-                    {suggestion}
-                  </li>
-                ))}
-              </ul>
-            )}
           </div>
           <div className="flex flex-row items-center w-6 h-full gap-30 ml-30">
             <Link to="/shoppingcart">

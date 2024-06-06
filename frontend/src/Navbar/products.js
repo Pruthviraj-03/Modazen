@@ -1858,7 +1858,7 @@ const Products = [
   {
     id: "51",
     name: "Legendary Whitetails brown",
-    desc: "EKLENTSON Army Jacket Men Winter Legendary Whitetails",
+    desc: "EKLENTSON brown T-Shirts Men Winter Legendary Whitetails",
     price: "$110",
     originalPrice: "$170",
     discount: "25% OFF",
@@ -1875,7 +1875,7 @@ const Products = [
   {
     id: "52",
     name: "Legendary Whitetails black",
-    desc: "EKLENTSON Army Jacket Men Winter Legendary Whitetails",
+    desc: "EKLENTSON black T-Shirts Men Winter Legendary Whitetails",
     price: "$120",
     originalPrice: "$170",
     discount: "25% OFF",
@@ -1892,7 +1892,7 @@ const Products = [
   {
     id: "53",
     name: "Legendary Whitetails navy",
-    desc: "EKLENTSON Army Jacket Men Winter Legendary Whitetails",
+    desc: "EKLENTSON navy T-Shirts Men Winter Legendary Whitetails",
     price: "$130",
     originalPrice: "$170",
     discount: "25% OFF",
@@ -1909,7 +1909,7 @@ const Products = [
   {
     id: "54",
     name: "Legendary Whitetails thicket",
-    desc: "EKLENTSON Army Jacket Men Winter Legendary Whitetails",
+    desc: "EKLENTSON T-Shirts Men Winter Legendary Whitetails",
     price: "$140",
     originalPrice: "$170",
     discount: "25% OFF",
@@ -1926,7 +1926,7 @@ const Products = [
   {
     id: "55",
     name: "Wrangler",
-    desc: "EKLENTSON Army Jacket Men Winter Legendary Whitetails",
+    desc: "Wrangler T-Shirts Men Winter",
     price: "$150",
     originalPrice: "$170",
     discount: "25% OFF",

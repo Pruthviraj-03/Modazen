@@ -9,7 +9,7 @@ const CategoriesProduct = () => {
   const filteredProducts = Products.filter((product) =>
     product.category.toLowerCase().includes(slug.toLowerCase())
   );
-  console.log(filteredProducts);
+  console.log("filteredProducts:", filteredProducts);
 
   return (
     <div className="Products">
