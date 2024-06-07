@@ -52,10 +52,9 @@ const Otp = () => {
         {
           phoneNumber,
           otp: enteredOtp,
-        }
+        },
+        { withCredentials: true }
       );
-
-      console.log("Otp is:", otp);
 
       if (response.status === 200) {
         navigate("/");

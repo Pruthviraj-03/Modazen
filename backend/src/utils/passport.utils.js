@@ -21,13 +21,14 @@ passport.use(
     },
     async (req, accessToken, refreshToken, profile, done) => {
       try {
-        let user = await User.findOne({ googleId: profile.id });
+        const email =
+          profile.emails && profile.emails.length > 0
+            ? profile.emails[0].value
+            : "";
+
+        let user = await User.findOne({ email });
 
         if (!user) {
-          const email =
-            profile.emails && profile.emails.length > 0
-              ? profile.emails[0].value
-              : "";
           const name = profile.displayName || "";
           const picture =
             profile.photos && profile.photos.length > 0

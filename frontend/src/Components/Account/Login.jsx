@@ -18,9 +18,13 @@ const Login = () => {
 
   const handleContinue = async () => {
     try {
-      await axios.post("http://localhost:8000/api/v1/users/send-otp", {
-        phoneNumber,
-      });
+      await axios.post(
+        "http://localhost:8000/api/v1/users/send-otp",
+        {
+          phoneNumber,
+        },
+        { withCredentials: true }
+      );
       localStorage.setItem("phoneNumber", phoneNumber);
       navigate("/login/otp");
     } catch (error) {

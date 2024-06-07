@@ -355,12 +355,11 @@ const HomePage = () => {
                         </h2>
                       </div>
                       <div
-                        className="home-container-arrivals-container-big-block-info-button"
+                        className="add-to-cart flex items-center justify-center flex-row w-170 h-55
+                        bg-main-color gap-20 cursor-pointer"
                         onClick={() => handleAddToCart(extra)}
                       >
                         <Link to="/shoppingcart">
-                          {/* flex items-center justify-center flex-row w-170 h-50
-                        bg-main-color gap-20 cursor-pointer */}
                           <span className="font-poppins text-dark-white font-700 tracking-1">
                             Add to Cart
                           </span>
@@ -417,25 +416,21 @@ const HomePage = () => {
                 </span>
               </Link>
             </div>
-            <div className="home-container-featured-container-blocks">
-              {/*  flex flex-wrap h-full w-full mt-50 gap-20 */}
+            <div className="flex flex-wrap h-full w-full mt-50 gap-20">
               {shuffledProducts.slice(0, 10).map((item) => (
                 <Link
                   key={item.id}
                   to={`/featured/${encodeURIComponent(item.name)}`}
                 >
-                  <div className="home-container-featured-container-box">
-                    {/*  w-355.1 h-458 flex flex-col items-center justify-center gap-20 cursor-pointer transition-transform duration-300 ease-in-out */}
-                    <div className="home-container-featured-container-image">
-                      {/*  w-50 h-50p overflow-hidden */}
+                  <div className="home-featured-box w-355.1 h-458 flex flex-col items-center justify-center gap-20 cursor-pointer transition-transform duration-300 ease-in-out">
+                    <div className="w-50 h-50p overflow-hidden">
                       <img
-                        // className="h-full w-full object-cover"
+                        className="h-full w-full object-contain"
                         src={item.img1}
                         alt="featured-images"
                       />
                     </div>
-                    <div className="home-container-featured-container-info">
-                      {/* flex flex-col items-center justify-center */}
+                    <div className="flex flex-col items-center justify-center h-auto p-10">
                       <h3 className="font-poppins text-main-color text-18 font-500 tracking-1">
                         {item.name}
                       </h3>

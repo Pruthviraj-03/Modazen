@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
     googleId: { type: String, unique: true, sparse: true },
     email: {
       type: String,
-      unique: true,
     },
     name: {
       type: String,
@@ -14,7 +13,6 @@ const userSchema = new mongoose.Schema(
     picture: { type: String },
     phoneNumber: {
       type: String,
-      unique: true,
     },
     gender: { type: String, enum: ["Male", "Female"] },
     DOB: { type: Date },
@@ -22,6 +20,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       sparse: true,
     },
+    accessToken: { type: String },
+    refreshToken: { type: String },
     otp: { type: String, select: false },
     otpExpires: { type: Date, select: false },
     wishlist: [{ type: Object }],
