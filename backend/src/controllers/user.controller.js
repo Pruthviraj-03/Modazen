@@ -177,16 +177,16 @@ const verifyOTP = asyncHandler(async (req, res) => {
   try {
     const { phoneNumber, otp } = req.body;
 
-    console.log("number is:", phoneNumber, "and", "otp is:", otp);
+    // console.log("number is:", phoneNumber, "and", "otp is:", otp);
 
     const user = await User.findOne({
       phoneNumber,
     }).select("+otp +otpExpires");
 
-    console.log("user otp is:", user);
+    // console.log("user otp is:", user);
 
     if (!user || user.otp !== otp || user.otpExpires < new Date()) {
-      console.log("Invalid or expired otp");
+      // console.log("Invalid or expired otp");
       return res.status(400).json({ error: "Invalid or expired OTP" });
     }
 
@@ -196,7 +196,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
     await user.save();
 
     const tokens = await generateAccessAndRefreshTokens(user);
-    console.log("Generated tokens:", tokens);
+    // console.log("Generated tokens:", tokens);
     CookieToken(user, res, tokens);
 
     // await client.messages.create({
@@ -207,7 +207,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
 
     // Redirect to the homepage (assuming this is an API endpoint)
     res.json(new ApiResponse(200, { user }, "OTP verify successfully"));
-    console.log("otp verified successfully");
+    // console.log("otp verified successfully");
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to verify the otp");
   }

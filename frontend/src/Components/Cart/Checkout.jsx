@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,11 +11,60 @@ import axios from "axios";
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/users/login/success",
+          { withCredentials: true }
+        );
+
+        const userData = response.data.data.user;
+        setFormData({
+          name: userData.name || "",
+          email: userData.email || "",
+          phoneNumber: userData.phoneNumber || "",
+        });
+      } catch (error) {
+        console.log("error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const totalAmount = location.state?.totalAmount || 0;
   console.log("Amount is:", totalAmount);
   const [paymentStatus, setPaymentStatus] = useState(null);
 
+  const validateForm = () => {
+    const { name, phoneNumber, address, city, state, zipCode } = formData;
+    if (!name || !phoneNumber || !address || !city || !state || !zipCode) {
+      window.alert("Please fill out all buyer info first!");
+      return false;
+    }
+    return true;
+  };
+
   const handlePayment = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
     const amount = totalAmount * 100;
     const currency = "INR";
     const receiptId = "1234567890";
@@ -23,6 +72,10 @@ const Checkout = () => {
     if (!amount) {
       window.alert("Add product first into the cart!");
       navigate("/shoppingcart");
+    }
+
+    if (formData === " ") {
+      window.alert("Pls filled all buyers info first!");
     }
     try {
       const response = await axios.post(
@@ -42,18 +95,14 @@ const Checkout = () => {
         handler: function (response) {
           alert(`Payment ID: ${response.razorpay_payment_id}`);
           alert(`Order ID: ${response.razorpay_order_id}`);
-          alert(`Signature: ${response.razorpay_signature}`);
           window.alert("Payment success");
           setPaymentStatus("success");
           navigate("/completed");
         },
         prefill: {
-          name: "Raj Kurane",
-          email: "raj.kurane03@gmail.com",
-          contact: "8692848775",
-        },
-        notes: {
-          address: "India, Maharashtra, Mumbai-60",
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phoneNumber,
         },
         theme: {
           color: "#3399cc",
@@ -129,38 +178,75 @@ const Checkout = () => {
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Full Name
               </span>
-              <input type="text" required></input>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              ></input>
             </div>
             <div className="checkout-container-data-buyer-info-address flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Address
               </span>
-              <input type="text" required></input>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                required
+              ></input>
             </div>
             <div className="checkout-container-data-buyer-info-contact flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 Contact
               </span>
-              <input type="text" required></input>
+              <input
+                type="text"
+                name="phoneNumber"
+                maxLength="10"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
+              ></input>
             </div>
             <div className="checkout-container-data-buyer-info-city flex flex-col gap-15">
               <span className="font-poppins text-dark-grey text-18 font-400">
                 City
               </span>
-              <input type="text" required></input>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              ></input>
             </div>
             <div className="flex flex-row gap-30">
               <div className="checkout-container-data-buyer-info-state flex flex-col gap-15 w-61">
                 <span className="font-poppins text-dark-grey text-18 font-400">
                   State
                 </span>
-                <input type="text" required></input>
+                <input
+                  type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  required
+                ></input>
               </div>
               <div className="checkout-container-data-buyer-info-zip-code flex flex-col gap-15 w-35">
                 <span className="font-poppins text-dark-grey text-18 font-400">
                   Zip Code
                 </span>
-                <input type="text" required></input>
+                <input
+                  type="text"
+                  name="zipCode"
+                  value={formData.zipCode}
+                  onChange={handleChange}
+                  required
+                ></input>
               </div>
             </div>
           </div>
