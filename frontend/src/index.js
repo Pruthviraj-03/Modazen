@@ -7,16 +7,19 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CartProvider } from "./Components/Context/CartContext";
 import { WishlistProvider } from "./Components/Context/WishlistContext";
+import { OrderProvider } from "./Components/Context/OrderContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
     <Router>
-      <CartProvider>
-        <WishlistProvider>
-          <App />
-        </WishlistProvider>
-      </CartProvider>
+      <OrderProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <App />
+          </WishlistProvider>
+        </CartProvider>
+      </OrderProvider>
     </Router>
   </>
 );

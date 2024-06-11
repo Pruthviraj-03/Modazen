@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
     otpExpires: { type: Date, select: false },
     wishlist: [{ type: Object }],
     cart: [{ type: Object }],
+    order: [{ type: Object }],
   },
   { timestamps: true }
 );
@@ -106,6 +107,16 @@ userSchema.methods.removeFromCart = async function (productId) {
   } catch (error) {
     throw new Error("Failed to remove product from wishlist");
   }
+};
+
+// Add to order
+userSchema.methods.addToOrder = async function (products) {
+  products.forEach((product) => {
+    if (!this.order.some((orderItem) => orderItem.id === product.id)) {
+      this.order.push(product);
+    }
+  });
+  await this.save();
 };
 
 const User = mongoose.model("User", userSchema);

@@ -7,8 +7,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
+import { useOrder } from "../Context/OrderContext";
 
 const Checkout = () => {
+  const { addToOrder } = useOrder();
   const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -50,7 +52,6 @@ const Checkout = () => {
   };
 
   const totalAmount = location.state?.totalAmount || 0;
-  console.log("Amount is:", totalAmount);
   const [paymentStatus, setPaymentStatus] = useState(null);
 
   const validateForm = () => {
@@ -92,12 +93,19 @@ const Checkout = () => {
         name: "ModaZen",
         description: "Transaction for buying products.",
         order_id: order.id,
-        handler: function (response) {
-          alert(`Payment ID: ${response.razorpay_payment_id}`);
-          alert(`Order ID: ${response.razorpay_order_id}`);
-          window.alert("Payment success");
-          setPaymentStatus("success");
-          navigate("/completed");
+        handler: async function (response) {
+          try {
+            alert(`Payment ID: ${response.razorpay_payment_id}`);
+            alert(`Order ID: ${response.razorpay_order_id}`);
+            window.alert("Payment success");
+            setPaymentStatus("success");
+
+            await addToOrder(location.state?.cartItems || []);
+            navigate("/completed");
+          } catch (error) {
+            console.error("Error adding to order:", error);
+            window.alert("Failed to add products to order.");
+          }
         },
         prefill: {
           name: formData.name,

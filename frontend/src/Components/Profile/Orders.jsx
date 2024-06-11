@@ -1,74 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import featured1 from "../../images/featured1.avif";
-import featured2 from "../../images/featured2.avif";
-import featured3 from "../../images/featured3.avif";
-import featured4 from "../../images/featured4.avif";
-import featured5 from "../../images/featured5.avif";
-import { Link } from "react-router-dom";
-
-export const orderedProductData = [
-  {
-    id: 1,
-    status: "Ongoing",
-    orderedDate: "On Sat, 8 Mar 2024",
-    name: "Golden Handbag",
-    image: featured5,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "78% OFF",
-  },
-  {
-    id: 2,
-    status: "Delivered",
-    orderedDate: "On Sat, 15 Feb 2023",
-    name: "Black Sports Shoes",
-    image: featured3,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "67% OFF",
-  },
-  {
-    id: 3,
-    status: "Ongoing",
-    orderedDate: "On Sat, 30 Dec 2022",
-    name: "Grey Trouser",
-    image: featured2,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-  {
-    id: 4,
-    status: "Exchange Delivered",
-    orderedDate: "On Sat, 20 Aug 2023",
-    name: "Green Crop Top",
-    image: featured4,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "45% OFF",
-  },
-  {
-    id: 5,
-    status: "Delivered",
-    orderedDate: "On Sat, 25 Jun 2022",
-    name: "Grey T-shirt",
-    image: featured1,
-    price: "$299",
-    originalPrice: "$100",
-    discount: "74% OFF",
-  },
-];
+import { Link, useNavigate } from "react-router-dom";
+import { useOrder } from "../Context/OrderContext.js";
+import axios from "axios";
 
 const Orders = () => {
+  const { orderItems, setOrderItems } = useOrder();
   const [searchOrder, setSearchOrder] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserWishlist = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/v2/getOrderListProducts",
+          { withCredentials: true }
+        );
+        const { userOrderList } = response.data.data;
+        setOrderItems(userOrderList);
+      } catch (error) {
+        navigate("/login");
+        console.error("Failed to fetch user order list", error);
+      }
+    };
+
+    fetchUserWishlist();
+  }, [setOrderItems]);
 
   const handleSearchChange = (e) => {
     setSearchOrder(e.target.value);
   };
 
-  const filteredProducts = orderedProductData.filter((product) =>
+  const filteredProducts = orderItems.filter((product) =>
     product.name.toLowerCase().includes(searchOrder.toLowerCase())
   );
 
@@ -110,7 +74,7 @@ const Orders = () => {
               </div>
               <div>
                 <h3 className="text-main-color text-18 font-700 tracking-0.5">
-                  {product.status}
+                  Delivered
                 </h3>
                 <span className="text-main-color text-15 font-400 tracking-0.5">
                   {product.orderedDate}
@@ -121,7 +85,7 @@ const Orders = () => {
               <div className="orders-product-box-image overflow-hidden">
                 <img
                   className="h-full w-full object-contain"
-                  src={product.image}
+                  src={product.img1}
                   alt="featured1"
                 />
               </div>

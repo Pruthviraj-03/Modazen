@@ -9,6 +9,10 @@ import {
   addToCart,
   removeFromCart,
 } from "../controllers/cartProducts.controller.js";
+import {
+  getUserOrderList,
+  addToOrder,
+} from "../controllers/orderProducts.controller.js";
 import { authMiddleWare } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -28,5 +32,9 @@ router.route("/addCartProducts").post(authMiddleWare, addToCart);
 router
   .route("/removeCartProducts/:productId")
   .delete(authMiddleWare, removeFromCart);
+
+router.route("/getOrderListProducts").get(authMiddleWare, getUserOrderList);
+
+router.route("/addOrderProducts").post(authMiddleWare, addToOrder);
 
 export { router };

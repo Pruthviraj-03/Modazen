@@ -64,7 +64,9 @@ const ShoppingCart = () => {
     .toFixed(2);
 
   const onClickGoesTo = () => {
-    navigate("/checkout", { state: { totalAmount: totalAmount } });
+    navigate("/checkout", {
+      state: { totalAmount: totalAmount, cartItems: cartItems },
+    });
   };
 
   const handleAction = (e) => {
