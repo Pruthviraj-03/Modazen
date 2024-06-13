@@ -38,7 +38,7 @@ const Footer = () => {
 
   return (
     <div className="bg-main-color w-full h-500 flex justify-center items-center flex-col">
-      <div className="flex items-center flex-row w-80 h-70">
+      <div className="flex items-center flex-row w-80 h-70 laptop:h-auto">
         <div className="w-25 h-full">
           <Link to="/">
             <div className="flex flex-row items-center cursor-pointer w-full h-10 gap-7">
@@ -48,12 +48,12 @@ const Footer = () => {
               </span>
             </div>
           </Link>
-          <p className="font-poppins w-full h-35 text-dark-grey text-15.5 font-500 tracking-1 mt-40">
+          <p className="font-poppins w-full h-35 text-dark-grey text-15.5 font-500 tracking-1 mt-40 laptop:mt-30 laptop:text-14">
             Welcome to our online store, where quality meets convenience.
             Discover a curated selection of products tailored to enhance your
             lifestyle.
           </p>
-          <div className="w-full h-12.5 mb-10 flex items-center">
+          <div className="w-full h-12.5 mb-10 flex items-center laptop:mt-10">
             <FontAwesomeIcon
               className="phone-icon h-22.5 w-22.5 text-dark-white"
               icon={faPhoneAlt}
@@ -92,7 +92,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="ml-160 flex flex-col items-center w-17.5 h-full gap-40">
+        <div className="ml-160 flex flex-col items-center w-17.5 h-full gap-30 laptop:ml-100">
           <span className="font-poppins text-dark-white text-22.5 font-900 tracking-1">
             Product Links
           </span>
@@ -119,7 +119,7 @@ const Footer = () => {
             </Link>
           </ul>
         </div>
-        <div className="flex flex-col items-center w-17.5 h-full gap-40">
+        <div className="flex flex-col items-center w-17.5 h-full gap-30 laptop:ml-30">
           <span className="font-poppins text-dark-white text-22.5 font-900 tracking-1">
             Company
           </span>
@@ -150,7 +150,7 @@ const Footer = () => {
           <span className="font-poppins text-dark-white text-22.5 font-900 tracking-1">
             Join our Newsletter
           </span>
-          <p className="font-poppins w-full h-30p text-dark-grey text-17 font-500 tracking-1 mt-40">
+          <p className="font-poppins w-full h-30p text-dark-grey text-17 font-500 tracking-1 mt-40 laptop:mt-30">
             Drop your email below to get update, promotions, coupons, and more!
           </p>
           <div className="flex flex-row items-center rounded-md border border-dark-white w-full h-60">

@@ -30,7 +30,7 @@ import { Products } from "./products";
 export const arrivalData = [
   {
     id: 202,
-    name: "Blue Grey Warm Jacket",
+    name: "Blue Grey Jacket",
     desc: "EKLENTSON Army Jacket Men Blue Grey Warm Jacket Men Multi Pockets Winter Jacket Men Thermal",
     img1: arrivals2,
     img2: arrivals2,
@@ -250,9 +250,9 @@ const HomePage = () => {
         <Carousel interval={2000} pause="hover" wrap indicators>
           {carouselData.map((carousel, index) => (
             <Carousel.Item key={index}>
-              <div className="flex flex-row w-full h-550 mt-40 bg-light-white">
+              <div className="flex flex-row w-full h-600 laptop:h-500 mt-40 bg-light-white">
                 <div className="flex flex-col justify-center h-full w-35 gap-20 pl-60 pb-30">
-                  <span className="font-poppins text-main-color text-90 font-400">
+                  <span className="font-poppins text-main-color text-90 font-400 laptop:text-56">
                     {carousel.title}
                   </span>
                   <span className="font-poppins text-64 font-700 text-main-color">
@@ -262,7 +262,7 @@ const HomePage = () => {
                     {carousel.description}
                   </p>
                   <div
-                    className="home-carousel-data-button hover:border hover:border-main-color hover:bg-dark-white flex items-center justify-center flex-row cursor-pointer w-230 h-70p bg-main-color gap-20"
+                    className="home-carousel-data-button hover:border hover:border-main-color hover:bg-dark-white flex items-center justify-center flex-row cursor-pointer w-230 h-70p bg-main-color gap-20 laptop:h-60 laptop:w-213"
                     onClick={() => handleCarouselClick(carousel.slug)}
                   >
                     <span className="font-poppins text-24 font-400 text-dark-white tracking-1">
@@ -287,9 +287,9 @@ const HomePage = () => {
         </Carousel>
 
         <div className="flex items-center justify-center h-330 w-full bg-dark-white mt-50">
-          <div className="flex flex-col h-full w-80 bg-dark-white p-20">
+          <div className="flex flex-col h-full w-80 bg-dark-white p-20 laptop:w-85">
             <div className="flex justify-between">
-              <h3 className="font-poppins text-main-color font-700 text-36">
+              <h3 className="font-poppins text-main-color font-700 text-36 laptop:text-30">
                 Categories
               </h3>
               <Link to="/categories">
@@ -298,12 +298,15 @@ const HomePage = () => {
                 </span>
               </Link>
             </div>
-            <div className="flex flex-row h-full w-full gap-40 mt-50">
+            <div className="flex flex-row h-full w-full gap-40 mt-50 laptop:w-85 laptop:gap-30">
               {categoryData.map((category) => (
                 <Link key={category.id} to="/categories">
-                  <div className="category-box hover:bg-main-color hover:text-dark-white h-full w-213 bg-light-white flex flex-col justify-center items-center gap-40 cursor-pointer">
-                    <FontAwesomeIcon className="text-50" icon={category.icon} />
-                    <span className="font-poppins text-18 font-500 text-dark-grey">
+                  <div className="category-box hover:bg-main-color hover:text-dark-white h-full w-213 laptop:h-70 laptop:w-150 bg-light-white flex flex-col justify-center items-center gap-40 laptop:gap-30 cursor-pointer">
+                    <FontAwesomeIcon
+                      className="text-50 laptop:text-40"
+                      icon={category.icon}
+                    />
+                    <span className="font-poppins text-18 font-500 text-dark-grey laptop:text-16">
                       {category.name}
                     </span>
                   </div>
@@ -313,10 +316,10 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center h-750 w-full bg-dark-white mt-50">
-          <div className="flex flex-col h-full w-80 bg-dark-white p-20">
+        <div className="flex items-center justify-center h-750 w-full bg-dark-white mt-50 laptop:mt-0 laptop:h-auto">
+          <div className="flex flex-col h-full w-80 bg-dark-white p-20 laptop:w-85">
             <div className="flex justify-between">
-              <h3 className="font-poppins text-main-color font-700 text-36">
+              <h3 className="font-poppins text-main-color font-700 text-36 laptop:text-30">
                 New Arrivals
               </h3>
               <Link to="/arrivals">
@@ -325,38 +328,38 @@ const HomePage = () => {
                 </span>
               </Link>
             </div>
-            <div className="flex flex-row h-full w-full gap-20 mt-50">
+            <div className="flex flex-row h-full w-full gap-20 mt-50 laptop:h-500 laptop:gap-10">
               {extraProducts.map((extra) => (
                 <Link
                   key={extra.id}
                   to={`/featured/${encodeURIComponent(extra.name)}`}
                 >
-                  <div className="home-container-arrivals-container-big-block flex flex-row w-730 h-full p-30 bg-light-white cursor-pointer">
-                    <div className="w-60 h-full overflow-hidden">
+                  <div className="home-container-arrivals-container-big-block flex flex-row w-730 h-full p-30 bg-light-white cursor-pointer laptop:w-540">
+                    <div className="w-60 h-full overflow-hidden laptop:w-70">
                       <img
                         className="h-full w-full object-cover"
                         src={extra.img1}
                         alt={extra.name}
                       />
                     </div>
-                    <div className="flex items-center justify-center flex-col w-40p h-full gap-25">
-                      <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
+                    <div className="flex items-center justify-center flex-col w-40p h-full gap-25 laptop:pl-30">
+                      <h3 className="font-poppins text-main-color text-24 font-500 tracking-1 laptop:text-22">
                         {extra.name}
                       </h3>
                       <div className="flex items-center justify-center flex-row gap-6">
                         <span className="font-poppins text-main-color text-18 font-700">
                           {extra.price}
                         </span>
-                        <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                        <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through laptop:text-14">
                           {extra.originalPrice}
                         </h1>
-                        <h2 className="font-poppins text-main-color text-14 font-400">
+                        <h2 className="font-poppins text-main-color text-14 font-400 laptop:text-13">
                           {extra.discount}
                         </h2>
                       </div>
                       <div
                         className="add-to-cart flex items-center justify-center flex-row w-170 h-55
-                        bg-main-color gap-20 cursor-pointer"
+                        bg-main-color gap-20 cursor-pointer laptop:h-50 laptop:w-150"
                         onClick={() => handleAddToCart(extra)}
                       >
                         <Link to="/shoppingcart">
@@ -370,28 +373,28 @@ const HomePage = () => {
                 </Link>
               ))}
 
-              <div className="flex flex-wrap w-50 h-full gap-20 bg-dark-white cursor-pointer">
+              <div className="flex flex-wrap w-50 h-full gap-20 bg-dark-white cursor-pointer laptop:w-575 laptop:gap-10">
                 {arrivalData.map((block) => (
                   <Link
                     key={block.id}
                     to={`/featured/${encodeURIComponent(block.name)}`}
                   >
-                    <div className="home-container-arrivals-container-small-block flex flex-col items-center justify-center h-320 w-354 gap-40 bg-light-white">
+                    <div className="home-container-arrivals-container-small-block flex flex-col items-center justify-center h-320 w-354 gap-40 bg-light-white laptop:w-240 laptop:h-240 laptop:gap-15">
                       <div className="h-40p w-40p">
                         <img src={block.img1} alt={block.name} />
                       </div>
-                      <div className="flex flex-col items-center justify-center gap-20">
-                        <h3 className="font-poppins text-main-color text-24 font-500 tracking-1">
+                      <div className="flex flex-col items-center justify-center gap-20 laptop:gap-15">
+                        <h3 className="font-poppins text-main-color text-24 font-500 tracking-1 laptop:text-20">
                           {block.name}
                         </h3>
                         <div className="home-container-arrivals-container-small-block-info-price flex items-center justify-center flex-row gap-6">
-                          <span className="font-poppins text-main-color text-18 font-700">
+                          <span className="font-poppins text-main-color text-18 font-700 laptop:tetx-16">
                             {block.price}
                           </span>
-                          <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                          <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through laptop:text-14">
                             {block.originalPrice}
                           </h1>
-                          <h2 className="font-poppins text-main-color text-14 font-400">
+                          <h2 className="font-poppins text-main-color text-14 font-400 laptop:text-13">
                             {block.discount}
                           </h2>
                         </div>
@@ -404,10 +407,10 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center h-1550 w-full bg-dark-white mt-50">
+        <div className="flex items-center justify-center h-1550 w-full bg-dark-white mt-50 laptop:h-auto">
           <div className="flex flex-col h-full w-80 bg-dark-white p-20">
             <div className="flex justify-between">
-              <h3 className="font-poppins text-main-color font-700 text-36">
+              <h3 className="font-poppins text-main-color font-700 text-36 laptop:text-30">
                 Featured
               </h3>
               <Link to="/featured">
@@ -422,7 +425,7 @@ const HomePage = () => {
                   key={item.id}
                   to={`/featured/${encodeURIComponent(item.name)}`}
                 >
-                  <div className="home-featured-box w-355.1 h-458 flex flex-col items-center justify-center gap-20 cursor-pointer transition-transform duration-300 ease-in-out">
+                  <div className="home-featured-box w-355.1 h-458 laptop:h-380 laptop:w-313.5 flex flex-col items-center justify-center gap-20 cursor-pointer transition-transform duration-300 ease-in-out laptop:gap-10">
                     <div className="w-50 h-50p overflow-hidden">
                       <img
                         className="h-full w-full object-contain"
@@ -431,14 +434,14 @@ const HomePage = () => {
                       />
                     </div>
                     <div className="flex flex-col items-center justify-center h-auto p-10">
-                      <h3 className="font-poppins text-main-color text-18 font-500 tracking-1">
+                      <h3 className="font-poppins text-main-color text-18 font-500 tracking-1 laptop:text-16">
                         {item.name}
                       </h3>
                       <div className="flex items-center justify-center flex-row gap-7 mt-3">
                         <span className="font-poppins text-main-color text-18 font-700">
                           {item.price}
                         </span>
-                        <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through">
+                        <h1 className="font-poppins text-dark-grey text-16 font-500 tracking-1 line-through laptop:text-14">
                           {item.originalPrice}
                         </h1>
                         <h2 className="font-poppins text-main-color text-14 font-400">
@@ -447,19 +450,18 @@ const HomePage = () => {
                       </div>
                     </div>
                     <div
-                      className="raj items-center justify-center flex-row w-170 h-10
-                        bg-main-color gap-20 cursor-pointer hidden"
+                      className="raj items-center justify-center flex-row w-170 h-10 laptop:h-11
+                        bg-main-color gap-20 cursor-pointer hidden laptop:w-150 laptop:gap-15"
                     >
                       <Link
                         to="/shoppingcart"
                         onClick={() => handleAddToCart(item)}
                       >
-                        <span className="font-poppins text-18 text-dark-white font-700 tracking-1">
+                        <span className="font-poppins text-18 text-dark-white font-700 tracking-1 laptop:text-16">
                           Add to Cart
                         </span>
                       </Link>
                     </div>
-                    {/*  flex items-center justify-center flex-row w-170 h-50 bg-main-color gap-20 cursor-pointer */}
                   </div>
                 </Link>
               ))}
@@ -467,26 +469,26 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex flex-col h-500 w-full bg-dark-white mt-30">
-          <div className="text-main-color text-36 font-700 ml-120">
+        <div className="flex flex-col h-500 w-full bg-dark-white mt-30 laptop:h-auto">
+          <div className="text-main-color text-36 font-700 ml-120 laptop:text-30">
             <span className="font-poppins">Why Choose Us</span>
           </div>
           <div className="flex justify-center h-full w-full bg-light-white mt-30">
-            <div className="flex flex-row h-full w-80 gap-50.5">
+            <div className="flex flex-row h-full w-80 gap-50.5 laptop:w-90 laptop:p-30 laptop:gap-20">
               {chooseUsData.map((item) => (
                 <div
                   key={item.id}
-                  className="h-full w-22.5p flex flex-col items-center justify-center"
+                  className="h-full w-22.5p flex flex-col items-center justify-center laptop:w-25"
                 >
                   <Link to="/termsofservices">
                     <div className="why-choose-us-icon rounded-full text-40 py-15 px-22.5 cursor-pointer mb-30">
                       <FontAwesomeIcon icon={item.icon} />
                     </div>
                   </Link>
-                  <span className="font-poppins text-main-color text-24 font-700 mt-20">
+                  <span className="font-poppins text-main-color text-24 font-700 mt-20 laptop-text-22">
                     {item.title}
                   </span>
-                  <p className="font-poppins text-dark-grey text-18 font-400 w-60 mb-50 ml-30 mt-30">
+                  <p className="font-poppins text-dark-grey text-18 font-400 w-60 mb-50 ml-30 mt-30 laptop-text-16 laptop:w-full laptop:p-20 laptop:mb-0">
                     {item.description}
                   </p>
                 </div>
@@ -495,17 +497,17 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-center w-full h-200 gap-60">
-          <span className="font-nike text-dark-grey text-50 font-800 tracking-1">
+        <div className="flex flex-row items-center justify-center w-full h-200 gap-60 laptop:h-150">
+          <span className="font-nike text-dark-grey text-50 font-800 tracking-1 laptop:text-45">
             Nike
           </span>
-          <span className="font-adidas text-medium-grey text-50 font-800 tracking-1">
+          <span className="font-adidas text-medium-grey text-50 font-800 tracking-1 laptop:text-45">
             Adidas
           </span>
-          <span className="font-gucci text-dark-grey text-50 font-500 tracking-1">
+          <span className="font-gucci text-dark-grey text-50 font-500 tracking-1 laptop:text-45">
             Gucci
           </span>
-          <span className="font-versace text-medium-grey text-50 font-500 tracking-1">
+          <span className="font-versace text-medium-grey text-50 font-500 tracking-1 laptop:text-45">
             Versace
           </span>
         </div>

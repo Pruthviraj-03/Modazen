@@ -54,7 +54,7 @@ const Header = () => {
   return (
     <>
       <div className="bg-dark-white h-24 w-full flex items-center justify-center shadow-md fixed top-0 opacity-100 z-50">
-        <div className="flex items-center flex-row w-70">
+        <div className="flex items-center flex-row w-70 laptop:w-80">
           <Link to="/" onClick={handleRefreshPage}>
             <div className="flex flex-row w-full h-full cursor-pointer">
               <img className="h-8 w-8" src={logoImg1} alt="ModaZen Logo" />
@@ -63,8 +63,8 @@ const Header = () => {
               </span>
             </div>
           </Link>
-          <div className="w-52 flex items-center justify-center h-full">
-            <ul className="font-poppins flex flex-row gap-50">
+          <div className="w-52 flex items-center justify-center h-full laptop:w-48.5">
+            <ul className="font-poppins flex flex-row gap-50 laptop:gap-30 laptop:ml-50">
               <Link to="/categories" onClick={window.scrollTo(0, 0)}>
                 <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
                   Categories
