@@ -88,7 +88,7 @@ const Categories = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-auto mt-25 mb-50">
-      <div className="flex mr-28 w-50 flex-row gap-30">
+      <div className="flex mr-28 w-50 flex-row gap-30 laptop:mr-40p">
         <Link to="/">
           <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
             Home
@@ -101,12 +101,12 @@ const Categories = () => {
           Categories
         </span>
       </div>
-      <div className="flex items-center justify-center h-100 w-80">
+      <div className="flex items-center justify-center h-100 w-80 laptop:w-90">
         <span className="font-poppins text-main-color text-36 font-700 tracking-1">
           Categories
         </span>
       </div>
-      <div className="flex flex-row justify-center w-80 h-1000 gap-30 mt-25">
+      <div className="flex flex-row justify-center w-80 h-1000 gap-30 mt-25 laptop:w-90 laptop:h-auto">
         <div className="w-18.5 h-full flex flex-col gap-20">
           <div className="w-full h-auto overflow-y-auto p-20">
             <div
@@ -218,7 +218,10 @@ const Categories = () => {
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
@@ -229,8 +232,14 @@ const Categories = () => {
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
@@ -241,9 +250,18 @@ const Categories = () => {
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
@@ -254,10 +272,22 @@ const Categories = () => {
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
@@ -268,11 +298,26 @@ const Categories = () => {
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                 </ul>
@@ -308,7 +353,7 @@ const Categories = () => {
                         type="checkbox"
                       ></input>
                     </Link>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       XS
                     </span>
                   </li>
@@ -319,7 +364,7 @@ const Categories = () => {
                         type="checkbox"
                       ></input>
                     </Link>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       S
                     </span>
                   </li>
@@ -330,7 +375,7 @@ const Categories = () => {
                         type="checkbox"
                       ></input>
                     </Link>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       M
                     </span>
                   </li>
@@ -341,7 +386,7 @@ const Categories = () => {
                         type="checkbox"
                       ></input>
                     </Link>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       L
                     </span>
                   </li>
@@ -352,7 +397,7 @@ const Categories = () => {
                         type="checkbox"
                       ></input>
                     </Link>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       XL
                     </span>
                   </li>
@@ -362,21 +407,21 @@ const Categories = () => {
           </div>
           <div className="categories-container-filter-box-line"></div>
         </div>
-        <div className="w-80 h-full p-20 flex flex-wrap gap-20">
+        <div className="w-80 h-full p-20 flex flex-wrap gap-20 laptop:p-15 laptop:h-full">
           {categoriesData.map((category) => (
             <div
-              className="categories-container-box hover:bg-main-color w-575 h-222 bg-light-white flex flex-row items-center justify-center gap-35 cursor-pointer"
+              className="categories-container-box hover:bg-main-color w-575 h-222 bg-light-white flex flex-row items-center justify-center gap-35 cursor-pointer laptop:h-170 laptop:w-425"
               key={category.id}
               onClick={() => handleCarouselClick(category.slug)}
             >
-              <div className="categories-container-box-image text-85">
+              <div className="categories-container-box-image text-85 laptop:text-70">
                 <FontAwesomeIcon icon={category.icon} />
               </div>
               <div>
-                <h3 className="font-poppins text-main-color text-36 font-700 tracking-1">
+                <h3 className="font-poppins text-main-color text-36 font-700 tracking-1 laptop:text-32">
                   {category.title}
                 </h3>
-                <span className="font-poppins text-dark-grey text-36 font-400 tracking-1">
+                <span className="font-poppins text-dark-grey text-36 font-400 tracking-1 laptop:text-32">
                   Collection
                 </span>
               </div>
