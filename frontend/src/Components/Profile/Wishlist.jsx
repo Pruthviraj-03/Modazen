@@ -34,7 +34,7 @@ const Whishlist = () => {
 
   return (
     <div className="w-full h-auto flex items-center justify-center">
-      <div className="flex w-80 h-auto min-h-400 flex-col mt-50 mb-50 gap-50">
+      <div className="flex w-80 h-auto min-h-400 flex-col mt-50 mb-50 gap-50 laptop:w-90 laptop:h-auto">
         <div className="flex h-10 w-full">
           <div className="flex items-center justify-center flex-row gap-10">
             <h3 className="font-poppins text-main-color text-18 font-700 tracking-0.5">
@@ -45,7 +45,7 @@ const Whishlist = () => {
             </span>
           </div>
         </div>
-        <div className="flex flex-wrap w-full h-auto gap-67">
+        <div className="flex flex-wrap w-full h-auto gap-67 laptop:gap-49">
           {wishlistItems.map((product) => (
             <div key={product.id} className="wishlist-box">
               <div className="whishlist-box flex w-250 h-370 flex-col">

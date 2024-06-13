@@ -80,7 +80,7 @@ const EditProfile = () => {
   return (
     <div className="w-full h-auto flex items-center justify-center p-150">
       <form
-        className="edit-profile-container flex justify-center items-center w-50 h-auto min-h-400 flex-col gap-10 p-50"
+        className="edit-profile-container flex justify-center items-center h-auto min-h-400 flex-col gap-10 p-50 w-auto"
         onSubmit={handleSubmit}
       >
         <div className="h-70p w-80 flex items-center">

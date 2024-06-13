@@ -25,7 +25,7 @@ const UserProfile = () => {
 
   return (
     <div className="w-full h-auto flex items-center justify-center p-150">
-      <div className="user-profile-container flex justify-center items-center w-40p h-auto min-h-400 flex-col gap-10 p-50">
+      <div className="user-profile-container flex justify-center items-center w-40p h-auto min-h-400 flex-col gap-10 p-50 laptop:w-60">
         <div className="flex items-center h-70p w-70">
           <span className="font-poppins text-main-color text-20 font-700">
             Profile Details

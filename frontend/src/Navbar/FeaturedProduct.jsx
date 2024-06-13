@@ -124,7 +124,7 @@ const FeaturedProduct = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-auto mt-25 mb-50 bg-dark-white">
-      <div className="flex flex-col w-80 h-full gap-40">
+      <div className="flex flex-col w-80 h-full gap-40 laptop:w-90 laptop:h-auto">
         <div className="flex flex-row ml-50p w-50 gap-30">
           <Link to="/featured">
             <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
@@ -201,7 +201,7 @@ const FeaturedProduct = () => {
                   Size :
                 </span>
               </div>
-              <div className="flex items-center w-45p h-full flex-row gap-22.5">
+              <div className="flex items-center w-45p h-full flex-row gap-22.5 laptop:w-60">
                 <div
                   className={`size-box w-60 h-49 rounded-60 flex items-center justify-center cursor-pointer ${
                     selectedSize === "XS" ? "bg-main-color text-dark-white" : ""

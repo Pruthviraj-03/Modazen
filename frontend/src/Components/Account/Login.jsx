@@ -34,7 +34,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-auto flex items-center justify-center p-150">
-      <div className="login-container flex w-27.5p h-600 flex-col gap-30 p-30">
+      <div className="login-container flex w-27.5p h-600 flex-col gap-30 p-30 laptop:w-40p laptop:h-550">
         <div className="flex items-center flex-row gap-7 h-55 w-full">
           <span className="font-poppins ttex-main-color text-22 font-700">
             Login
@@ -74,8 +74,8 @@ const Login = () => {
           </span>
         </div>
         {/* </Link> */}
-        <h2 className="font-poppins text-dark-grey text-15.5 font-700 tracking-1 ml-10">
-          ----------- or with google account -----------
+        <h2 className="font-poppins text-dark-grey text-15.5 font-700 tracking-1 ml-10 laptop:text-13.5">
+          ---------- or with google account -----------
         </h2>
         <div
           className="login-google flex items-center justify-center flex-row h-55 w-full rounded-60 gap-15 cursor-pointer bg-main-color"

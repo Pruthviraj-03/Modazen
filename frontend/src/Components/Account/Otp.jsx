@@ -79,7 +79,7 @@ const Otp = () => {
 
   return (
     <div className="w-full h-auto flex items-center justify-center p-150">
-      <div className="login-container flex w-27.5p h-600 flex-col gap-30 p-30">
+      <div className="login-container flex w-27.5p h-600 flex-col gap-30 p-30 laptop:w-40p laptop:h-550">
         <div className="flex flex-col gap-10 w-full">
           <span className="font-poppins text-main-color text-22 font-700 tracking-0.3">
             Verify with OTP
