@@ -132,7 +132,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -143,7 +143,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -154,7 +154,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -165,7 +165,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -176,7 +176,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -213,7 +213,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -227,7 +227,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -245,37 +245,11 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
                     <span className="ml-20">
-                      <FontAwesomeIcon
-                        className="star-icon mr-8 text-18 laptop:text-16"
-                        icon={faStar}
-                      />
-                      <FontAwesomeIcon
-                        className="star-icon mr-8 text-18 laptop:text-16"
-                        icon={faStar}
-                      />
-                      <FontAwesomeIcon
-                        className="star-icon mr-8 text-18 laptop:text-16"
-                        icon={faStar}
-                      />
-                    </span>
-                  </li>
-                  <li>
-                    <Link to="/products">
-                      <input
-                        className="h-18 w-18 cursor-pointer"
-                        type="checkbox"
-                      ></input>
-                    </Link>
-                    <span className="ml-20">
-                      <FontAwesomeIcon
-                        className="star-icon mr-8 text-18 laptop:text-16"
-                        icon={faStar}
-                      />
                       <FontAwesomeIcon
                         className="star-icon mr-8 text-18 laptop:text-16"
                         icon={faStar}
@@ -293,7 +267,33 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
+                        type="checkbox"
+                      ></input>
+                    </Link>
+                    <span className="ml-20">
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-8 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                    </span>
+                  </li>
+                  <li>
+                    <Link to="/products">
+                      <input
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -349,7 +349,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -360,7 +360,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -371,7 +371,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -382,7 +382,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>
@@ -393,7 +393,7 @@ const Categories = () => {
                   <li>
                     <Link to="/products">
                       <input
-                        className="h-18 w-18 cursor-pointer"
+                        className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                         type="checkbox"
                       ></input>
                     </Link>

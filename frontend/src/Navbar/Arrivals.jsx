@@ -226,7 +226,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-auto mt-25 mb-50">
-      <div className="flex mr-28 w-50 flex-row gap-30">
+      <div className="flex mr-28 w-50 flex-row gap-30 laptop:mr-40p">
         <Link to="/">
           <span className="font-poppins text-dark-grey text-18 font-500 tracking-1">
             Home
@@ -242,19 +242,19 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
           {title || "Arrivals"}
         </span>
       </div>
-      <div className="flex items-center justify-center h-100 w-80">
+      <div className="flex items-center justify-center h-100 w-80 laptop:w-90">
         <span className="font-poppins text-main-color text-36 font-700 tracking-1">
           {title || "Arrivals"}
         </span>
       </div>
-      <div className="flex justify-center flex-row w-80 h-2000 gap-30 mt-25">
+      <div className="flex justify-center flex-row w-80 h-2000 gap-30 mt-25 laptop:w-90 laptop:h-auto">
         <div className="categories-container-filters w-18.5 h-full flex flex-col gap-20">
           <div className="w-full h-auto overflow-y-auto p-20">
             <div
               className="flex justify-between items-center cursor-pointer"
               onClick={toggleCategoryDrawer}
             >
-              <span className="font-poppins text-main-color text-18 font-500 tracking-1font-poppins">
+              <span className="font-poppins text-main-color text-18 font-500 tracking-1 laptop:text-16">
                 Filter by Category
               </span>
               <FontAwesomeIcon
@@ -271,17 +271,17 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
               <div className="arrivals-container-filter-box-options mt-20">
                 {categoriesData.map((category) => (
                   <ul
-                    className={`flex flex-col gap-13 category-btn ${
+                    className={`flex flex-col gap-13 laptop:gap-20 category-btn ${
                       selectedCategory.includes(category.title) ? "active" : ""
                     }`}
                     key={category.id}
                     onClick={(e) => handleCategoryClick(e, category.title)}
                   >
                     <li className="flex flex-row items-center justify-center h-45 w-full gap-5p cursor-pointer pl-20">
-                      <h3 className="text-main-color w-20 text-20 font-500">
+                      <h3 className="text-main-color w-20 text-20 laptop:16 font-500">
                         <FontAwesomeIcon icon={category.icon} />
                       </h3>
-                      <span className="font-poppins text-main-color w-50 text-20 font-500">
+                      <span className="font-poppins text-main-color w-50 text-20 laptop:16 font-500">
                         {category.title}
                       </span>
                     </li>
@@ -296,7 +296,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
               className="flex justify-between items-center cursor-pointer"
               onClick={toggleDrawer}
             >
-              <span className="font-poppins text-main-color text-18 font-500 tracking-1">
+              <span className="font-poppins text-main-color text-18 font-500 tracking-1 laptop:text-16">
                 Filter by Price
               </span>
               <FontAwesomeIcon
@@ -314,7 +314,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                 <ul className="flex flex-col gap-13">
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedPriceRange.includes("$100 - $250")}
                       onChange={() => handlePriceRangeChange("$100 - $250")}
@@ -325,7 +325,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedPriceRange.includes("$250 - $500")}
                       onChange={() => handlePriceRangeChange("$250 - $500")}
@@ -336,7 +336,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedPriceRange.includes("$500 - $750")}
                       onChange={() => handlePriceRangeChange("$500 - $750")}
@@ -347,7 +347,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedPriceRange.includes("$750 - $1000")}
                       onChange={() => handlePriceRangeChange("$750 - $1000")}
@@ -358,7 +358,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedPriceRange.includes("$1000 - $1500")}
                       onChange={() => handlePriceRangeChange("$1000 - $1500")}
@@ -377,7 +377,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
               className="flex justify-between items-center cursor-pointer"
               onClick={toggleRatingDrawer}
             >
-              <span className="font-poppins text-main-color text-18 font-500 tracking-1">
+              <span className="font-poppins text-main-color text-18 font-500 tracking-1 laptop:text-16">
                 Filter by Rating
               </span>
               <FontAwesomeIcon
@@ -395,67 +395,112 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                 <ul className="flex flex-col gap-13">
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedRating.includes("1")}
                       onChange={() => handleRatingChange("1")}
                     ></input>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedRating.includes("2")}
                       onChange={() => handleRatingChange("2")}
                     ></input>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedRating.includes("3")}
                       onChange={() => handleRatingChange("3")}
                     ></input>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedRating.includes("4")}
                       onChange={() => handleRatingChange("4")}
                     ></input>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                       checked={selectedRating.includes("5")}
                       onChange={() => handleRatingChange("5")}
                     ></input>
                     <span className="ml-20">
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
-                      <FontAwesomeIcon className="star-icon" icon={faStar} />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
+                      <FontAwesomeIcon
+                        className="star-icon mr-6 text-18 laptop:text-16"
+                        icon={faStar}
+                      />
                     </span>
                   </li>
                 </ul>
@@ -469,7 +514,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
               className="flex justify-between items-center cursor-pointer"
               onClick={toggleSizeDrawer}
             >
-              <span className="font-poppins text-main-color text-18 font-500 tracking-1">
+              <span className="font-poppins text-main-color text-18 font-500 tracking-1 laptop:text-16">
                 Filter by Size
               </span>
               <FontAwesomeIcon
@@ -487,46 +532,46 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
                 <ul className="flex flex-col gap-13">
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                     ></input>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       XS
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                     ></input>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       S
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                     ></input>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       M
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                     ></input>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       L
                     </span>
                   </li>
                   <li>
                     <input
-                      className="h-18 w-18 cursor-pointer"
+                      className="h-18 w-18 cursor-pointer laptop:h-16 laptop:w-16"
                       type="checkbox"
                     ></input>
-                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20">
+                    <span className="font-poppins text-main-color text-18 font-500 tracking-1 ml-20 laptop:text-16">
                       XL
                     </span>
                   </li>
@@ -536,7 +581,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
           </div>
           <div className="categories-container-filter-box-line"></div>
         </div>
-        <div className="w-80 h-full p-20 flex flex-col gap-20 bg-dark-white">
+        <div className="w-80 h-full p-20 flex flex-col gap-20 bg-dark-white laptop:h-full">
           <div className="flex justify-between">
             <span className="font-poppins text-18 font-500 text-dark-grey">
               Viewing {Math.min(indexOfLastProduct, sortedProducts.length)} out
@@ -576,13 +621,13 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
               </div>
             </div>
           </div>
-          <div className="w-full h-auto flex flex-wrap gap-20 p-10">
+          <div className="w-full h-auto flex flex-wrap gap-20 p-10 laptop:p-0 laptop:pt-10">
             {currentProducts.map((product) => (
               <Link
                 key={product.id}
                 to={`/featured/${encodeURIComponent(product.name)}`}
               >
-                <div className="arrivals-container-box flex flex-col relative w-272.5 h-335 gap-27.5 items-center justify-center cursor-pointer">
+                <div className="arrivals-container-box flex flex-col relative w-272.5 h-335 gap-27.5 items-center justify-center cursor-pointer laptop:w-275">
                   <div className="product-rating hidden gap-1 w-40 h-40 items-center justify-center flex-row  transition-opacity duration-300 ease-in-out absolute top-2.5 right-2.5 z-50 rounded-full">
                     <span className="font-poppins text-16 font-600 text-main-color tracking-1">
                       {product.rating}
@@ -638,7 +683,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
             ))}
           </div>
           <div
-            className="w-full h-5 flex items-center justify-center flex-row gap-30"
+            className="w-full h-5 flex items-center justify-center flex-row gap-30 laptop:mt-40"
             onClick={window.scrollTo(0, 0)}
           >
             <FontAwesomeIcon
