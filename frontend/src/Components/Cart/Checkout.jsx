@@ -135,43 +135,43 @@ const Checkout = () => {
 
   return (
     <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
-      <div className="categories-title flex justify-center items-center w-80 h-full">
+      <div className="categories-title flex justify-center items-center w-80 h-full laptop:w-90 laptop:h-auto">
         <span className="font-poppins text-main-color text-36 font-700 tracking-1">
           Checkout
         </span>
       </div>
-      <div className="flex w-80 h-auto min-h-400 flex-col mb-50 gap-80">
-        <div className="flex items-center justify-center flex-row w-full h-10 gap-20">
+      <div className="flex w-80 h-auto min-h-400 flex-col mb-50 gap-80 laptop:w-90 laptop:h-auto">
+        <div className="flex items-center justify-center flex-row w-full h-10 gap-20 laptop:gap-0">
           <Link to="/shoppingcart">
-            <div className="shoppingCart-container-title-one flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500">
+            <div className="shoppingCart-container-title-one flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
+              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
                 1
               </h3>
-              <span className="font-poppins text-main-color text-24 font-500">
+              <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
                 Shopping Cart
               </span>
               <div className="shoppingCart-container-title-one-line"></div>
             </div>
           </Link>
           <Link to="/checkout">
-            <div className="checkout-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500">
+            <div className="checkout-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
+              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
                 2
               </h3>
-              <span className="font-poppins text-main-color text-24 font-500">
+              <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
                 Checkout
               </span>
               <div className="checkout-container-title-two-line"></div>
             </div>
           </Link>
           <div
-            className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer"
+            className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-200"
             onClick={handleAction}
           >
-            <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500">
+            <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500 laptop:text-21">
               3
             </h3>
-            <span className="font-poppins text-medium-grey text-24 font-500">
+            <span className="font-poppins text-medium-grey text-24 font-500 laptop:text-21">
               Completed
             </span>
           </div>
@@ -264,27 +264,27 @@ const Checkout = () => {
             </span>
             <div className="checkout-container-data-line"></div>
             <div className="flex gap-40 flex-row">
-              <div className="checkout-container-data-payment-method-credit-card hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30">
-                <h3 className="text-main-color text-24 font-400">
+              <div className="checkout-container-data-payment-method-credit-card hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                <h3 className="text-main-color text-24 font-400 laptop:text-22">
                   <FontAwesomeIcon icon={faCreditCard} />
                 </h3>
-                <span className="font-poppins text-main-color text-18 font-400">
+                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
                   Credit Card
                 </span>
               </div>
-              <div className="checkout-container-data-payment-method-bank-transfer hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30">
-                <h3 className="text-main-color text-24 font-400">
+              <div className="checkout-container-data-payment-method-bank-transfer hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                <h3 className="text-main-color text-24 font-400 laptop:text-22">
                   <FontAwesomeIcon icon={faMoneyBillTransfer} />
                 </h3>
-                <span className="font-poppins text-main-color text-18 font-400">
+                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
                   Bank Transfer
                 </span>
               </div>
-              <div className="checkout-container-data-payment-method-paypal hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30">
-                <h3 className="text-main-color text-24 font-400">
+              <div className="checkout-container-data-payment-method-paypal hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                <h3 className="text-main-color text-24 font-400 laptop:text-22">
                   <FontAwesomeIcon icon={faPaypal} />
                 </h3>
-                <span className="font-poppins text-main-color text-18 font-400">
+                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
                   Paypal
                 </span>
               </div>

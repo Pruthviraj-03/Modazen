@@ -272,15 +272,15 @@
   width: 55%;
 }
 
+.shoppingCart-container-title-two-line {
+  border-bottom: 2px solid #cdcfd1;
+  width: 55%;
+}
+
 .shoppingCart-container-title-two h3,
 .shoppingCart-container-title-three h3 {
   border: 2px solid #cdcfd1;
   border-radius: 50%;
-}
-
-.shoppingCart-container-title-two-line {
-  border-bottom: 2px solid #cdcfd1;
-  width: 60%;
 }
 
 .shoppingCart-container-data-line {
