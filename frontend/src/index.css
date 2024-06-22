@@ -22,6 +22,22 @@
   transform: translateX(-50%);
   z-index: 1000;
 }
+
+.shadow-top {
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 -2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.drawer {
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+}
+.translate-y-full {
+  transform: translateY(100%);
+}
+.translate-y-0 {
+  transform: translateY(0);
+}
 /* header end */
 
 /* home start */

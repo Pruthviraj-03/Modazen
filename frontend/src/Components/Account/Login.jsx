@@ -36,7 +36,7 @@ const Login = () => {
     <div className="w-full h-auto flex items-center justify-center p-150">
       <div className="login-container flex w-27.5p h-600 flex-col gap-30 p-30 laptop:w-40p laptop:h-550">
         <div className="flex items-center flex-row gap-7 h-55 w-full">
-          <span className="font-poppins ttex-main-color text-22 font-700">
+          <span className="font-poppins text-main-color text-22 font-700">
             Login
           </span>
           <h3 className="font-poppins">or</h3>
@@ -58,13 +58,6 @@ const Login = () => {
             onChange={handlePhoneNumberChange}
           />
         </div>
-        {/* <div className="flex flex-row">
-          <span className="font-poppins text-dark-grey text-14 font-400">By continuing, I agree to the</span>
-          <h3 className="font-poppins text-dark-grey text-15 font-400">Terms of Use</h3>
-          <span>&</span>
-          <h3 className="font-poppins">Privacy Policy</h3>
-        </div> */}
-        {/* <Link to="/login/otp"> */}
         <div
           className="login-button flex justify-center items-center w-full h-40 bg-main-color cursor-pointer"
           onClick={handleContinue}
@@ -73,7 +66,6 @@ const Login = () => {
             CONTINUE
           </span>
         </div>
-        {/* </Link> */}
         <h2 className="font-poppins text-dark-grey text-15.5 font-700 tracking-1 ml-10 laptop:text-13.5">
           ---------- or with google account -----------
         </h2>

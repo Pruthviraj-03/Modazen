@@ -88,31 +88,28 @@ const Otp = () => {
             Sent to {phoneNumber}
           </h3>
         </div>
-        <div className="flex flex-row gap-30 h-70p w-full mt-30">
+        <div className="flex flex-row gap-4 h-70p w-full mt-6 mobile:mt-40">
           {otp.map((data, index) => (
-            <div
+            <input
               key={index}
-              className="otp-number-box flex justify-center items-center h-full w-13"
-            >
-              <input
-                className="font-poppins text-18 w-full h-full border-none outline-none pl-17.5"
-                type="text"
-                maxLength="1"
-                value={data}
-                onChange={(e) => handleChange(e.target, index)}
-                onFocus={(e) => e.target.select()}
-                onKeyDown={(e) => {
-                  if (e.key === "Backspace" && !otp[index] && index > 0) {
-                    e.preventDefault();
-                    if (e.target.previousElementSibling) {
-                      e.target.previousElementSibling.focus();
-                    }
+              className="font-poppins text-20 text-center w-60p h-60 mobile:w-80p mobile:h-80p border border-gray-300 rounded-md outline-none"
+              type="text"
+              maxLength="1"
+              value={data}
+              onChange={(e) => handleChange(e.target, index)}
+              onFocus={(e) => e.target.select()}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace" && !otp[index] && index > 0) {
+                  e.preventDefault();
+                  if (e.target.previousElementSibling) {
+                    e.target.previousElementSibling.focus();
                   }
-                }}
-              />
-            </div>
+                }
+              }}
+            />
           ))}
         </div>
+
         <button
           onClick={handleSubmit}
           className="login-button flex justify-center items-center w-full h-40 bg-main-color cursor-pointer"

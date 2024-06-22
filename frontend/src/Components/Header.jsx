@@ -15,6 +15,7 @@ const Header = () => {
   const [userProfileVisible, setUserProfileVisible] = useState(false);
   const navigate = useNavigate();
   const profileRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleRefreshPage = () => {
     navigate("/");
@@ -51,46 +52,110 @@ const Header = () => {
     };
   }, [profileRef]);
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
     <>
-      <div className="bg-dark-white h-24 w-full flex items-center justify-center shadow-md fixed top-0 opacity-100 z-50">
-        <div className="flex items-center flex-row w-70 laptop:w-80">
-          <Link to="/" onClick={handleRefreshPage}>
-            <div className="flex flex-row w-full h-full cursor-pointer">
-              <img className="h-8 w-8" src={logoImg1} alt="ModaZen Logo" />
-              <span className="font-poppins text-main-color text-20 font-900 tracking-0.5">
-                ModaZen
-              </span>
+      {!isMobile && (
+        <div className="bg-dark-white h-24 w-full flex items-center justify-center shadow-md fixed top-0 opacity-100 z-50">
+          <div className="flex items-center flex-row w-70 laptop:w-80">
+            <Link to="/" onClick={handleRefreshPage}>
+              <div className="flex flex-row w-full h-full cursor-pointer">
+                <img className="h-8 w-8" src={logoImg1} alt="ModaZen Logo" />
+                <span className="font-poppins text-main-color text-20 font-900 tracking-0.5">
+                  ModaZen
+                </span>
+              </div>
+            </Link>
+            <div className="w-52 flex items-center justify-center h-full laptop:w-48.5">
+              <ul className="font-poppins flex flex-row gap-50 laptop:gap-30 laptop:ml-50">
+                <Link to="/categories" onClick={window.scrollTo(0, 0)}>
+                  <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
+                    Categories
+                  </li>
+                </Link>
+                <Link to="/arrivals">
+                  <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
+                    New Arrivals
+                  </li>
+                </Link>
+                <Link to="/featured">
+                  <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
+                    Featured
+                  </li>
+                </Link>
+                <Link to="/products">
+                  <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
+                    Products
+                  </li>
+                </Link>
+              </ul>
             </div>
-          </Link>
-          <div className="w-52 flex items-center justify-center h-full laptop:w-48.5">
-            <ul className="font-poppins flex flex-row gap-50 laptop:gap-30 laptop:ml-50">
-              <Link to="/categories" onClick={window.scrollTo(0, 0)}>
-                <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
-                  Categories
-                </li>
+            <div className="flex relative items-center border border-gray-300 w-32 h-45 ml-60 rounded-md">
+              <FontAwesomeIcon className="text-15 ml-15" icon={faSearch} />
+              <input
+                className="font-poppins text-main-color text-15 font-400 w-86 ml-15 tracking-0.3 h-full border-none outline-none"
+                placeholder="Search for products"
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onKeyDown={handleKeyPress}
+              />
+            </div>
+            <div className="flex flex-row items-center w-6 h-full gap-30 ml-30">
+              <Link to="/shoppingcart">
+                <FontAwesomeIcon
+                  className="h-22.5 w-22.5 cursor-pointer"
+                  icon={faShoppingCart}
+                />
               </Link>
-              <Link to="/arrivals">
-                <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
-                  New Arrivals
-                </li>
-              </Link>
-              <Link to="/featured">
-                <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
-                  Featured
-                </li>
-              </Link>
-              <Link to="/products">
-                <li className="font-poppins text-main-color text-13 font-500 tracking-0.9 cursor-pointer hover:text-dark-grey">
-                  Products
-                </li>
-              </Link>
-            </ul>
+              <FontAwesomeIcon
+                className="h-22.5 w-22.5 cursor-pointer mb-1"
+                onClick={toggleUserProfile}
+                icon={faUser}
+              />
+            </div>
           </div>
-          <div className="flex relative items-center border border-gray-300 w-32 h-45 ml-60 rounded-md">
-            <FontAwesomeIcon className="text-15 ml-15" icon={faSearch} />
+        </div>
+      )}
+
+      {isMobile && (
+        <div className="bg-dark-white h-auto p-15 w-full flex items-center justify-center flex-col gap-12 shadow-md fixed top-0 opacity-100 z-50">
+          <div className="flex items-center flex-row w-full h-auto relative">
+            <Link to="/" onClick={handleRefreshPage}>
+              <div className="flex flex-row w-full h-full cursor-pointer">
+                <img className="text-17" src={logoImg1} alt="ModaZen Logo" />
+                <span className="font-poppins text-main-color text-17 font-900 tracking-0.5">
+                  ModaZen
+                </span>
+              </div>
+            </Link>
+
+            <div className="absolute top-0 right-0 flex flex-row items-center w-auto h-auto gap-30 mr-10">
+              <Link to="/shoppingcart">
+                <FontAwesomeIcon
+                  className="text-20 cursor-pointer"
+                  icon={faShoppingCart}
+                />
+              </Link>
+              <FontAwesomeIcon
+                className="text-20 cursor-pointer"
+                onClick={toggleUserProfile}
+                icon={faUser}
+              />
+            </div>
+          </div>
+          <div className="flex relative items-center border border-gray-300 w-full h-35p rounded-60">
+            <FontAwesomeIcon className="text-14 ml-15" icon={faSearch} />
             <input
-              className="font-poppins text-main-color text-15 font-400 w-86 ml-15 tracking-0.3 h-full border-none outline-none"
+              className="font-poppins text-main-color text-14 font-400 w-80 ml-10 tracking-0.5 h-full border-none outline-none"
               placeholder="Search for products"
               type="text"
               value={searchQuery}
@@ -98,21 +163,8 @@ const Header = () => {
               onKeyDown={handleKeyPress}
             />
           </div>
-          <div className="flex flex-row items-center w-6 h-full gap-30 ml-30">
-            <Link to="/shoppingcart">
-              <FontAwesomeIcon
-                className="h-22.5 w-22.5 cursor-pointer"
-                icon={faShoppingCart}
-              />
-            </Link>
-            <FontAwesomeIcon
-              className="h-22.5 w-22.5 cursor-pointer mb-1"
-              onClick={toggleUserProfile}
-              icon={faUser}
-            />
-          </div>
         </div>
-      </div>
+      )}
 
       {userProfileVisible && (
         <div className="user-profile-overlay" ref={profileRef}>

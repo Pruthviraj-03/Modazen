@@ -110,6 +110,50 @@ const userLogin = asyncHandler(async (req, res) => {
   }
 });
 
+const sendDetailToDB = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    let user = await User.findById(userId);
+
+    const { email, name, phoneNumber, DOB, AlternateMobile } = req.body;
+
+    let formattedDOB;
+    if (DOB) {
+      const parsedDOB = moment(DOB, "YYYY-MM-DD", true);
+      if (!parsedDOB.isValid()) {
+        throw new ApiError(400, "Invalid date format for DOB");
+      }
+      formattedDOB = parsedDOB.format("YYYY-MM-DD");
+    }
+
+    if (!user) {
+      user = new User({
+        _id: userId,
+        email,
+        name,
+        phoneNumber,
+        DOB: formattedDOB,
+        AlternateMobile,
+      });
+    } else {
+      user.email = email || user.email;
+      user.name = name || user.name;
+      user.phoneNumber = phoneNumber || user.phoneNumber;
+      user.DOB = formattedDOB || user.DOB;
+      user.AlternateMobile = AlternateMobile || user.AlternateMobile;
+    }
+
+    await user.save();
+
+    res.json(
+      new ApiResponse(200, { user }, "User details saved successfully.")
+    );
+  } catch (error) {
+    throw new ApiError(500, error?.message || "Failed to save the details.");
+  }
+});
+
 const logoutUser = asyncHandler(async (req, res) => {
   try {
     req.logout((err) => {
@@ -251,50 +295,6 @@ const sendEmail = asyncHandler(async (req, res) => {
     res.json(new ApiResponse(200, { email }, "Email send successfully."));
   } catch (error) {
     throw new ApiError(500, error?.message || "Failed to send an email.");
-  }
-});
-
-const sendDetailToDB = asyncHandler(async (req, res) => {
-  try {
-    const userId = req.user.id;
-
-    let user = await User.findById(userId);
-
-    const { email, name, phoneNumber, DOB, AlternateMobile } = req.body;
-
-    let formattedDOB;
-    if (DOB) {
-      const parsedDOB = moment(DOB, "YYYY-MM-DD", true);
-      if (!parsedDOB.isValid()) {
-        throw new ApiError(400, "Invalid date format for DOB");
-      }
-      formattedDOB = parsedDOB.format("YYYY-MM-DD");
-    }
-
-    if (!user) {
-      user = new User({
-        _id: userId,
-        email,
-        name,
-        phoneNumber,
-        DOB: formattedDOB,
-        AlternateMobile,
-      });
-    } else {
-      user.email = email || user.email;
-      user.name = name || user.name;
-      user.phoneNumber = phoneNumber || user.phoneNumber;
-      user.DOB = formattedDOB || user.DOB;
-      user.AlternateMobile = AlternateMobile || user.AlternateMobile;
-    }
-
-    await user.save();
-
-    res.json(
-      new ApiResponse(200, { user }, "User details saved successfully.")
-    );
-  } catch (error) {
-    throw new ApiError(500, error?.message || "Failed to save the details.");
   }
 });
 

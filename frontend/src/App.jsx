@@ -65,7 +65,7 @@ const App = () => {
           <Route exact path="/editprofile" element={<EditProfile />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/login/otp" element={<Otp />} />
-          <Route exact path="*/:query" element={<NotFound />} />
+          <Route exact path="/:query" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
