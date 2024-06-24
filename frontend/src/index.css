@@ -112,6 +112,16 @@
   font-size: 18px;
 }
 
+.mobile-arrivals-container-filter-box-options li:hover {
+  border: 1px solid #ffffff;
+  background-color: #393d46;
+}
+
+.mobile-arrivals-container-filter-box-options li:hover span,
+.mobile-arrivals-container-filter-box-options li:hover h3 {
+  color: #ffffff;
+}
+
 .star-icon {
   color: rgb(235, 235, 16);
 }
