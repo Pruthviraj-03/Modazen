@@ -240,6 +240,24 @@
   color: #ffffff;
 }
 
+.MinusBox,
+.PlusBox {
+  border: 1px solid #393d46;
+  height: 22px;
+  width: 22px;
+}
+
+.MinusBox:hover,
+.PlusBox:hover {
+  background-color: #393d46;
+  border: 1px solid #ffffff;
+}
+
+.MinusBox:hover span,
+.PlusBox:hover span {
+  color: #ffffff;
+}
+
 .featured-product-atc-button,
 .featured-product-atw-button {
   border: 1px solid #ffffff;
