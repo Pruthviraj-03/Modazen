@@ -20,6 +20,7 @@ const Checkout = () => {
     state: "",
     zipCode: "",
   });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,6 +42,15 @@ const Checkout = () => {
     };
 
     fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   const handleChange = (e) => {
@@ -134,59 +144,231 @@ const Checkout = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
-      <div className="categories-title flex justify-center items-center w-80 h-full laptop:w-90 laptop:h-auto">
-        <span className="font-poppins text-main-color text-36 font-700 tracking-1">
-          Checkout
-        </span>
-      </div>
-      <div className="flex w-80 h-auto min-h-400 flex-col mb-50 gap-80 laptop:w-90 laptop:h-auto">
-        <div className="flex items-center justify-center flex-row w-full h-10 gap-20 laptop:gap-0">
-          <Link to="/shoppingcart">
-            <div className="shoppingCart-container-title-one flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
-                1
-              </h3>
-              <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
-                Shopping Cart
-              </span>
-              <div className="shoppingCart-container-title-one-line"></div>
-            </div>
-          </Link>
-          <Link to="/checkout">
-            <div className="checkout-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
-              <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
-                2
-              </h3>
-              <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
-                Checkout
-              </span>
-              <div className="checkout-container-title-two-line"></div>
-            </div>
-          </Link>
-          <div
-            className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-200"
-            onClick={handleAction}
-          >
-            <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500 laptop:text-21">
-              3
-            </h3>
-            <span className="font-poppins text-medium-grey text-24 font-500 laptop:text-21">
-              Completed
+    <>
+      {!isMobile && (
+        <div className="flex justify-center items-center w-full h-auto flex-col mt-50 mb-50 bg-dark-white gap-50">
+          <div className="categories-title flex justify-center items-center w-80 h-full laptop:w-90 laptop:h-auto">
+            <span className="font-poppins text-main-color text-36 font-700 tracking-1">
+              Checkout
             </span>
           </div>
+          <div className="flex w-80 h-auto min-h-400 flex-col mb-50 gap-80 laptop:w-90 laptop:h-auto">
+            <div className="flex items-center justify-center flex-row w-full h-10 gap-20 laptop:gap-0">
+              <Link to="/shoppingcart">
+                <div className="shoppingCart-container-title-one flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
+                  <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
+                    1
+                  </h3>
+                  <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
+                    Shopping Cart
+                  </span>
+                  <div className="shoppingCart-container-title-one-line"></div>
+                </div>
+              </Link>
+              <Link to="/checkout">
+                <div className="checkout-container-title-two flex w-600 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-500">
+                  <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-main-color text-24 font-500 laptop:text-21">
+                    2
+                  </h3>
+                  <span className="font-poppins text-main-color text-24 font-500 laptop:text-21">
+                    Checkout
+                  </span>
+                  <div className="checkout-container-title-two-line"></div>
+                </div>
+              </Link>
+              <div
+                className="shoppingCart-container-title-three flex w-300 h-full justify-center items-center flex-row gap-20 cursor-pointer laptop:w-200"
+                onClick={handleAction}
+              >
+                <h3 className="font-poppins w-45 h-45 flex items-center justify-center text-medium-grey text-24 font-500 laptop:text-21">
+                  3
+                </h3>
+                <span className="font-poppins text-medium-grey text-24 font-500 laptop:text-21">
+                  Completed
+                </span>
+              </div>
+            </div>
+            <div className="flex w-full h-90 flex-row gap-50">
+              <div className="flex w-48.5 h-full flex-col gap-35">
+                <span className="font-poppins text-main-color text-18 font-500">
+                  Buyer Info
+                </span>
+                <div className="checkout-container-data-line"></div>
+                <div className="checkout-container-data-buyer-info-name flex flex-col gap-15">
+                  <span className="font-poppins text-dark-grey text-18 font-400">
+                    Full Name
+                  </span>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  ></input>
+                </div>
+                <div className="checkout-container-data-buyer-info-address flex flex-col gap-15">
+                  <span className="font-poppins text-dark-grey text-18 font-400">
+                    Address
+                  </span>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                  ></input>
+                </div>
+                <div className="checkout-container-data-buyer-info-contact flex flex-col gap-15">
+                  <span className="font-poppins text-dark-grey text-18 font-400">
+                    Contact
+                  </span>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    maxLength="10"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
+                  ></input>
+                </div>
+                <div className="checkout-container-data-buyer-info-city flex flex-col gap-15">
+                  <span className="font-poppins text-dark-grey text-18 font-400">
+                    City
+                  </span>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    required
+                  ></input>
+                </div>
+                <div className="flex flex-row gap-30">
+                  <div className="checkout-container-data-buyer-info-state flex flex-col gap-15 w-61">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      State
+                    </span>
+                    <input
+                      type="text"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      required
+                    ></input>
+                  </div>
+                  <div className="checkout-container-data-buyer-info-zip-code flex flex-col gap-15 w-35">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      Zip Code
+                    </span>
+                    <input
+                      type="text"
+                      name="zipCode"
+                      value={formData.zipCode}
+                      onChange={handleChange}
+                      required
+                    ></input>
+                  </div>
+                </div>
+              </div>
+              <div className="flex w-48.5 h-full flex-col gap-35">
+                <span className="font-poppins text-main-color text-18 font-500">
+                  Payment Method
+                </span>
+                <div className="checkout-container-data-line"></div>
+                <div className="flex gap-40 flex-row">
+                  <div className="checkout-container-data-payment-method-credit-card hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                    <h3 className="text-main-color text-24 font-400 laptop:text-22">
+                      <FontAwesomeIcon icon={faCreditCard} />
+                    </h3>
+                    <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
+                      Credit Card
+                    </span>
+                  </div>
+                  <div className="checkout-container-data-payment-method-bank-transfer hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                    <h3 className="text-main-color text-24 font-400 laptop:text-22">
+                      <FontAwesomeIcon icon={faMoneyBillTransfer} />
+                    </h3>
+                    <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
+                      Bank Transfer
+                    </span>
+                  </div>
+                  <div className="checkout-container-data-payment-method-paypal hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
+                    <h3 className="text-main-color text-24 font-400 laptop:text-22">
+                      <FontAwesomeIcon icon={faPaypal} />
+                    </h3>
+                    <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
+                      Paypal
+                    </span>
+                  </div>
+                </div>
+                <div className="checkout-container-data-payment-method-card-name flex flex-col gap-15">
+                  <span className="font-poppins text-dark-grey text-18 font-400">
+                    Name on Card
+                  </span>
+                  <input type="text"></input>
+                </div>
+                <div className="flex flex-row gap-30">
+                  <div className="checkout-container-data-payment-method-card-number flex flex-col gap-15 w-61">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      Card Number
+                    </span>
+                    <input type="text"></input>
+                  </div>
+                  <div className="checkout-container-data-payment-method-card-cvv flex flex-col gap-15 w-35">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      CVV
+                    </span>
+                    <input type="text"></input>
+                  </div>
+                </div>
+                <div className="flex flex-row gap-30">
+                  <div className="checkout-container-data-payment-method-card-month flex flex-col gap-15 w-48.5">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      Month
+                    </span>
+                    <input type="text"></input>
+                  </div>
+                  <div className="checkout-container-data-payment-method-card-year flex flex-col gap-15 w-48.5">
+                    <span className="font-poppins text-dark-grey text-18 font-400">
+                      Year
+                    </span>
+                    <input type="text"></input>
+                  </div>
+                </div>
+                <div className="flex relative mt-40">
+                  <div
+                    className="featured-product-completed-button flex absolute right-0 items-center justify-center h-55 w-200 bg-dark-white cursor-pointer"
+                    onClick={handlePayment}
+                  >
+                    <span className="font-poppins text-main-color text-18 font-500">
+                      Pay Now
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex w-full h-90 flex-row gap-50">
-          <div className="flex w-48.5 h-full flex-col gap-35">
+      )}
+
+      {isMobile && (
+        <div className="flex flex-col w-full h-auto mt-40 p-20 mb-70">
+          <div className="flex flex-col items-center justify-center h-auto w-full gap-30 mb-30 tracking-1">
+            <span className="font-poppins text-main-color text-24 font-700">
+              Checkout
+            </span>
+          </div>
+          <div className="flex w-full h-full flex-col gap-15">
             <span className="font-poppins text-main-color text-18 font-500">
               Buyer Info
             </span>
             <div className="checkout-container-data-line"></div>
-            <div className="checkout-container-data-buyer-info-name flex flex-col gap-15">
-              <span className="font-poppins text-dark-grey text-18 font-400">
+            <div className="checkout-container-data-buyer-info-name flex flex-col gap-10">
+              <span className="font-poppins text-dark-grey text-16 font-400">
                 Full Name
               </span>
               <input
+                className="h-auto p-6 text-15 tracking-0.5"
                 type="text"
                 name="name"
                 value={formData.name}
@@ -194,11 +376,12 @@ const Checkout = () => {
                 required
               ></input>
             </div>
-            <div className="checkout-container-data-buyer-info-address flex flex-col gap-15">
-              <span className="font-poppins text-dark-grey text-18 font-400">
+            <div className="checkout-container-data-buyer-info-address flex flex-col gap-10">
+              <span className="font-poppins text-dark-grey text-16 font-400">
                 Address
               </span>
               <input
+                className="h-auto p-6 text-15 tracking-0.5"
                 type="text"
                 name="address"
                 value={formData.address}
@@ -206,11 +389,12 @@ const Checkout = () => {
                 required
               ></input>
             </div>
-            <div className="checkout-container-data-buyer-info-contact flex flex-col gap-15">
-              <span className="font-poppins text-dark-grey text-18 font-400">
+            <div className="checkout-container-data-buyer-info-contact flex flex-col gap-10">
+              <span className="font-poppins text-dark-grey text-16 font-400">
                 Contact
               </span>
               <input
+                className="h-auto p-6 text-15 tracking-0.5"
                 type="text"
                 name="phoneNumber"
                 maxLength="10"
@@ -219,11 +403,12 @@ const Checkout = () => {
                 required
               ></input>
             </div>
-            <div className="checkout-container-data-buyer-info-city flex flex-col gap-15">
-              <span className="font-poppins text-dark-grey text-18 font-400">
+            <div className="checkout-container-data-buyer-info-city flex flex-col gap-10">
+              <span className="font-poppins text-dark-grey text-16 font-400">
                 City
               </span>
               <input
+                className="h-auto p-6 text-15 tracking-0.5"
                 type="text"
                 name="city"
                 value={formData.city}
@@ -232,11 +417,12 @@ const Checkout = () => {
               ></input>
             </div>
             <div className="flex flex-row gap-30">
-              <div className="checkout-container-data-buyer-info-state flex flex-col gap-15 w-61">
-                <span className="font-poppins text-dark-grey text-18 font-400">
+              <div className="checkout-container-data-buyer-info-state flex flex-col gap-10 w-61">
+                <span className="font-poppins text-dark-grey text-16 font-400">
                   State
                 </span>
                 <input
+                  className="h-auto p-6 text-15 tracking-0.5"
                   type="text"
                   name="state"
                   value={formData.state}
@@ -244,11 +430,12 @@ const Checkout = () => {
                   required
                 ></input>
               </div>
-              <div className="checkout-container-data-buyer-info-zip-code flex flex-col gap-15 w-35">
-                <span className="font-poppins text-dark-grey text-18 font-400">
+              <div className="checkout-container-data-buyer-info-zip-code flex flex-col gap-10 w-35">
+                <span className="font-poppins text-dark-grey text-16 font-400">
                   Zip Code
                 </span>
                 <input
+                  className="h-auto p-6 text-15 tracking-0.5"
                   type="text"
                   name="zipCode"
                   value={formData.zipCode}
@@ -258,85 +445,17 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-48.5 h-full flex-col gap-35">
-            <span className="font-poppins text-main-color text-18 font-500">
-              Payment Method
+          <div
+            className="featured-product-checkout-button flex items-center justify-center h-45 w-44p bg-dark-white cursor-pointer rounded-60 mt-30 ml-200"
+            onClick={handlePayment}
+          >
+            <span className="font-poppins text-main-color text-16 font-500">
+              Pay Now
             </span>
-            <div className="checkout-container-data-line"></div>
-            <div className="flex gap-40 flex-row">
-              <div className="checkout-container-data-payment-method-credit-card hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
-                <h3 className="text-main-color text-24 font-400 laptop:text-22">
-                  <FontAwesomeIcon icon={faCreditCard} />
-                </h3>
-                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
-                  Credit Card
-                </span>
-              </div>
-              <div className="checkout-container-data-payment-method-bank-transfer hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
-                <h3 className="text-main-color text-24 font-400 laptop:text-22">
-                  <FontAwesomeIcon icon={faMoneyBillTransfer} />
-                </h3>
-                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
-                  Bank Transfer
-                </span>
-              </div>
-              <div className="checkout-container-data-payment-method-paypal hover:bg-main-color flex items-center justify-center flex-row bg-dark-white cursor-pointer gap-20 h-80p w-30 laptop:gap-10">
-                <h3 className="text-main-color text-24 font-400 laptop:text-22">
-                  <FontAwesomeIcon icon={faPaypal} />
-                </h3>
-                <span className="font-poppins text-main-color text-18 font-400 laptop:text-16">
-                  Paypal
-                </span>
-              </div>
-            </div>
-            <div className="checkout-container-data-payment-method-card-name flex flex-col gap-15">
-              <span className="font-poppins text-dark-grey text-18 font-400">
-                Name on Card
-              </span>
-              <input type="text"></input>
-            </div>
-            <div className="flex flex-row gap-30">
-              <div className="checkout-container-data-payment-method-card-number flex flex-col gap-15 w-61">
-                <span className="font-poppins text-dark-grey text-18 font-400">
-                  Card Number
-                </span>
-                <input type="text"></input>
-              </div>
-              <div className="checkout-container-data-payment-method-card-cvv flex flex-col gap-15 w-35">
-                <span className="font-poppins text-dark-grey text-18 font-400">
-                  CVV
-                </span>
-                <input type="text"></input>
-              </div>
-            </div>
-            <div className="flex flex-row gap-30">
-              <div className="checkout-container-data-payment-method-card-month flex flex-col gap-15 w-48.5">
-                <span className="font-poppins text-dark-grey text-18 font-400">
-                  Month
-                </span>
-                <input type="text"></input>
-              </div>
-              <div className="checkout-container-data-payment-method-card-year flex flex-col gap-15 w-48.5">
-                <span className="font-poppins text-dark-grey text-18 font-400">
-                  Year
-                </span>
-                <input type="text"></input>
-              </div>
-            </div>
-            <div className="flex relative mt-40">
-              <div
-                className="featured-product-completed-button flex absolute right-0 items-center justify-center h-55 w-200 bg-dark-white cursor-pointer"
-                onClick={handlePayment}
-              >
-                <span className="font-poppins text-main-color text-18 font-500">
-                  Pay Now
-                </span>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
