@@ -276,64 +276,61 @@ const ShoppingCart = () => {
           </div>
           <div className="flex flex-col gap-30">
             {cartItems.map((product) => (
-              <Link to={`/featured/${encodeURIComponent(product.name)}`}>
-                <div
-                  className="flex flex-row p-10 border border-main-color w-full h-auto gap-15"
-                  key={product.id}
-                >
-                  <div className="border border-main-color p-1 h-170 w-40p overflow-hidden">
+              <div
+                className="flex flex-row p-10 border border-main-color w-full h-auto gap-15"
+                key={product.id}
+              >
+                <div className="border border-main-color p-1 h-170 w-40p overflow-hidden">
+                  <Link to={`/featured/${encodeURIComponent(product.name)}`}>
                     <img
                       className="h-full w-full object-contain"
                       src={product.img1}
                       alt="img"
                     />
-                  </div>
-                  <div className="flex flex-col gap-10 w-60 h-auto">
-                    <span className="font-poppins text-main-color text-16 font-500">
-                      {product.name}
-                    </span>
-                    <h3 className="font-poppins text-main-color text-14 font-700">
-                      Size: {product.size}
-                    </h3>
-                    <div className="flex flex-row w-full h-auto gap-10">
-                      <div
-                        className="MinusBox flex justify-center items-center bg-dark-white cursor-pointer"
-                        onClick={() => handleDecrement(product.id)}
-                      >
-                        <span className="font-poppins text-main-color text-14 font-700">
-                          -
-                        </span>
-                      </div>
-                      <span className="font-poppins text-main-color text-14 font-600">
-                        {quantities[product.id] || 1}
-                      </span>
-                      <div
-                        className="PlusBox flex justify-center items-center bg-dark-white cursor-pointer"
-                        onClick={() => handleIncrement(product.id)}
-                      >
-                        <span className="font-poppins text-main-color text-14 font-700">
-                          +
-                        </span>
-                      </div>
-                    </div>
-                    <span className="font-poppins text-main-color text-14 font-500 tracking-1">
-                      Price : {product.price}
-                    </span>
-                    <span className="font-poppins text-main-color text-14 font-500 tracking-1">
-                      Total :{" "}
-                      {calculateTotal(
-                        product.price,
-                        quantities[product.id] || 1
-                      )}
-                    </span>
-                  </div>
-                  <FontAwesomeIcon
-                    className="text-main-color text-16 font-700 cursor-pointer hover:text-medium-grey"
-                    icon={faXmark}
-                    onClick={() => handleRemoveFromCart(product.id)}
-                  />
+                  </Link>
                 </div>
-              </Link>
+                <div className="flex flex-col gap-10 w-60 h-auto">
+                  <span className="font-poppins text-main-color text-16 font-500">
+                    {product.name}
+                  </span>
+                  <h3 className="font-poppins text-main-color text-14 font-700">
+                    Size: {product.size}
+                  </h3>
+                  <div className="flex flex-row w-full h-auto gap-10">
+                    <div
+                      className="MinusBox flex justify-center items-center bg-dark-white cursor-pointer"
+                      onClick={() => handleDecrement(product.id)}
+                    >
+                      <span className="font-poppins text-main-color text-14 font-700">
+                        -
+                      </span>
+                    </div>
+                    <span className="font-poppins text-main-color text-14 font-600">
+                      {quantities[product.id] || 1}
+                    </span>
+                    <div
+                      className="PlusBox flex justify-center items-center bg-dark-white cursor-pointer"
+                      onClick={() => handleIncrement(product.id)}
+                    >
+                      <span className="font-poppins text-main-color text-14 font-700">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                  <span className="font-poppins text-main-color text-14 font-500 tracking-1">
+                    Price : {product.price}
+                  </span>
+                  <span className="font-poppins text-main-color text-14 font-500 tracking-1">
+                    Total :{" "}
+                    {calculateTotal(product.price, quantities[product.id] || 1)}
+                  </span>
+                </div>
+                <FontAwesomeIcon
+                  className="text-main-color text-16 font-700 cursor-pointer hover:text-medium-grey"
+                  icon={faXmark}
+                  onClick={() => handleRemoveFromCart(product.id)}
+                />
+              </div>
             ))}
           </div>
 

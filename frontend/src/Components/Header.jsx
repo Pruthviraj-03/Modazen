@@ -145,11 +145,12 @@ const Header = () => {
                   icon={faShoppingCart}
                 />
               </Link>
-              <FontAwesomeIcon
-                className="text-20 cursor-pointer"
-                onClick={toggleUserProfile}
-                icon={faUser}
-              />
+              <Link to="/userprofile">
+                <FontAwesomeIcon
+                  className="text-20 cursor-pointer"
+                  icon={faUser}
+                />
+              </Link>
             </div>
           </div>
           <div className="flex relative items-center border border-gray-300 w-full h-35p rounded-60">
