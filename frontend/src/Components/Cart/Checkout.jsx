@@ -8,6 +8,8 @@ import {
 import { faPaypal } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useOrder } from "../Context/OrderContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
   const { addToOrder } = useOrder();
@@ -67,7 +69,11 @@ const Checkout = () => {
   const validateForm = () => {
     const { name, phoneNumber, address, city, state, zipCode } = formData;
     if (!name || !phoneNumber || !address || !city || !state || !zipCode) {
-      window.alert("Please fill out all buyer info first!");
+      // window.alert("Please fill out all buyer info first!");
+      toast.info("Please fill out all buyer info first!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       return false;
     }
     return true;
@@ -81,12 +87,20 @@ const Checkout = () => {
     const receiptId = "1234567890";
 
     if (!amount) {
-      window.alert("Add product first into the cart!");
+      // window.alert("Add product first into the cart!");
+      toast.info("Add product first into the cart!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       navigate("/shoppingcart");
     }
 
     if (formData === " ") {
-      window.alert("Pls filled all buyers info first!");
+      // window.alert("Pls filled all buyers info first!");
+      toast.info("Pls filled all buyers info first!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
     try {
       const response = await axios.post(
@@ -105,16 +119,24 @@ const Checkout = () => {
         order_id: order.id,
         handler: async function (response) {
           try {
-            alert(`Payment ID: ${response.razorpay_payment_id}`);
-            alert(`Order ID: ${response.razorpay_order_id}`);
-            window.alert("Payment success");
+            // alert(`Payment ID: ${response.razorpay_payment_id}`);
+            // alert(`Order ID: ${response.razorpay_order_id}`);
+            // window.alert("Payment success");
+            toast.success("Payment success!", {
+              position: "top-center",
+              autoClose: 3000,
+            });
             setPaymentStatus("success");
 
             await addToOrder(location.state?.cartItems || []);
             navigate("/completed");
           } catch (error) {
             console.error("Error adding to order:", error);
-            window.alert("Failed to add products to order.");
+            // window.alert("Failed to add products to order.");
+            toast.error("Failed to add products to order!", {
+              position: "top-center",
+              autoClose: 3000,
+            });
           }
         },
         prefill: {
@@ -139,7 +161,11 @@ const Checkout = () => {
     if (paymentStatus === "success") {
       navigate("/completed");
     } else {
-      alert("Do payment first!");
+      // alert("Do payment first!");
+      toast.info("Do payment first!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 

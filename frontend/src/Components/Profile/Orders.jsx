@@ -4,6 +4,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useOrder } from "../Context/OrderContext.js";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Orders = () => {
   const { orderItems, setOrderItems } = useOrder();
@@ -22,6 +24,10 @@ const Orders = () => {
         setOrderItems(userOrderList);
       } catch (error) {
         navigate("/login");
+        toast.warning("Login first to access orders!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
         console.error("Failed to fetch user order list", error);
       }
     };

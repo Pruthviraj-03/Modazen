@@ -28,6 +28,8 @@ import { useCart } from "../Components/Context/CartContext";
 import { Products } from "./products";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const arrivalData = [
   {
@@ -223,9 +225,17 @@ const HomePage = () => {
     const isProductInCart = cartItems.some((item) => item.id === extra.id);
     if (!isProductInCart) {
       addToCart(extra);
-      alert("Product added in the cart.");
+      // alert("Product added in the cart.");
+      toast.success("Product added in the cart successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     } else {
-      alert("Product is already in the cart.");
+      // alert("Product is already in the cart.");
+      toast.info("Product is already in the cart!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -360,28 +370,28 @@ const HomePage = () => {
                 </h3>
               </div>
               <div className="flex flex-row h-auto w-full gap-20 mt-30 overflow-hidden border border-main-color">
-                {/* <Swiper
+                <Swiper
                   spaceBetween={20}
                   slidesPerView={"auto"}
                   freeMode={true}
                   grabCursor={true}
-                > */}
-                {categoryData.map((category) => (
-                  // <SwiperSlide key={category.id}>
-                  <Link to="/categories" key={category.id}>
-                    <div className="category-box hover:bg-main-color hover:text-dark-white h-105 w-110 bg-light-white flex flex-col justify-center items-center gap-20 cursor-pointer rounded-lg">
-                      <FontAwesomeIcon
-                        className="text-24"
-                        icon={category.icon}
-                      />
-                      <span className="font-poppins text-14 font-500 text-dark-grey">
-                        {category.name}
-                      </span>
-                    </div>
-                  </Link>
-                  // </SwiperSlide>
-                ))}
-                {/* </Swiper> */}
+                >
+                  {categoryData.map((category) => (
+                    <SwiperSlide key={category.id}>
+                      <Link to="/categories" key={category.id}>
+                        <div className="category-box hover:bg-main-color hover:text-dark-white h-105 w-110 bg-light-white flex flex-col justify-center items-center gap-20 cursor-pointer rounded-lg">
+                          <FontAwesomeIcon
+                            className="text-24"
+                            icon={category.icon}
+                          />
+                          <span className="font-poppins text-14 font-500 text-dark-grey">
+                            {category.name}
+                          </span>
+                        </div>
+                      </Link>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             </div>
           </div>

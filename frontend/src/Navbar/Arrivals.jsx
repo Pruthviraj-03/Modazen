@@ -19,6 +19,8 @@ import { useWishlist } from "../Components/Context/WishlistContext";
 import { Products } from "./products";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
   const { addToWishlist, wishlistItems } = useWishlist();
@@ -38,14 +40,32 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
   const [isSortDrawerOpen, setIsSortDrawerOpen] = useState(false);
 
   const handleAddToWishlist = (product) => {
+    // const isProductInWishlist = wishlistItems.some(
+    //   (item) => item.id === product.id
+    // );
+    // if (!isProductInWishlist) {
+    //   addToWishlist(product);
+    //   alert("Product added in the wishlist.");
+    // } else {
+    //   alert("Product is already in the wishlist.");
+    // }
+
     const isProductInWishlist = wishlistItems.some(
       (item) => item.id === product.id
     );
     if (!isProductInWishlist) {
       addToWishlist(product);
-      alert("Product added in the wishlist.");
+      // alert("Product added in the wishlist.");
+      toast.success("Product added in the wishlist successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     } else {
-      alert("Product is already in the wishlist.");
+      // alert("Product is already in the wishlist.");
+      toast.info("Product is already in the wishlist!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 

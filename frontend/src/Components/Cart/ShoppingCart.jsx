@@ -4,6 +4,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
@@ -22,6 +24,10 @@ const ShoppingCart = () => {
         setCartItems(userCart);
       } catch (error) {
         navigate("/login");
+        toast.warning("Login first to access cart!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
         console.error("Failed to fetch user wishlist:", error);
       }
     };
@@ -31,7 +37,11 @@ const ShoppingCart = () => {
 
   const handleRemoveFromCart = (productId) => {
     removeFromCart(productId);
-    alert("Product remove from the cart.");
+    // alert("Product remove from the cart.");
+    toast.success("Product remove from the cart successfully!", {
+      position: "top-center",
+      autoClose: 3000,
+    });
   };
 
   const handleIncrement = (productId) => {
@@ -72,7 +82,11 @@ const ShoppingCart = () => {
 
   const handleAction = (e) => {
     e.preventDefault();
-    alert("Do payment first!");
+    // alert("Do payment first!");
+    toast.info("Do payment first!", {
+      position: "top-center",
+      autoClose: 3000,
+    });
     navigate("/checkout");
   };
 

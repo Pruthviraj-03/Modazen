@@ -14,6 +14,8 @@ import { Products } from "./products";
 import { useCart } from "../Components/Context/CartContext";
 import { useWishlist } from "../Components/Context/WishlistContext";
 import { Carousel } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FeaturedProduct = () => {
   const { productName } = useParams();
@@ -80,9 +82,17 @@ const FeaturedProduct = () => {
     const isProductInCart = cartItems.some((item) => item.id === product.id);
     if (!isProductInCart) {
       addToCart(product);
-      alert("Product added in the cart.");
+      // alert("Product added in the cart.");
+      toast.success("Product added in the cart successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     } else {
-      alert("Product is already in the cart.");
+      // alert("Product is already in the cart.");
+      toast.info("Product is already in the cart!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -92,15 +102,40 @@ const FeaturedProduct = () => {
     );
     if (!isProductInWishlist) {
       addToWishlist(product);
-      alert("Product added in the wishlist.");
+      // alert("Product added in the wishlist.");
+      toast.success("Product added in the wishlist successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     } else {
-      alert("Product is already in the wishlist.");
+      // alert("Product is already in the wishlist.");
+      toast.info("Product is already in the wishlist!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
   const handleSimilarProductAddToWishlist = (similarProduct) => {
-    addToWishlist(similarProduct);
-    alert("Product added to wishlist.");
+    // addToWishlist(similarProduct);
+    // alert("Product added to wishlist.");
+    const isProductInWishlist = wishlistItems.some(
+      (item) => item.id === product.id
+    );
+    if (!isProductInWishlist) {
+      addToWishlist(similarProduct);
+      // alert("Product added in the wishlist.");
+      toast.success("Product added in the wishlist successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    } else {
+      // alert("Product is already in the wishlist.");
+      toast.info("Product is already in the wishlist!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
   };
 
   const handleSwipe = (direction) => {
@@ -463,7 +498,7 @@ const FeaturedProduct = () => {
               </Carousel.Item>
             </Carousel>
             <div
-              className="flex justify-center flex-col w-full h-auto gap-20 p-10"
+              className="flex justify-center flex-col w-full h-auto gap-10"
               key={product.id}
             >
               <h3 className="font-poppins text-main-color text-18 font-500 tracking-1">
@@ -483,7 +518,7 @@ const FeaturedProduct = () => {
               <p className="font-poppins text-dark-grey text-14 font-400">
                 {product.desc}
               </p>
-              <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-10 mt-10">
                 <span className="font-poppins text-main-color text-18 font-700 tracking-1">
                   Size :
                 </span>
@@ -550,7 +585,7 @@ const FeaturedProduct = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-row h-auto w-full items-center gap-20">
+              <div className="flex flex-row h-auto w-full items-center gap-20 mt-10">
                 <span className="font-poppins text-main-color text-18 font-700">
                   Quantity
                 </span>
@@ -574,9 +609,9 @@ const FeaturedProduct = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center flex-row gap-10 w-full h-auto">
+              <div className="flex items-center flex-row gap-10 w-full h-auto mt-10">
                 <div
-                  className="featured-product-atc-button w-60 h-55 bg-main-color rounded-60"
+                  className="featured-product-atc-button w-75 h-55 bg-main-color rounded-60"
                   onClick={handleAddToCart}
                 >
                   <Link to="/shoppingcart">
@@ -593,7 +628,7 @@ const FeaturedProduct = () => {
                 </div>
 
                 <div
-                  className="featured-product-atw-button w-60 h-55 bg-main-color rounded-60"
+                  className="featured-product-atw-button w-75 h-55 bg-main-color rounded-60"
                   onClick={handleAddToWishlist}
                 >
                   <Link to="/wishlist">

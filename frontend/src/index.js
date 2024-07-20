@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CartProvider } from "./Components/Context/CartContext";
 import { WishlistProvider } from "./Components/Context/WishlistContext";
 import { OrderProvider } from "./Components/Context/OrderContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +19,7 @@ root.render(
         <CartProvider>
           <WishlistProvider>
             <App />
+            <ToastContainer className="foo" style={{ fontWeight: "bold" }} />
           </WishlistProvider>
         </CartProvider>
       </OrderProvider>

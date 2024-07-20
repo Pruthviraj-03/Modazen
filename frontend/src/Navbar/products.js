@@ -4412,7 +4412,7 @@ const Products = [
     price: "$300",
     originalPrice: "$350",
     discount: "30% OFF",
-    category: "TShirts",
+    category: "T-Shirts",
     pricerange: "$250 - $500",
     rating: "5",
     size: "S",

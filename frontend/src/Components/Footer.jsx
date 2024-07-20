@@ -13,6 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   faInstagram,
@@ -32,11 +34,22 @@ const Footer = () => {
         email,
       });
       console.log("Email is:", email);
-      alert("Thanks for contacting us! We will be in touch with you shortly.");
+      // alert("Thanks for contacting us! We will be in touch with you shortly.");
+      toast.success(
+        "Thanks for contacting us! We will be in touch with you shortly!",
+        {
+          position: "top-center",
+          autoClose: 3000,
+        }
+      );
       setEmail(" ");
     } catch (error) {
       console.log(error);
-      alert("Email failed, Login first!");
+      // alert("Email failed, Login first!");
+      toast.error("Email failed, Login first!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       navigate("/login");
       setEmail(" ");
     }

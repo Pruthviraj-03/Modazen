@@ -9,6 +9,8 @@ import {
   faRightToBracket,
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState({});
@@ -32,7 +34,11 @@ const UserProfile = () => {
       await axios.get("http://localhost:8000/api/v1/users/logout", {
         withCredentials: true,
       });
-      window.alert("User logout success");
+      // window.alert("User logout success");
+      toast.success("User logged out successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       setUserData(null);
       navigate("/login");
     } catch (error) {
@@ -49,6 +55,11 @@ const UserProfile = () => {
 
       setUserData(response.data.data.user);
     } catch (error) {
+      navigate("/login");
+      toast.warning("Login first to access user data!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       console.log("error fetching user data:", error);
     }
   };

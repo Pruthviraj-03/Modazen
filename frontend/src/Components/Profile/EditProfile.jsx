@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLifeRing } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -74,6 +76,10 @@ const EditProfile = () => {
         { withCredentials: true }
       );
       console.log("User details saved successfully.");
+      toast.success("User details saved successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       navigate("/userprofile");
     } catch (error) {
       console.error("Error saving user details:", error);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -29,7 +31,11 @@ const Profile = () => {
       await axios.get("http://localhost:8000/api/v1/users/logout", {
         withCredentials: true,
       });
-      window.alert("User logout success");
+      // window.alert("User logout success");
+      toast.success("User logged out successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
       setUserData(null);
       navigate("/login");
     } catch (error) {

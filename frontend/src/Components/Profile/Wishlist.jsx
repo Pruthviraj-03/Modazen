@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useWishlist } from "../Context/WishlistContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Whishlist = () => {
   const { wishlistItems, setWishlistItems, removeFromWishlist } = useWishlist();
@@ -19,6 +21,10 @@ const Whishlist = () => {
         setWishlistItems(userWishlist);
       } catch (error) {
         navigate("/login");
+        toast.warning("Login first to access wishlist!", {
+          position: "top-center",
+          autoClose: 3000,
+        });
         console.error("Failed to fetch user wishlist:", error);
       }
     };
@@ -28,7 +34,11 @@ const Whishlist = () => {
 
   const handleRemoveFromWishlist = (productId) => {
     removeFromWishlist(productId);
-    alert("Product removed from the wishlist.");
+    // alert("Product removed from the wishlist.");
+    toast.success("Product removed from the wishlist successfully!", {
+      position: "top-center",
+      autoClose: 3000,
+    });
   };
 
   const wishlistItemCount = wishlistItems.length;
