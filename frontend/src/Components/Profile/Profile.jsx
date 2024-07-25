@@ -10,7 +10,6 @@ const Profile = () => {
 
   const getUser = async () => {
     try {
-      // console.log("Fetching user data...");
       const response = await axios.get(
         "http://localhost:8000/api/v1/users/login/success",
         { withCredentials: true }
@@ -31,7 +30,6 @@ const Profile = () => {
       await axios.get("http://localhost:8000/api/v1/users/logout", {
         withCredentials: true,
       });
-      // window.alert("User logout success");
       toast.success("User logged out successfully!", {
         position: "top-center",
         autoClose: 3000,

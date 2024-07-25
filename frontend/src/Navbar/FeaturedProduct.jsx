@@ -82,13 +82,11 @@ const FeaturedProduct = () => {
     const isProductInCart = cartItems.some((item) => item.id === product.id);
     if (!isProductInCart) {
       addToCart(product);
-      // alert("Product added in the cart.");
       toast.success("Product added in the cart successfully!", {
         position: "top-center",
         autoClose: 3000,
       });
     } else {
-      // alert("Product is already in the cart.");
       toast.info("Product is already in the cart!", {
         position: "top-center",
         autoClose: 3000,
@@ -102,13 +100,11 @@ const FeaturedProduct = () => {
     );
     if (!isProductInWishlist) {
       addToWishlist(product);
-      // alert("Product added in the wishlist.");
       toast.success("Product added in the wishlist successfully!", {
         position: "top-center",
         autoClose: 3000,
       });
     } else {
-      // alert("Product is already in the wishlist.");
       toast.info("Product is already in the wishlist!", {
         position: "top-center",
         autoClose: 3000,
@@ -117,20 +113,16 @@ const FeaturedProduct = () => {
   };
 
   const handleSimilarProductAddToWishlist = (similarProduct) => {
-    // addToWishlist(similarProduct);
-    // alert("Product added to wishlist.");
     const isProductInWishlist = wishlistItems.some(
       (item) => item.id === product.id
     );
     if (!isProductInWishlist) {
       addToWishlist(similarProduct);
-      // alert("Product added in the wishlist.");
       toast.success("Product added in the wishlist successfully!", {
         position: "top-center",
         autoClose: 3000,
       });
     } else {
-      // alert("Product is already in the wishlist.");
       toast.info("Product is already in the wishlist!", {
         position: "top-center",
         autoClose: 3000,

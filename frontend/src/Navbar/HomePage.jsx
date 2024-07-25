@@ -225,13 +225,11 @@ const HomePage = () => {
     const isProductInCart = cartItems.some((item) => item.id === extra.id);
     if (!isProductInCart) {
       addToCart(extra);
-      // alert("Product added in the cart.");
       toast.success("Product added in the cart successfully!", {
         position: "top-center",
         autoClose: 3000,
       });
     } else {
-      // alert("Product is already in the cart.");
       toast.info("Product is already in the cart!", {
         position: "top-center",
         autoClose: 3000,

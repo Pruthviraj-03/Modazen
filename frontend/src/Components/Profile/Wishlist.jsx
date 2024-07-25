@@ -34,7 +34,6 @@ const Whishlist = () => {
 
   const handleRemoveFromWishlist = (productId) => {
     removeFromWishlist(productId);
-    // alert("Product removed from the wishlist.");
     toast.success("Product removed from the wishlist successfully!", {
       position: "top-center",
       autoClose: 3000,

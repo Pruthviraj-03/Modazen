@@ -34,7 +34,6 @@ const Footer = () => {
         email,
       });
       console.log("Email is:", email);
-      // alert("Thanks for contacting us! We will be in touch with you shortly.");
       toast.success(
         "Thanks for contacting us! We will be in touch with you shortly!",
         {
@@ -45,7 +44,6 @@ const Footer = () => {
       setEmail(" ");
     } catch (error) {
       console.log(error);
-      // alert("Email failed, Login first!");
       toast.error("Email failed, Login first!", {
         position: "top-center",
         autoClose: 3000,

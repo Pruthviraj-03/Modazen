@@ -40,28 +40,16 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
   const [isSortDrawerOpen, setIsSortDrawerOpen] = useState(false);
 
   const handleAddToWishlist = (product) => {
-    // const isProductInWishlist = wishlistItems.some(
-    //   (item) => item.id === product.id
-    // );
-    // if (!isProductInWishlist) {
-    //   addToWishlist(product);
-    //   alert("Product added in the wishlist.");
-    // } else {
-    //   alert("Product is already in the wishlist.");
-    // }
-
     const isProductInWishlist = wishlistItems.some(
       (item) => item.id === product.id
     );
     if (!isProductInWishlist) {
       addToWishlist(product);
-      // alert("Product added in the wishlist.");
       toast.success("Product added in the wishlist successfully!", {
         position: "top-center",
         autoClose: 3000,
       });
     } else {
-      // alert("Product is already in the wishlist.");
       toast.info("Product is already in the wishlist!", {
         position: "top-center",
         autoClose: 3000,
@@ -104,36 +92,36 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
       title: "Shirts",
       icon: faTshirt,
     },
-    // {
-    //   id: 3,
-    //   title: "T-Shirts",
-    //   icon: faTshirt,
-    // },
-    // {
-    //   id: 4,
-    //   title: "Pants",
-    //   icon: faHatCowboySide,
-    // },
-    // {
-    //   id: 5,
-    //   title: "Dress",
-    //   icon: faPersonDress,
-    // },
-    // {
-    //   id: 6,
-    //   title: "Tops",
-    //   icon: faPersonDress,
-    // },
-    // {
-    //   id: 7,
-    //   title: "Shoes",
-    //   icon: faShoePrints,
-    // },
-    // {
-    //   id: 8,
-    //   title: "Accesi",
-    //   icon: faHatCowboySide,
-    // },
+    {
+      id: 3,
+      title: "T-Shirts",
+      icon: faTshirt,
+    },
+    {
+      id: 4,
+      title: "Pants",
+      icon: faHatCowboySide,
+    },
+    {
+      id: 5,
+      title: "Dress",
+      icon: faPersonDress,
+    },
+    {
+      id: 6,
+      title: "Tops",
+      icon: faPersonDress,
+    },
+    {
+      id: 7,
+      title: "Shoes",
+      icon: faShoePrints,
+    },
+    {
+      id: 8,
+      title: "Accesi",
+      icon: faHatCowboySide,
+    },
   ];
 
   const handleCategoryClick = (e, categoryTitle) => {
