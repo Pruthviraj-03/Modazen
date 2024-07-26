@@ -37,10 +37,10 @@ const addToOrder = asyncHandler(async (req, res) => {
     await user.addToOrder(product);
     res.json(new ApiResponse(200, { product }, "Product added to order list"));
   } catch (error) {
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Failed to add product to order list",
-    });
+    throw new ApiError(
+      500,
+      error.message || "Failed to add product to order list"
+    );
   }
 });
 

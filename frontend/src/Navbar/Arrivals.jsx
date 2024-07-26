@@ -119,7 +119,7 @@ const Arrivals = ({ title, filteredProducts, searchedProducts }) => {
     },
     {
       id: 8,
-      title: "Accesi",
+      title: "Accessories",
       icon: faHatCowboySide,
     },
   ];

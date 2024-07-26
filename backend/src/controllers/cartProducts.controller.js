@@ -36,10 +36,7 @@ const addToCart = asyncHandler(async (req, res) => {
     await user.addToCart(product);
     res.json(new ApiResponse(200, { product }, "Product added to cart"));
   } catch (error) {
-    res.status(error.statusCode || 500).json({
-      success: false,
-      message: error.message || "Failed to add product to cart",
-    });
+    throw new ApiError(500, error.message || "Failed to add product to cart");
   }
 });
 
