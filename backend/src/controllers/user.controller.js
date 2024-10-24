@@ -205,11 +205,11 @@ const sendOTP = async (req, res) => {
     await user.save();
     console.log("user is:", user);
 
-    // await client.messages.create({
-    //   body: `[#] ${otp} is your OTP to login/register to Modazen. DO NOT share with anyone. Modazen never calls to ask for OTP. The otp expires in 10 mins.`,
-    //   from: process.env.TWILIO_PHONE_NUMBER,
-    //   to: formattedPhoneNumber,
-    // });
+    await client.messages.create({
+      body: `[#] ${otp} is your OTP to login/register to Modazen. DO NOT share with anyone. Modazen never calls to ask for OTP. The otp expires in 10 mins.`,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: formattedPhoneNumber,
+    });
 
     res.json(new ApiResponse(200, {}, "OTP sent successfully"));
   } catch (error) {
