@@ -205,6 +205,67 @@ Each product object contains the following fields:
 - **size:** Available size (e.g., "S").
 - **images:** Array of image filenames associated with the product.
 
+## Screenshots
+
+Here are some screenshots of the Modazen website for reference:
+
+- **Home Page**  
+  ![Home Page](screenshots/home-page.jpeg)
+
+- **Categories Page**  
+  ![Categories Page](screenshots/categories-page.jpeg)
+
+- **New Arrivals Page**  
+  ![Arrivals Page](screenshots/arrivals-page.jpeg)
+
+- **Featured Products Page**  
+  ![Featured Page](screenshots/featured-page.jpeg)
+
+- **Products Page**  
+  ![Products Page](screenshots/products-page.jpeg)
+
+- **Login Page**  
+  ![Login Page](screenshots/login-page.jpeg)
+
+- **Footer Section**  
+  ![Footer Page](screenshots/footer-page.jpeg)
+
+- **Shopping Cart Page**  
+  ![Shopping Cart Page](screenshots/shopping-cart-page.jpeg)
+
+- **Checkout Page**  
+  ![Checkout Page](screenshots/checkout-page.jpeg)
+
+- **Checkout Complete Page**  
+  ![Checkout Complete Page](screenshots/checkout-complete-page.jpeg)
+
+- **User Profile Page**  
+  ![User Profile Page](screenshots/user-profile-page.jpeg)
+
+- **Orders Page**  
+  ![Orders Page](screenshots/orders-page.jpeg)
+
+- **Wishlist Page**  
+  ![Wishlist Page](screenshots/wishlist-page.jpeg)
+
+- **User Profile Details Page**  
+  ![User Profile Details Page](screenshots/user-profile-details-page.jpeg)
+
+- **Edit Profile Details Page**  
+  ![Edit Profile Details Page](screenshots/edit-profile-details-page.jpeg)
+
+- **About Us Page**  
+  ![About Us Page](screenshots/about-us-page.jpeg)
+
+- **Contact Us Page**  
+  ![Contact Us Page](screenshots/contact-us-page.jpeg)
+
+- **Privacy Policy Page**  
+  ![Privacy Policy Page](screenshots/privacy-policy-page.jpeg)
+
+- **Terms of Service Page**  
+  ![Terms of Service Page](screenshots/terms-of-services-page.jpeg)
+
 ## Contributing
 
 We welcome contributions to the Modazen project! If you're interested in helping us improve the application, please follow these steps:
