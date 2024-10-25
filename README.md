@@ -210,61 +210,61 @@ Each product object contains the following fields:
 Here are some screenshots of the Modazen website for reference:
 
 - **Home Page**  
-  ![Home Page](screenshots/home-page.jpeg)
+  ![Home Page](screenshots/Home%20page.jpeg)
 
 - **Categories Page**  
-  ![Categories Page](screenshots/categories-page.jpeg)
+  ![Categories Page](screenshots/categories%20page.jpeg)
 
 - **New Arrivals Page**  
-  ![Arrivals Page](screenshots/arrivals-page.jpeg)
+  ![Arrivals Page](screenshots/arrivals%20page.jpeg)
 
 - **Featured Products Page**  
-  ![Featured Page](screenshots/featured-page.jpeg)
+  ![Featured Page](screenshots/featured%20page.jpeg)
 
 - **Products Page**  
-  ![Products Page](screenshots/products-page.jpeg)
+  ![Products Page](screenshots/products%20page.jpeg)
 
 - **Login Page**  
-  ![Login Page](screenshots/login-page.jpeg)
+  ![Login Page](screenshots/Login%20page.jpeg)
 
 - **Footer Section**  
-  ![Footer Page](screenshots/footer-page.jpeg)
+  ![Footer Page](screenshots/footer%20page.jpeg)
 
 - **Shopping Cart Page**  
-  ![Shopping Cart Page](screenshots/shopping-cart-page.jpeg)
+  ![Shopping Cart Page](screenshots/shopping%20cart%20page.jpeg)
 
 - **Checkout Page**  
-  ![Checkout Page](screenshots/checkout-page.jpeg)
+  ![Checkout Page](screenshots/checkout%20page.jpeg)
 
 - **Checkout Complete Page**  
-  ![Checkout Complete Page](screenshots/checkout-complete-page.jpeg)
+  ![Checkout Complete Page](screenshots/checkout%20complete%20page.jpeg)
 
 - **User Profile Page**  
-  ![User Profile Page](screenshots/user-profile-page.jpeg)
+  ![User Profile Page](screenshots/user%20profile%20page.jpeg)
 
 - **Orders Page**  
-  ![Orders Page](screenshots/orders-page.jpeg)
+  ![Orders Page](screenshots/orders%20page.jpeg)
 
 - **Wishlist Page**  
-  ![Wishlist Page](screenshots/wishlist-page.jpeg)
+  ![Wishlist Page](screenshots/wishlist%20page.jpeg)
 
 - **User Profile Details Page**  
-  ![User Profile Details Page](screenshots/user-profile-details-page.jpeg)
+  ![User Profile Details Page](screenshots/user%20profile%20details%20page.jpeg)
 
 - **Edit Profile Details Page**  
-  ![Edit Profile Details Page](screenshots/edit-profile-details-page.jpeg)
+  ![Edit Profile Details Page](screenshots/edit%20profile%20details%20page.jpeg)
 
 - **About Us Page**  
-  ![About Us Page](screenshots/about-us-page.jpeg)
+  ![About Us Page](screenshots/about%20us%20page.jpeg)
 
 - **Contact Us Page**  
-  ![Contact Us Page](screenshots/contact-us-page.jpeg)
+  ![Contact Us Page](screenshots/contact%20us%20page.jpeg)
 
 - **Privacy Policy Page**  
-  ![Privacy Policy Page](screenshots/privacy-policy-page.jpeg)
+  ![Privacy Policy Page](screenshots/privacy%20policy%20page.jpeg)
 
 - **Terms of Service Page**  
-  ![Terms of Service Page](screenshots/terms-of-services-page.jpeg)
+  ![Terms of Service Page](screenshots/terms%20of%20services%20page.jpeg)
 
 ## Contributing
 
